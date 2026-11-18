@@ -135,6 +135,13 @@ REST just leaves the key out. Either way, the earlier conclusion holds: ignore s
 - `recordingId` lets Articulate apply the Private check (folder and tag of that recording) before sending
   anything to master-todo. `assignee` is the field for the "first-person only" rule.
 - `update_pocket_actionitem` needs `recordings:write` (docs), which a Free key doesn't have.
+- **No paging.** The tool's input schema has no `page`, `offset` or `limit`. The response reports `limit: 50`
+  and `total`. To read more than 50, window by `recordingDateFrom`/`recordingDateTo`. A nightly pull of the last
+  few days is far below 50. The schema's filter values differ slightly from the docs: `actionType`
+  (`send_message`, `draft_email`, `create_reminder`) and lowercase `priority`; there's no `category`.
+- **Assignee works for "first person".** Across 22 items there were 3 distinct assignees, and 16 items were a
+  "me"-style value. All 22 were `TODO` and `create_reminder`, with `payload.reminder`. The items came from 7
+  recordings.
 
 ## What the read-only key costs
 
