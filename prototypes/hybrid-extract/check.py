@@ -11,6 +11,10 @@ from pathlib import Path
 
 path = Path(sys.argv[1])
 quiet = "--quiet" in sys.argv
+r7 = "--rule=r7" in sys.argv  # articulate#35: one rule (vl_match R7) for text layer, OCR and VL
+if r7:
+    from vl_match import bounded
+    R7 = bounded("near")
 result = json.loads(path.read_text())
 out, meta = result["output"], result["meta"]
 stem = path.name.split(".")[0]
@@ -80,6 +84,20 @@ def check_claim(c: dict, where: str):
         p, q = ct["page"], norm(ct["quote"])
         if not 1 <= p <= len(prep):
             stats["cite: bad page"] += 1
+            continue
+        if r7:
+            pg = prep[p - 1]
+            vt = vl_raw.get(str(p), {}).get("text")
+            if R7(ct["quote"], pg["text"]):
+                stats["cite: text layer"] += 1
+            elif R7(ct["quote"], "\n".join(l["text"] for l in pg["ocr"])):
+                stats["cite: OCR"] += 1
+            elif vt and R7(ct["quote"], vt):
+                stats["cite: VL transcript"] += 1
+            else:
+                stats["cite: unverified"] += 1
+                if not quiet:
+                    print(f"    unverified p{p} [{where}]: {ct['quote'][:90]!r}")
             continue
         if q and q in layer[p - 1]:
             stats["cite: text layer"] += 1
