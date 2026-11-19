@@ -32,6 +32,7 @@ def latex_plain(t: str) -> str:
            "\\in": "∈", "\\neq": "≠", "\\pm": "±", "\\cdot": "·", "\\quad": " "}
     for k in sorted(rep, key=len, reverse=True):
         t = t.replace(k, rep[k])
+    t = re.sub(r"\\[a-zA-Z]+", " ", t)  # remaining commands (\cap, \phi, \frac, \cdots…): norm() drops symbols anyway
     return re.sub(r"[\\{}$_^]", "", t)
 
 
