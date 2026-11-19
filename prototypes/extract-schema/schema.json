@@ -1,0 +1,395 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "concepts",
+    "contrastGroups"
+  ],
+  "properties": {
+    "concepts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "title",
+          "kind",
+          "explanation",
+          "aliases",
+          "useWhen",
+          "conditions",
+          "workedExamples",
+          "slideHints",
+          "confidence",
+          "confidenceNote"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Short unique slug for this concept within this output, e.g. paired-t-test",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "title": {
+            "type": "string",
+            "description": "Short name of the concept, as the course names it",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "kind": {
+            "type": "string",
+            "description": "definition = a term's meaning; fact = a statement to recall (a theorem you state); method = something you choose and apply to a problem (formula, test, theorem you apply, procedure)",
+            "enum": [
+              "definition",
+              "fact",
+              "method"
+            ]
+          },
+          "explanation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "citations",
+              "text",
+              "gapFill"
+            ],
+            "properties": {
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "page",
+                    "quote"
+                  ],
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "description": "1-based page/slide number"
+                    },
+                    "quote": {
+                      "type": "string",
+                      "description": "Short passage copied character-for-character from that page, including text inside images",
+                      "pattern": "^[^\\t\\x08\\x0c]*$"
+                    }
+                  }
+                },
+                "description": "1 to 3 places that support this claim; empty only when gapFill is true"
+              },
+              "text": {
+                "type": "string",
+                "description": "The claim itself. LaTeX in $...$ for math",
+                "pattern": "^[^\\t\\x08\\x0c]*$"
+              },
+              "gapFill": {
+                "type": "boolean",
+                "description": "true if the claim comes from outside the document (no citation)"
+              }
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Another name or tell-tale keyword",
+              "pattern": "^[^\\t\\x08\\x0c]*$"
+            },
+            "description": "Names and keywords that give the concept away; methods only"
+          },
+          "useWhen": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "citations",
+                "text",
+                "gapFill"
+              ],
+              "properties": {
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "page",
+                      "quote"
+                    ],
+                    "properties": {
+                      "page": {
+                        "type": "integer",
+                        "description": "1-based page/slide number"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Short passage copied character-for-character from that page, including text inside images",
+                        "pattern": "^[^\\t\\x08\\x0c]*$"
+                      }
+                    }
+                  },
+                  "description": "1 to 3 places that support this claim; empty only when gapFill is true"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The claim itself. LaTeX in $...$ for math",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "gapFill": {
+                  "type": "boolean",
+                  "description": "true if the claim comes from outside the document (no citation)"
+                }
+              }
+            },
+            "description": "Cues visible in a problem that signal this method applies; methods only"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "citations",
+                "text",
+                "gapFill"
+              ],
+              "properties": {
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "page",
+                      "quote"
+                    ],
+                    "properties": {
+                      "page": {
+                        "type": "integer",
+                        "description": "1-based page/slide number"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Short passage copied character-for-character from that page, including text inside images",
+                        "pattern": "^[^\\t\\x08\\x0c]*$"
+                      }
+                    }
+                  },
+                  "description": "1 to 3 places that support this claim; empty only when gapFill is true"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The claim itself. LaTeX in $...$ for math",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "gapFill": {
+                  "type": "boolean",
+                  "description": "true if the claim comes from outside the document (no citation)"
+                }
+              }
+            },
+            "description": "Assumptions that must hold to use it; methods only"
+          },
+          "workedExamples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "citations",
+                "text",
+                "gapFill"
+              ],
+              "properties": {
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "page",
+                      "quote"
+                    ],
+                    "properties": {
+                      "page": {
+                        "type": "integer",
+                        "description": "1-based page/slide number"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Short passage copied character-for-character from that page, including text inside images",
+                        "pattern": "^[^\\t\\x08\\x0c]*$"
+                      }
+                    }
+                  },
+                  "description": "1 to 3 places that support this claim; empty only when gapFill is true"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The claim itself. LaTeX in $...$ for math",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "gapFill": {
+                  "type": "boolean",
+                  "description": "true if the claim comes from outside the document (no citation)"
+                }
+              }
+            },
+            "description": "Worked examples from the document, markdown steps each labelled by the principle used; methods only"
+          },
+          "slideHints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "page",
+                "quote"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "description": "What the slide says about this concept",
+                  "enum": [
+                    "examHint",
+                    "dismissal",
+                    "emphasis"
+                  ]
+                },
+                "page": {
+                  "type": "integer",
+                  "description": "1-based page/slide number"
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "The exact sentence on the slide",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                }
+              }
+            },
+            "description": "Only explicit slide statements that this is on the exam, can be skipped, or is important"
+          },
+          "confidence": {
+            "type": "string",
+            "description": "How sure you are the concept and its explanation are right and correctly located",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "confidenceNote": {
+            "type": "string",
+            "description": "Why it is not high; empty when confidence is high",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          }
+        }
+      },
+      "description": "Every concept the document teaches"
+    },
+    "contrastGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "question",
+          "memberKeys",
+          "contrasts"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Short name for what the members compete over",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "question": {
+            "type": "string",
+            "description": "The choice a student faces, e.g. 'Which test compares two means?'; empty if there is none",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "memberKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "key of a member concept",
+              "pattern": "^[^\\t\\x08\\x0c]*$"
+            },
+            "description": "2 or more concept keys from this output"
+          },
+          "contrasts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "a",
+                "b",
+                "decidingFeature"
+              ],
+              "properties": {
+                "a": {
+                  "type": "string",
+                  "description": "key of one member",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "b": {
+                  "type": "string",
+                  "description": "key of the other member",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "decidingFeature": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "citations",
+                    "text",
+                    "gapFill"
+                  ],
+                  "properties": {
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "page",
+                          "quote"
+                        ],
+                        "properties": {
+                          "page": {
+                            "type": "integer",
+                            "description": "1-based page/slide number"
+                          },
+                          "quote": {
+                            "type": "string",
+                            "description": "Short passage copied character-for-character from that page, including text inside images",
+                            "pattern": "^[^\\t\\x08\\x0c]*$"
+                          }
+                        }
+                      },
+                      "description": "1 to 3 places that support this claim; empty only when gapFill is true"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "The claim itself. LaTeX in $...$ for math",
+                      "pattern": "^[^\\t\\x08\\x0c]*$"
+                    },
+                    "gapFill": {
+                      "type": "boolean",
+                      "description": "true if the claim comes from outside the document (no citation)"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Pairs whose deciding feature the document states; leave a pair out when it doesn't"
+          }
+        }
+      },
+      "description": "Sets of concepts in this document a student could plausibly mix up"
+    }
+  }
+}
