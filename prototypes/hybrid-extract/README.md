@@ -14,6 +14,8 @@ Decks and outputs stay local: `decks/` (course PDFs) and `out/` are gitignored.
 | `vl_transcribe.py` | local VL transcription of slides (math as LaTeX) → `out/<stem>.vl.json` |
 | `check.py` | #22 checks + citation pass rate: text layer → OCR → VL transcript |
 | `ollama_format_test.py` | shows Ollama dropping the grammar when a schema has `pattern` |
+| `long_deck.py` | articulate#36: Gemini Extract with a prompt variant (`base`/`named`) and a page-range split above N pages → `out/<stem>.<variant>-s<N>.json`; `GEMINI_MODEL` overrides 3.8 Flash |
+| `recall.py`, `gold/` | articulate#36: concept recall against a hand list of what each deck teaches |
 | `schema.py`, `prompt.md`, `run_gemini.py` | copied from `prototype/22-extract-schema` |
 
 ```sh
@@ -23,6 +25,8 @@ uv run extract.py gemini decks/<deck>.pdf
 NUM_PREDICT=4096 CHUNK=4 uv run extract.py local decks/<deck>.pdf      # LOCAL_MODEL=qwen3:8b default
 uv run vl_transcribe.py decks/<deck>.pdf all qwen3-vl:8b-instruct
 python3 check.py out/<deck>.<leg>.json [--quiet]
+uv run long_deck.py decks/<deck>.pdf named 40      # articulate#36: prompt line + split above 40 pages
+python3 recall.py out/<deck>.named-s40.json
 ```
 
 Needs Ollama with `qwen3:8b` and `qwen3-vl:8b-instruct`, and the Gemini key in the login Keychain item

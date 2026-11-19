@@ -25,7 +25,7 @@ rule = sys.argv[3] if len(sys.argv) > 3 else "default"
 out = here / "out"
 prep = json.loads((out / f"{deck.stem}.pages.json").read_text())
 PROMPT = (here / "prompt.md").read_text()
-GEMINI_MODEL, LOCAL_MODEL = "gemini-3.8-flash", os.environ.get("LOCAL_MODEL", "qwen3:8b")
+GEMINI_MODEL, LOCAL_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash"), os.environ.get("LOCAL_MODEL", "qwen3:8b")
 CHUNK = int(os.environ.get("CHUNK", 12))  # pages per local call
 calls = {"gemini": 0, "local": 0}
 timing = {"gemini_s": 0.0, "local_s": 0.0}
@@ -67,10 +67,14 @@ def gemini(pdf_bytes: bytes, note: str = "") -> dict:
         except (TimeoutError, urllib.error.URLError) as e:
             print(f"gemini timeout/network: {e}", file=sys.stderr)
     timing["gemini_s"] += time.time() - start
-    usage["gemini"].append(raw.get("usageMetadata"))
     cand = raw["candidates"][0]
+    usage["gemini"].append({**(raw.get("usageMetadata") or {}), "finishReason": cand.get("finishReason")})
     text = "".join(p.get("text", "") for p in cand["content"]["parts"] if not p.get("thought"))
-    return json.loads(text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        (out / f"{deck.stem}.gemini-fail.txt").write_text(text)
+        sys.exit(f"gemini: invalid JSON, finishReason={cand.get('finishReason')}, usage={raw.get('usageMetadata')}")
 
 
 def sub_pdf(pages: list[int]) -> bytes:
