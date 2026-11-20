@@ -591,6 +591,25 @@ Runner rules:
   runner enqueues a same-day task.
 - `privacy` is set by the Source and can only move toward `private`, never away from it, inside a run.
 
+#### Phase 2 intake stages
+
+The intake slices don't call each other's handlers. Each one registers a step that takes the items sitting at its
+stage, does its work, and advances them. Stage names are the contract:
+
+| Stage | Item kinds | Owner | Writes | Advances to |
+|---|---|---|---|---|
+| `pick` | `slides`, `guide_or_exam`, `other_file` | `intake/canvas` | `source_files` (all but `page_count`), `exams`, `units`, archive copy | `convert` (`other_file` → skipped + flag) |
+| `convert` | `slides`, `guide_or_exam` | `intake/convert` | `pages`, `source_files.page_count`, `.pages.json` | `extract` (slides) or `guide_extract` |
+| `extract` | `slides` | `intake/extract` | candidate concepts and groups in `concepts`/`contrast_groups` with `status = held`, `hold_reason = 'library'` | `library` |
+| `guide_extract` | `guide_or_exam` | `intake/guides` | `guide_items` | `library` |
+| `library` | both | `intake/library` | merges, `tier`, `tier_reasons_json`, `on_guide`, `status` (`held` with a reason, or ready) | `shape` |
+| `shape` | both | `intake/shape` | `prompts` | `export` |
+| `export` | both | `handoff` | `concepts.shipped_in`, `prompts.shipped_in`, `handoff_files` | `done` |
+
+`intake/cite` has no stage: `extract` and `guides` call `intake.cite.check(quote, file_id, page, kind)` before they
+advance, and it fills `status`/`verifiedBy` on each citation and `verified` on guide items. `plan` reads the content
+tables and `encore_snapshots`; it has no items.
+
 ### 3.6 ModelRunner
 
 `core/models/`. Every model call in Articulate goes through it, including prototypes run during the day, because the
