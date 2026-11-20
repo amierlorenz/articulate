@@ -3,6 +3,28 @@
     "id": 501,
     "display_name": "Lecture 1.pdf",
     "size": 102400,
+    "folder_id": 1,
     "url": "https://myschool.instructure.com/files/501/download"
+  },
+  {
+    "id": 504,
+    "display_name": "Exam_Review.pdf",
+    "size": 204800,
+    "folder_id": 1,
+    "url": "https://myschool.instructure.com/files/504/download"
+  },
+  {
+    "id": 505,
+    "display_name": "banner.png",
+    "size": 51200,
+    "folder_id": 2,
+    "url": "https://myschool.instructure.com/files/505/download"
+  },
+  {
+    "id": 506,
+    "display_name": "Schedule.xlsx",
+    "size": 12000,
+    "folder_id": 1,
+    "url": "https://myschool.instructure.com/files/506/download"
   }
 ]

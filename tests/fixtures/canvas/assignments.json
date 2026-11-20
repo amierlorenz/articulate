@@ -4,13 +4,55 @@
     "name": "Homework 1",
     "due_at": "2026-11-25T23:59:59Z",
     "unlock_at": "2026-11-18T00:00:00Z",
-    "lock_at": "2026-11-26T23:59:59Z"
+    "lock_at": "2026-11-26T23:59:59Z",
+    "assignment_group": {"name": "Homework"}
   },
   {
     "id": 202,
     "name": "Reading Assignment",
     "due_at": null,
     "unlock_at": null,
-    "lock_at": null
+    "lock_at": null,
+    "assignment_group": {"name": "Readings"}
+  },
+  {
+    "id": 203,
+    "name": "Test 1",
+    "due_at": "2026-10-15T23:59:59Z",
+    "unlock_at": "2026-10-15T00:00:00Z",
+    "lock_at": "2026-10-15T23:59:59Z",
+    "assignment_group": {"name": "Tests"}
+  },
+  {
+    "id": 204,
+    "name": "Midterm Exam",
+    "due_at": "2026-11-10T23:59:59Z",
+    "unlock_at": "2026-11-10T00:00:00Z",
+    "lock_at": "2026-11-10T23:59:59Z",
+    "assignment_group": {"name": "Exams"}
+  },
+  {
+    "id": 205,
+    "name": "Final Exam",
+    "due_at": "2026-12-07T23:59:59Z",
+    "unlock_at": "2026-11-30T00:00:00Z",
+    "lock_at": "2026-12-07T23:59:59Z",
+    "assignment_group": {"name": "Final Exam"}
+  },
+  {
+    "id": 206,
+    "name": "Senior Project Presentation",
+    "due_at": "2026-12-01T23:59:59Z",
+    "unlock_at": "2026-11-01T00:00:00Z",
+    "lock_at": "2026-12-01T23:59:59Z",
+    "assignment_group": {"name": "Projects"}
+  },
+  {
+    "id": 207,
+    "name": "Chapter 4 Quiz",
+    "due_at": "2026-11-05T23:59:59Z",
+    "unlock_at": "2026-11-05T00:00:00Z",
+    "lock_at": "2026-11-05T23:59:59Z",
+    "assignment_group": {"name": "Quizzes"}
   }
 ]
