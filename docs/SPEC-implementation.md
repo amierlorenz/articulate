@@ -7,8 +7,7 @@ Authority: the map ([Map: Articulate](https://github.com/amierlorenz/articulate/
 comments on its closed tickets. Where this spec and a ticket disagree, the ticket wins and this file is wrong.
 Questions the tickets left open, and Amier's answers, are under [Decisions made while writing this spec](#decisions-made-while-writing-this-spec).
 
-Status: **Phase 0 written.** Phases 1–5 have their packages in the module map; their contract details are added
-with their build issues.
+Status: **Phases 0–5 written.** Phase 0 contracts are in §3; Phases 3–5 add theirs in §7.
 
 ---
 
@@ -1214,6 +1213,350 @@ all Phase 1 and 2 slices can start the day Phase 0 merges. Build issues carry th
 
 ---
 
+## 7. Phases 3–5
+
+The same rules hold: one package per slice, no two open issues edit the same file, contracts first. Two additions:
+- **Taking over a package.** Once a phase has merged, a later issue may change a package from an earlier phase. Its
+  issue names the files it touches, and no other open issue may touch them.
+- **New contracts are additive.** New tables, columns, plan fields and prompt kinds are added, never renamed. The
+  hand-off schemas stay at their versions (#18: additive fields don't bump the version).
+
+### 7.1 Phase 3: ramp, post-class quiz, confusable pairs, re-intake
+
+| Package | Change | Deciding tickets |
+|---|---|---|
+| `plan` (taken over) | ramp, practice tests, review quiz, missed days, corrections, contrasts, reading slot hook | [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9), [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10) (finals), [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23), [Confusable pairs across decks](https://github.com/amierlorenz/articulate/issues/41) |
+| `postclass` | :15/:45 post-class quiz | [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9), [Model routing and budget](https://github.com/amierlorenz/articulate/issues/11) |
+| `intake/library` (taken over) | the judge also picks a contrast group | [Confusable pairs across decks](https://github.com/amierlorenz/articulate/issues/41) |
+| `intake/contrast` | nightly contrast writer, `kind: contrast` prompts | [Confusable pairs across decks](https://github.com/amierlorenz/articulate/issues/41), [Definitions in decision groups?](https://github.com/amierlorenz/articulate/issues/19) |
+| `intake/reintake` | stage `reintake`: diff, re-anchor, buckets | [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23) |
+| `tasks` (taken over) | lecture-directive tasks (Q9) | [Pulling to-dos from transcripts and tuning them](https://github.com/amierlorenz/articulate/issues/20) |
+
+#### Plan, additive fields (`encore.plan` v1)
+
+```python
+class PracticeTest(BaseModel):
+    examId: str
+    itemCount: int                       # 15–20
+    freeRecallMin: float = 0.5           # mix like past exams, never below half free recall
+
+class ReviewQuiz(BaseModel):
+    examId: str
+    conceptIds: list[str]                # core concepts of the exam, short
+
+class Plan(...):                         # new fields, all optional
+    practiceTest: PracticeTest | None = None
+    reviewQuiz: ReviewQuiz | None = None
+    reviewLimit: int | None = None       # backlog spread: at most this many due reviews today
+    reviewPriority: list[str] = []       # exam ids whose concepts jump the backlog
+    newPaused: bool = False              # backlog doesn't fit the budget yet
+    holdNewForExams: list[str] = []      # last 2 days before an exam: no new for it
+```
+
+Rules, all computed in plain code from `state.json`, the attempts ledger and the content tables
+([Daily rhythm](https://github.com/amierlorenz/articulate/issues/9)):
+1. **Ramp:** an exam inside 10 days (14 for a final) puts its unit concepts first in `new` and sets `examFocus` with
+   `rampDay`. `budgetMinutes.planned` may rise to 35; `readingShare` is 0 while any ramp is on.
+2. **Practice test** on ramp days 9, 6 and 3 (every ~3 days), exam scope, `itemCount` 15–20. **Review quiz** the day
+   before. **No new** for that exam in its last 2 days (`holdNewForExams`).
+3. **Finals:** scope is every unit; a concept emphasised in 2+ units or on a midterm counts one tier up in the final's
+   ordering ([Deciding what matters](https://github.com/amierlorenz/articulate/issues/10)). A final study guide overrides like any guide.
+4. **Missed days:** a day with no attempts expires its plan. The next plan sets `reviewLimit` to what fits the
+   budget, most overdue and core first; `reviewPriority` lists ramp exams; `newPaused` stays on until the backlog
+   fits. After 3 days in a row with no session, one task `study:idle:<YYYY-MM-DD>` (once per idle streak).
+5. **Corrections** ([Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23)): a prompt re-issued with a new id goes first in
+   `new` with `reason: correction`, outside the ≤10 cap.
+6. **Post-class skipped:** its concepts lead the next `new` with `reason: postclassSkipped`.
+7. **Contrasts** ([Confusable pairs across decks](https://github.com/amierlorenz/articulate/issues/41)): eligible once both members are introduced and each has a
+   review ≥1 day after introduction; both core or standard; ≤2 a day inside the cap; in an exam's scope only when
+   both members are in its units.
+8. **Interval cap:** 30 days while the course is `active`; dropped once its final has passed.
+
+Encore must serve these fields; see Q14.
+
+#### Post-class quiz (`postclass`)
+
+Runs in `watch` (registry order 140), after `pocket.poll`.
+
+1. For each Classes event that ended in the last 18 h, with an `active` course key and no row in `postclass_quizzes`
+   (or `waiting`), look for its class recording (the `calendar` match). No ended class → exit without calling Pocket.
+2. Once the transcript is archived: one `postclass_quiz` call (Flash Lite, class window only) returns 3–5 closed-book
+   items, each `{ concept: { title, kind, explanation: Claim }, prompt: { kind, ...content } }`, with transcript
+   citations `{ startSec, endSec, quote }` checked exactly against the archived segments ([Transcript-only concepts](https://github.com/amierlorenz/articulate/issues/39)'s
+   rule). Mostly free recall.
+3. The `library` public matcher (embedding shortlist → judge, from the daytime reserve) attaches each item to an
+   existing concept or makes a new one at `tier: standard` (re-tiered at 02:00).
+4. Write `import-<batchId>.json`, then `postclass-<lectureId>.json` (`kind: postclass`, `importBatch` = that batch),
+   then `open -g -b com.amierlorenz.Encore`. Lecture id: `<course>.l.<YYYY-MM-DD>`.
+5. The 02:00 run takes over any lecture still `waiting`: status `taken_over`, and the normal path runs (slides only if
+   there's still no transcript, [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10)).
+
+```sql
+CREATE TABLE postclass_quizzes (
+  lecture_id TEXT PRIMARY KEY, course_key TEXT, event_id TEXT, recording_id TEXT,
+  status TEXT,                  -- waiting | built | taken_over | failed
+  batch_id TEXT, plan_id TEXT, created_at TEXT, built_at TEXT
+);
+```
+
+Encore's side (introducing the concept on answer, first review ≥1 day later with `calibrated: false`, the "post-class
+quiz ready" and mid-afternoon notifications) is Q14.
+
+#### Confusable pairs (`intake/contrast`, `intake/library`)
+
+- **Library change:** the per-deck judge call also gets each shortlisted concept's same-course groups (name,
+  `question`, members) and returns `group: <id> | new` per confusable match. Membership is written to
+  `contrast_groups`. Cross-course matches stay judge notes.
+- **Contrast writer:** one batched `contrast_writer` call a night for every new pair or newly joined member. Input per
+  pair: both concepts' claims with quotes and the cited pages (or transcript lines) from each source. Output: a
+  `decidingFeature` claim whose citations each carry their own `sourceFileId`; `intake/cite` checks each against its
+  own file.
+- **No citable feature:** the pair stays in the group uncontrasted, logged, never flagged; retried when either member
+  gets newly matched material, up to 3 tries.
+- **Prompt:** `kind: contrast`, `content { conceptIds: [a, b], groupId }`, id `contrast:<lower id>:<higher id>`, a new
+  id when the deciding feature changes. Tier = the lower member's.
+- A retired or `out` member suspends its group's contrasts; a group with <2 active members goes dormant. "Split the
+  pair" on the weekly list tombstones the membership (`tombstones.kind = 'pair'`).
+
+```sql
+CREATE TABLE contrast_attempts (
+  pair TEXT PRIMARY KEY,        -- "<lower id>|<higher id>"
+  group_id TEXT, tries INTEGER, last_try TEXT, status TEXT,   -- pending | written | given_up
+  reason TEXT
+);
+```
+
+#### Re-intake (`intake/reintake`)
+
+Takes items at stage `reintake` ([§3.5](#35-source--item--handler)), from [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23):
+1. Old version never finished Shape → mark it `superseded`; the new version goes to `convert` as a new file.
+2. Otherwise convert the new version (the `convert` public function), diff page text against the archived
+   `.pages.json` (whitespace and formatting ignored), and run the `extract` (or `guides`) public function on changed
+   and added pages only, with the titles of concepts already cited from this file. More than 30 % of pages changed →
+   the whole file.
+3. Re-anchor every citation from the file by searching for its quote in the new version.
+4. Bucket each concept: unchanged (nothing), enriched (auto), changed (auto if the new claim passes the citation
+   check; weekly undo line), new (normal path), unsupported (weekly keep / retire; keeps shipping).
+5. The judge says whether the expected answer changed: same → regenerate under the same `prompt_id`; changed → retire
+   the old prompt, new id, first in the next plan ([§7.1](#plan-additive-fields-encoreplan-v1) rule 5).
+6. Old versions stay archived with `superseded_by`. No re-intake after a course's final. Inside the 2-day freeze,
+   corrections ship and new concepts wait. An open "card is wrong" flag on a changed concept closes as "superseded by
+   source update" with a weekly line.
+
+The `extract` and `guides` public functions must accept a page subset and context titles; if #61 or #62 didn't expose
+that, the re-intake issue adds it (taking over the named file).
+
+#### Lecture-directive tasks (`tasks`)
+
+At 02:00, class windows of lectures go through `prompts/task.md`'s lecture variant on `qwen3:8b`: instructor
+directives with a concrete action only. A directive that looks like a Canvas assignment (same course, an assignment
+due within ±2 days, from the `intake/canvas` public list) is dropped. A date change ("quiz moved to Friday") becomes a
+weekly flag line, not a task.
+
+### 7.2 Phase 4: voice commands, Literature notes, people, transcript-only concepts
+
+| Package | Change | Deciding tickets |
+|---|---|---|
+| `commands` | detect, parse, resolve, act, receipts, undo | [Voice commands for acting on recordings](https://github.com/amierlorenz/articulate/issues/29), [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31) |
+| `literature` | claim-breakdown Literature notes | [Claim breakdown from a guest speaker](https://github.com/amierlorenz/articulate/issues/30), [The new vault workflow](https://github.com/amierlorenz/articulate/issues/8) |
+| `people` | `People/` stubs | [Person notes for speakers and authors](https://github.com/amierlorenz/articulate/issues/33) |
+| `intake/transcript` | transcript-only concepts | [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues/39), [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10) |
+| `inbox`, `tasks` (taken over) | skip spans a command used up or put hands-off | [Voice commands for acting on recordings](https://github.com/amierlorenz/articulate/issues/29), [Non-class recordings with no command](https://github.com/amierlorenz/articulate/issues/42) |
+
+#### Commands (`commands`, registry order 110: before `inbox` and `tasks`)
+
+1. **Detect:** fuzzy wake-phrase search ("Articulate", "main agent", plus a growing mis-hearing list in
+   `src/articulate/commands/wake_variants.txt`) over each new transcript; in class recordings only the first and last
+   2 min. `command-confirm` (`qwen3:8b`) confirms an imperative addressed to the agent and finds where it ends.
+2. **Parse:** `command-parse` (`qwen3:8b`) → `{ action, target, span, speakers, instructions }`, action one of
+   `literature_notes`, `note`, `task`, `hands_off`, `cancel`.
+3. **Target:** recordings ending before the command; "last/latest/earlier today" look back 72 h, dates and weekdays
+   14 days; course key or title, people by title or transcript; no reference → the same recording if it has more than
+   the command, else the previous one. Only a single clear match acts; otherwise a weekly flag with one checkbox per
+   candidate (ticking re-runs it).
+4. **Span:** embed the topic phrase against 2–5 min windows (class: Gemini Embedding 2; personal: `embeddinggemma`),
+   apply position hints, grow while neighbours stay on topic, `span-trim` cuts to sentences with a confidence.
+   Timestamps skip the search. >30 min or low confidence → flag.
+5. **Speakers:** the command names them; spellings joined; `attribution` decides which sentences are theirs; unclear →
+   no quote. The first instructor named for a course is written to `courses.toml` `instructor` (only when empty; a
+   different later name → flag). `commands` is the only writer of that key.
+6. **Act** (the whitelist, [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31)): `literature_notes` → `literature`;
+   `note` → a dictated or summarised `Inbox/` note (`inbox-note` prompt); `task` → task queue, first-person only;
+   `hands_off` → the span gets no automatic notes or tasks; `cancel`. Refused parts → an `Inbox/` note quoting them.
+   More than 12 notes → flag the whole command.
+7. **Report:** one `Runs.md` line per command (id, action, target, outputs, model, prompt hash, usage) and a receipt
+   `Inbox/Articulate – <command title>.md` with a "☐ Undo this command" box. Undo (box or spoken) deletes only the
+   untouched notes and person stubs it made and tombstones them; tasks stay.
+8. **Timing:** `watch` detects and resolves; a target transcript not ready retries each pass until 02:00; after 24 h
+   unresolved → weekly flag.
+9. **Routing:** command recordings are personal (`qwen3:8b`). A class-recording target follows class routing (span on
+   embeddings, notes on `lecture_literature`). A personal target's Literature notes use `personal_literature`
+   (`claude -p`). Anything Private runs on local models only and never reaches Encore.
+
+```sql
+CREATE TABLE commands (
+  command_id TEXT PRIMARY KEY, recording_id TEXT, start_sec REAL, end_sec REAL,
+  action TEXT, target_recording_id TEXT, span_start REAL, span_end REAL,
+  speakers_json TEXT, instructions TEXT,
+  status TEXT,                  -- detected | waiting_target | resolved | done | flagged | undone | cancelled
+  attempts INTEGER, receipt_id TEXT, prompt_hash TEXT, created_at TEXT, resolved_at TEXT
+);
+CREATE TABLE span_claims (       -- what inbox and tasks skip
+  recording_id TEXT, start_sec REAL, end_sec REAL,
+  kind TEXT,                    -- command | hands_off | used_by_command
+  command_id TEXT
+);
+CREATE TABLE command_outputs (command_id TEXT, kind TEXT, ref TEXT);   -- note articulate_id, task external_id, ...
+```
+
+A command-only recording is claimed in full, so `inbox` and `tasks` skip it; that check is the `inbox`/`tasks`
+take-over.
+
+#### Literature notes (`literature`)
+
+The recipe from `prototype/30-claim-breakdown:prototypes/claim-breakdown/RECIPE.md` becomes
+`prompts/literature-notes.md`:
+- One note per claim in `Literature Notes/`; title = the claim; restatements merged; anecdotes are evidence.
+- Code writes the frontmatter (`tags: [literature]`, `source`, `created`, `recorded`, `agent: true`, `articulate_id`,
+  `pocket_id`, `command_id`, `speaker`, and `course` for class targets); the model writes only title and body.
+- Body: paraphrase, `## Citation` with verbatim quotes (`…` cuts, `[bracket]` fixes) at interpolated `≈H:MM:SS`,
+  `## Speaker` (role at the time, context only), `## Questions for Amier` (1–3), the Derived Permanent Notes Dataview.
+- The mechanical quote check (every piece outside `[…]` and `…` in the transcript, in order) gates each note; one
+  retry with the error, then hold + flag.
+- Links only to titles from the provided list (Literature, Permanent, `Concepts/`, hubs, `People/`, minus
+  `private: true` in cloud runs).
+- `Runs.md` logs `total_cost_usd` and usage per `claude -p` call.
+
+#### People (`people`)
+
+From [Person notes for speakers and authors](https://github.com/amierlorenz/articulate/issues/33): `People/<Full Name>.md` only when something links to it;
+frontmatter `tags: [person]`, `aliases`, `role`, `affiliation`, `agent: true`, `articulate_id`, and the source of each
+fact; a Dataview of notes whose `speaker`/`author` links here (and hubs whose `author`/`Channel` text contains the name
+or an alias). Before creating: normalised fuzzy match on titles and aliases, scoped to the course or source; confident
+→ reuse and add the alias (untouched notes only); unsure → weekly flag, no new note. Instructors come from
+`courses.toml` first. From a Private recording → `private: true`, left out of cloud title lists and cloud matching.
+`People.base` is created once if missing.
+
+#### Transcript-only concepts (`intake/transcript`)
+
+From [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues/39):
+- A Source over archived class windows emits one `lecture` item per class recording at 02:00, once its deck is
+  matched, or after 3 nights without one (then the whole lecture is off-slide).
+- Windows: cut at segment boundaries every ~180 s (cap 300 s; a tail under 120 s joins the previous one).
+- One `transcript_concepts` call (text only, 20-min timeout on 3.8 Flash) with the deck concept list returns
+  `{ newConcepts, spokenClaims, spokenHints, contrastGroups }` (schema in
+  `prototype/39-transcript-concepts:prototypes/transcript-concepts/schema.py`).
+- Citations `{ window, quote }` are checked exactly (case, whitespace and punctuation canonicalised) against Pocket
+  text in the window ±1; code adds `recordingId`, `startSec`, `endSec`. Failing quotes fail closed as #39 lists.
+- `correctsSlide: true` makes the spoken claim primary with a weekly undo line; unit-level hints with `scope`
+  cross-check exam scope and dates; time share comes from cited windows.
+- Items then go to stage `library`, like slides.
+- A lecture with no transcript keeps the slides-only fallback (every concept standard) and a weekly line.
+
+### 7.3 Phase 5: reading, YouTube, LeetCode, evals and tuning
+
+| Package | Change | Deciding tickets |
+|---|---|---|
+| `reading` | Literature notes (and `quiz: true` Permanent notes) → prompts | [Quizzes from reading and goals](https://github.com/amierlorenz/articulate/issues/43) |
+| `youtube` | "Articulate" playlist → `📺` Literature notes | [What GitHub, YouTube and Medium feed into](https://github.com/amierlorenz/articulate/issues/44), [Getting transcripts for watched YouTube videos](https://github.com/amierlorenz/articulate/issues/46), [Gemini reading watched YouTube videos by link](https://github.com/amierlorenz/articulate/issues/47), [Retest Flash Lite on YouTube links](https://github.com/amierlorenz/articulate/issues/48) |
+| `leetcode` | `interview` course from `Drop/interview/` | [LeetCode problems as a source](https://github.com/amierlorenz/articulate/issues/25) |
+| `evals` | `articulate eval tasks`, `articulate eval commands` | [Pulling to-dos from transcripts and tuning them](https://github.com/amierlorenz/articulate/issues/20), [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31), [Non-class recordings with no command](https://github.com/amierlorenz/articulate/issues/42) |
+| `tasks` (taken over) | Google Tasks "Articulate" list drain (Q11), feedback signals | [Task funnel into master-todo](https://github.com/amierlorenz/articulate/issues/7), [Pulling to-dos from transcripts and tuning them](https://github.com/amierlorenz/articulate/issues/20) |
+| `plan` (taken over) | reading slot, `macPractice` | [Quizzes from reading and goals](https://github.com/amierlorenz/articulate/issues/43), [LeetCode problems as a source](https://github.com/amierlorenz/articulate/issues/25) |
+
+#### Reading (`reading`)
+
+- **Which notes:** Literature notes Amier wrote or touched, minus `quiz: false` and `private: true`; untouched agent
+  notes are not quizzed (see Q12, Q13). Permanent notes only with `quiz: true`.
+- **Courses:** one `book:<slug>` course per source hub, created when a quizzable note's `source:` points at it; videos
+  and articles share `reading`. A Permanent note goes to its `from:` source's course, else `reading`.
+- **Claims:** #22's claim shape with citations `{ locator, quote }` from the note's title, restatement and
+  `## Citation` bullets; quotes checked exactly against the note. A book page in a bullet is display-only.
+- **Model:** `claude -p` Sonnet on leftover budget after class work; held 7 days → `qwen3:8b`. Never Gemini.
+- **Prompts:** every note counts as standard: a cue → claim recall prompt, plus an explain-why or apply prompt when the
+  Citation or restatement supports it; title-only notes get the recall prompt only.
+- **Edits:** per-section heading hash checked nightly; #23's rules (same id if the answer holds); a deleted note or
+  `quiz: false` retires its prompts.
+- **Plan:** one pooled reading slot inside ≤20 % (0 in ramps), ~2 new a day, round-robin across courses with unquizzed
+  notes, `#reading` books first. A hub tag mismatch (e.g. `#finished` vs `#read`) → weekly flag.
+
+#### YouTube (`youtube`)
+
+- **OAuth:** `articulate setup` adds `youtube.readonly` to the same Google client (one re-consent).
+- **Playlist:** a private playlist named "Articulate"; `playlistItems.list` + batched `videos.list` (~64 units a day).
+  Watched = item `snippet.publishedAt`; Published = `contentDetails.videoPublishedAt`; Duration from `videos`.
+  Ledger table `videos(video_id, playlist_item_id, status, watched_at, note_id, windows_done, error)`.
+- **When:** last in `nightly` and `pass2`, **lowest priority of every Gemini call**: only leftover quota, never the
+  daytime reserve. A note appears the morning after a video is added.
+- **Calls:** one request per ≤30-min window. Videos ≤5 min → `youtube_short` (Flash Lite first); longer →
+  `youtube_long` (3.6 Flash). Timestamps asked as `"M:SS"` strings, converted in code; clip times are absolute.
+- **Non-public** (unlisted, private, removed) or refused → metadata-only stub note + weekly flag.
+- **Note:** `Literature Notes/📺 <video title>.md`, tag `video`, `agent: true`, Channel, Title, URL, Duration,
+  Published, Watched, TL;DW, timestamped notes with `?t=` links; `## Key Ideas` left empty for Amier. Which model writes
+  the TL;DW and notes is Q15.
+- `quiz: false` on the note retires its cards; whether an untouched video note is quizzed is Q12.
+
+#### LeetCode (`leetcode`)
+
+- **Course:** `[courses.interview]` with no `canvas_id`, `public = true` (its drop files count as class material and
+  use the Gemini chain; recordings still fail closed), `new_per_day = 2`, optional `[[courses.interview.exams]]` (an
+  interview date) that turns on the ramp. Without a date it counts as a learning goal inside the ≤20 % slot.
+- **Input:** one Markdown file per problem in `Drop/interview/`: statement with examples, optional URL (citation
+  only, never fetched), `pattern:`, starter code, `implement: true`, your solution, notes. A pattern reference doc
+  dropped once grounds use-when cues and contrasts.
+- **Extract:** the pattern is a `method` concept in contrast groups; the problem is a cited worked example on it. With
+  neither `pattern:` nor a solution, the model's label is gap-fill (held, weekly list).
+- **Prompts:** `methodPick` and `setUp` always; `codeImplement` with `implement: true` or a solution;
+  `codeComplexity` on your solution; no `fullProblem`.
+- **Tests:** visible = the statement's examples. Hidden = 5–8 model-written inputs, expected values from **running** a
+  reference solution (yours wins) and an independent brute force in `sandbox-exec` (no network, temp writes only, 5 s,
+  memory cap, `uv` Python). Flag when the reference fails an example, the two disagree, or a run times out. Python only.
+- **Plan:** `macPractice` lists ≤3 `codeImplement` prompts not tried in 14+ days ([Mac practice list from the daily plan](https://github.com/amierlorenz/encore/issues/32)).
+
+#### Evals (`evals`)
+
+- **`articulate eval tasks`:** labelled set in `DATA/evals/tasks/`, seeded once from ~20 non-Private recordings (8
+  conversations or meetings, 6 voice notes, 6 lectures) by a high-recall pass that writes `Inbox/Task labels.md` for
+  Amier to tick; grows from "wrong" signals (removed within 3 days, unticked 2 weeks) and 3 Pocket-caught misses a
+  month. Gate: high-band precision ≥0.9 and not below the current version; high+medium recall drops ≤5 points.
+- **`articulate eval commands`:** fixtures in `DATA/evals/commands/`, seeded with AI301 and ~10 uncommanded recordings
+  ([Non-class recordings with no command](https://github.com/amierlorenz/articulate/issues/42)); grows from flagged or undone commands and deleted default notes.
+  Gate: parse accuracy (action, target, span overlap ≥80 %), 100 % quote check, gate decision ≥90 %, `kind:` ≥80 %.
+- Both run locally, never in CI. A `pre-push` hook (installed by `articulate setup`) runs the matching eval when
+  `prompts/task*.md`, `prompts/command-*.md`, `prompts/inbox-*.md` or `prompts/literature-notes.md` changed, and
+  refuses the push on a failed gate. Old recordings are re-scored, never re-extracted.
+
+#### Google Tasks drain (`tasks`)
+
+Each run drains the Google Tasks list "Articulate": each item goes through Add Task with `externalID = gtasks:<id>`
+(a `due: YYYY-MM-DD HH:MM` line in its notes brings back the due time), then is deleted from Google. Needs the
+`tasks` OAuth scope added to the Google client (one re-consent).
+
+### 7.4 Cross-repo work per phase
+
+| Phase | Repo | Issues |
+|---|---|---|
+| 3 | Encore | [Serve contrast prompts (kind: contrast)](https://github.com/amierlorenz/encore/issues/34), [Flag button with reason and suggested fix](https://github.com/amierlorenz/encore/issues/28), [Banner when Articulate's daily plan is stale](https://github.com/amierlorenz/encore/issues/33), [Export the library](https://github.com/amierlorenz/encore/issues/30), and the unfiled ramp and post-class work (Q14) |
+| 5 | Encore | [Mac practice list from the daily plan](https://github.com/amierlorenz/encore/issues/32) |
+
+### 7.5 Registry orders for Phases 3–5
+
+| Step | Order | Jobs |
+|---|---|---|
+| `commands.detect` | 110 | `watch`, `nightly` |
+| `postclass.build` | 140 | `watch` |
+| `tasks.lecture` (inside `tasks`'s line) | 130 | `nightly` |
+| `intake.transcript` | 280 | `nightly`, `pass2` |
+| `intake.reintake` | 290 | `nightly`, `pass2` |
+| `intake.contrast` | 310 | `nightly`, `pass2` |
+| `literature.write` | 500 | `watch`, `nightly` |
+| `people.stubs` | 510 | `watch`, `nightly` |
+| `reading.prompts` | 600 | `nightly`, `pass2` |
+| `leetcode.tests` | 610 | `nightly`, `pass2` |
+| `youtube.notes` | 690 | `nightly`, `pass2` (always last before `plan`) |
+
+---
+
 ## Decisions made while writing this spec
 
 These were open after the tickets. Amier answered them on 2026-11-19 (taking the recommendation each time). They
@@ -1236,3 +1579,16 @@ override the defaults above where they differ.
 | — | Pocket REST host | confirmed by `articulate setup` with one call |
 
 No open questions remain for Phases 0–2.
+
+### Open questions for Phases 3–5
+
+Each has a default this spec uses until Amier answers.
+
+| # | Question | Where it comes from | Default |
+|---|---|---|---|
+| Q12 | Are untouched agent video notes quizzed? [What GitHub, YouTube and Medium feed into](https://github.com/amierlorenz/articulate/issues/44) says every video is quizzed by default; [Quizzes from reading and goals](https://github.com/amierlorenz/articulate/issues/43) says untouched agent notes are not. | #44 vs #43 | videos quizzed by default (#44 decided videos specifically); `quiz: false` opts out |
+| Q13 | Literature notes a command makes from a **class** recording: [Voice commands for acting on recordings](https://github.com/amierlorenz/articulate/issues/29) says they join the course's quiz pool as reading material; #43 says untouched agent notes aren't quizzed. | #29 vs #43 | quizzed in the course's pool at reading priority (their quotes are mechanically checked) |
+| Q14 | Encore has no issue for the Phase 3 plan fields (`practiceTest`, `reviewQuiz`, `reviewLimit`, `reviewPriority`, `newPaused`, `holdNewForExams`) or for the post-class quiz (`kind: postclass` plans, introducing on answer, uncalibrated first review, the two notifications from [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9)). | #9, #18 | file two Encore issues: "Serve ramp fields from the daily plan" and "Post-class quiz from Articulate" |
+| Q15 | Who writes a video note's TL;DW and timestamped notes? #44 first said "personal route only"; its amendment moves transcription to Gemini by URL but doesn't name the note writer. | #44, #47 | the same Gemini URL call per window returns timestamped notes; one Flash Lite text call writes the TL;DW (the video is public) |
+| Q16 | When does `articulate eval commands` start gating prompt changes? [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31) says it gates every change to `prompts/`; [v1 scope and phase plan](https://github.com/amierlorenz/articulate/issues/49) puts evals in Phase 5. | #31 vs #49 | Phase 5; Phase 4 ships its prompts as version 1 with the fixtures seeded as it goes |
+| Q17 | Is [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10)'s separate lecture-to-slide embedding alignment, and #11's Flash Lite "rank lecture concepts" step, still built? [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues/39) gets spoken claims on deck concepts, hints and time share from one call. | #10, #11 vs #39 | not built: #39's call covers them |
