@@ -59,7 +59,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.subcommand == "schemas":
-        print("Schemas generator will be available in issue #52.")
+        from articulate.core.handoff_schemas import write_schemas
+        paths = write_schemas()
+        for p in paths:
+            print(f"Wrote {p}")
         return 0
 
     return 0

@@ -1,0 +1,36 @@
+{
+  "header": {
+    "schema": "encore.library",
+    "version": 1,
+    "id": "lib-01JD0000000000000000000004",
+    "created_at": "2026-11-20T03:00:00Z",
+    "producer": "encore 1.0 (42)"
+  },
+  "exportedAt": "2026-11-20T03:00:00Z",
+  "courses": [
+    {
+      "id": "csc301",
+      "name": "Operating Systems",
+      "units": [{"id": "csc301.u.processes", "name": "Processes"}],
+      "status": "active"
+    }
+  ],
+  "exams": [
+    {
+      "id": "csc301.x.midterm",
+      "courseId": "csc301",
+      "name": "Midterm",
+      "date": "2026-12-05",
+      "unitIds": ["csc301.u.processes"]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "csc301.process",
+      "courseId": "csc301",
+      "unitId": "csc301.u.processes",
+      "title": "Process",
+      "status": "active"
+    }
+  ]
+}
