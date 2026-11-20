@@ -5,8 +5,7 @@ What each phase must deliver, and how it's checked, is in [SPEC-requirements.md]
 
 Authority: the map ([Map: Articulate](https://github.com/amierlorenz/articulate/issues/1)) and the resolution
 comments on its closed tickets. Where this spec and a ticket disagree, the ticket wins and this file is wrong.
-Questions this spec could not answer from the tickets are under [Open questions](#open-questions). They are
-not decided here.
+Questions the tickets left open, and Amier's answers, are under [Decisions made while writing this spec](#decisions-made-while-writing-this-spec).
 
 Status: **Phase 0 written.** Phases 1–5 have their packages in the module map; their contract details are added
 with their build issues.
@@ -145,7 +144,7 @@ below are the code names. Pydantic v2 models are the source of truth, and `uv ru
 
 | Name | Path |
 |---|---|
-| `DATA` | `~/Library/Application Support/articulate/` (see open question Q1) |
+| `DATA` | `~/Library/Application Support/articulate/` |
 | `DB` | `DATA/articulate.sqlite3` |
 | `TRANSCRIPTS` | `DATA/transcripts/YYYY/MM/<recording_id>.json.gz` (the Pocket detail payload as fetched, plus `fetched_at`) |
 | `ARCHIVE` | `DATA/archive/<course_key>/<sha256>.<ext>` plus `<sha256>.pages.json` |
@@ -203,7 +202,7 @@ current shape: `{"exams": [...], "units": [...]}`).
 #### `HUMAN/models.toml`
 
 From [Model routing and budget](https://github.com/amierlorenz/articulate/issues/11) ("chains and ceilings live in
-`models.toml` next to `courses.toml`"; see Q2), limits from
+`models.toml` next to `courses.toml`"; Q2), limits from
 [Check model accounts and limits](https://github.com/amierlorenz/articulate/issues/16).
 
 ```toml
@@ -773,7 +772,7 @@ class Concept(BaseModel):
     title: str
     explanation: str
     kind: Literal["definition", "fact", "method"]
-    status: Literal["active", "retired"] = "active"     # "out" → see open question Q3
+    status: Literal["active", "retired"] = "active"     # "out" ships as retired (Q3)
     tier: Literal["core", "standard", "background", "out"]   # informational for Encore
     details: ConceptDetails
     groupIds: list[str] = []
@@ -1183,7 +1182,7 @@ Phase 0 (serial)  core: config/paths/secrets → db + migrations → pipeline �
         └── Phase 2   intake/canvas ─ intake/convert ─ intake/cite ─┬─ intake/extract ─┐
                                                                     └─ intake/guides ──┤
                                                      intake/library ─ intake/shape ─ handoff ─ plan
-                      encore#25 (import v2) · encore#26 (watch folder) · encore#27 (today's session)
+                      encore#25 (import v2) · encore#26 (watch folder) · encore#27 (today's session) · encore#29 (state export)
 ```
 
 Arrows are data dependencies, not build blockers: every slice builds against Phase 0's contracts and fixtures, so
@@ -1191,20 +1190,25 @@ all Phase 1 and 2 slices can start the day Phase 0 merges. Build issues carry th
 
 ---
 
-## Open questions
+## Decisions made while writing this spec
 
-Not decided by any ticket, or two tickets disagree. Each has a default this spec uses until Amier answers.
+These were open after the tickets. Amier answered them on 2026-11-19 (taking the recommendation each time). They
+override the defaults above where they differ.
 
-| # | Question | Where it comes from | Default in this spec |
-|---|---|---|---|
-| Q1 | Data dir case: `Application Support/articulate` ([Running class intake unattended](https://github.com/amierlorenz/articulate/issues/14)) or `Application Support/Articulate/transcripts` ([The new vault workflow](https://github.com/amierlorenz/articulate/issues/8))? | two tickets | lowercase `articulate` for everything (APFS is case-insensitive, so they'd collide anyway) |
-| Q2 | `models.toml`: next to `courses.toml` in iCloud ([Model routing and budget](https://github.com/amierlorenz/articulate/issues/11)), or local, since the map says only `courses.toml` and `Drop/` live in iCloud? | map vs #11 | iCloud, next to `courses.toml` |
-| Q3 | How does an `out` concept that was already shipped reach Encore? v2 has only `status: retired`; [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10) says "out" suspends cards and is reversible, and handed the "how" to #13, which doesn't say. | #10 → #13 | ship it as `status: retired` (hidden, history kept, reversible by re-import) with `tier: out` |
-| Q4 | Where do exam dates and exam → unit lists come from? | #13, #32 | **Answered by Amier, 2026-11-19:** Canvas assignments + posted announcements + `courses.toml` overrides ([§3.14](#314-exams-and-exam-dates)) |
-| Q5 | Weekly list file: `_system/Weekly Flags.md` ([The new vault workflow](https://github.com/amierlorenz/articulate/issues/8)) or `Inbox/Intake flags.md` (#14 and every later ticket)? | two tickets | `Inbox/Intake flags.md` |
-| Q6 | Real fixtures: commit course PDFs and decks to this private repo, or keep them local with a committed manifest? | not decided | local + manifest ([§4](#4-fixtures)) |
-| Q7 | Phase 2's plan needs Encore's `state.json` (to know what's introduced and due) and the 02:00 run waits for it, but [v1 scope and phase plan](https://github.com/amierlorenz/articulate/issues/49) lists only encore#25–#27 for Phase 2. Add [Export schedule state and grading attempts](https://github.com/amierlorenz/encore/issues/29) (and [Export the library](https://github.com/amierlorenz/encore/issues/30)?) to Phase 2? | #49 vs #18 | add encore#29 to Phase 2; encore#30 stays later (Articulate's SQLite is the library until then) |
-| Q8 | [Watch the hand-off folder on the Mac](https://github.com/amierlorenz/encore/issues/26) still says "iCloud hand-off folder"; #18 moved it to the local `~/Library/Application Support/Encore/Handoff/`. Update encore#26's body? | encore#26 vs #18 | comment on encore#26 pointing at #18 |
-| Q9 | Lecture directive tasks (#20) must drop Canvas look-alikes, which needs Canvas assignments (Phase 2's client). Do they ship in Phase 1? | #20 vs #49 | Phase 1 sends tasks from non-class recordings only; lecture directives join when `intake/canvas` lands |
-| Q10 | The Phase 1 fallback list in `Inbox/` (until master-todo#33 lands): once the intent works, are its pending tasks sent too (risk: Amier already copied them by hand), or does the list stay as the record? | #49 vs #7 | send them, and mark each fallback line "sent" so a hand copy is easy to spot |
-| Q11 | Draining the Google Tasks "Articulate" list for cloud agents ([Task funnel into master-todo](https://github.com/amierlorenz/articulate/issues/7)) isn't placed in any phase by #49. | #7 vs #49 | Phase 5, with the task tuning work |
+| # | Question | Answer |
+|---|---|---|
+| Q1 | Data dir: `Application Support/articulate` (#14) or `…/Articulate/transcripts` (#8)? | lowercase `articulate` for everything |
+| Q2 | `models.toml` in iCloud (#11) or local (map)? | iCloud, next to `courses.toml` |
+| Q3 | How does a shipped concept that becomes `out` reach Encore? | `status: retired` + `tier: out` (hidden, history kept, reversible by re-import) |
+| Q4 | Where do exam dates and units come from? | Canvas assignments + posted announcements + `courses.toml` overrides ([§3.14](#314-exams-and-exam-dates)) |
+| Q5 | Weekly list: `_system/Weekly Flags.md` (#8) or `Inbox/Intake flags.md` (#14)? | `Inbox/Intake flags.md` |
+| Q6 | Real fixtures in git? | no: local `DATA/fixtures/real/` + committed manifest ([§4](#4-fixtures)) |
+| Q7 | Does Phase 2 need Encore's state export? | yes: [Export schedule state and grading attempts](https://github.com/amierlorenz/encore/issues/29) joins Phase 2; [Export the library](https://github.com/amierlorenz/encore/issues/30) stays later |
+| Q8 | encore#26 still says "iCloud hand-off folder" | comment posted on [encore#26](https://github.com/amierlorenz/encore/issues/26) pointing at #18's local folder |
+| Q9 | Lecture-directive tasks in Phase 1? | no: Phase 1 sends tasks from non-class recordings; lecture directives join in Phase 3, once `intake/canvas` can drop Canvas look-alikes |
+| Q10 | Fallback list tasks once master-todo#33 lands | sent through the intent; each fallback line is marked "sent ✓" |
+| Q11 | Google Tasks "Articulate" list drain (#7) | Phase 5 |
+| — | Spec-chosen names (launchd labels, Keychain accounts `canvas_token`/`google_oauth`, v2 id format) | kept as written |
+| — | Pocket REST host | confirmed by `articulate setup` with one call |
+
+No open questions remain for Phases 0–2.
