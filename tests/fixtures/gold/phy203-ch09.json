@@ -1,0 +1,27 @@
+{
+  "deck": "PHY-203 Cutnell & Johnson Ch. 9 Rotational Dynamics (46 slides)",
+  "note": "Hand list of what the deck teaches, written from the page text before the #36 runs. `match` is a case-insensitive regex over a concept's title, key and aliases. `minor` = could fairly be folded into a neighbour. Worked examples are claims, not concepts.",
+  "items": [
+    {"id": "translation-vs-rotation", "pages": [2], "tier": "minor", "match": "translational motion|translation.*rotation|general motion|pure translation"},
+    {"id": "torque", "pages": [3, 4, 5], "tier": "core", "match": "^torque|torque \\(|definition of torque|magnitude of torque"},
+    {"id": "lever-arm", "pages": [5], "tier": "minor", "match": "lever arm"},
+    {"id": "torque-sign", "pages": [5], "tier": "minor", "match": "direction of torque|torque (sign|direction)|counterclockwise"},
+    {"id": "rigid-body-equilibrium", "pages": [8, 9], "tier": "core", "match": "equilibrium of a rigid|rigid.*equilibrium|^equilibrium"},
+    {"id": "equilibrium-strategy", "pages": [10], "tier": "core", "match": "reasoning strategy|equilibrium.*(strategy|procedure|problem)|solving equilibrium"},
+    {"id": "center-of-gravity", "pages": [17], "tier": "core", "match": "^cent(er|re) of gravity$|cent(er|re) of gravity \\(|definition of cent"},
+    {"id": "cg-symmetric", "pages": [18], "tier": "core", "match": "symmetr|geometric(al)? cent"},
+    {"id": "cg-formula", "pages": [19, 20, 21], "tier": "core", "match": "cent(er|re) of gravity.*(formula|calculat|position|locat)|x_?\\{?cg"},
+    {"id": "cg-irregular", "pages": [23], "tier": "minor", "match": "irregular|suspend|plumb"},
+    {"id": "cg-stability", "pages": [22], "tier": "minor", "match": "stabil|cargo|overload|shift"},
+    {"id": "moment-of-inertia", "pages": [24, 25], "tier": "core", "match": "^moment of inertia$|moment of inertia \\(|^moment of inertia definition|rotational inertia"},
+    {"id": "newton-2nd-rotation", "pages": [26], "tier": "core", "match": "second law.*rotat|rotational analog|tau ?= ?i|newton"},
+    {"id": "inertia-depends-on-axis", "pages": [27, 28, 29], "tier": "core", "match": "depends on.*axis|axis.*(depend|location)|inertia.*axis"},
+    {"id": "rotational-work", "pages": [34, 35], "tier": "core", "match": "rotational work"},
+    {"id": "rotational-ke", "pages": [36, 37], "tier": "core", "match": "rotational kinetic"},
+    {"id": "energy-conservation-rotation", "pages": [39], "tier": "core", "match": "(conservation|total).*(mechanical )?energy|energy conservation"},
+    {"id": "rolling-without-slipping", "pages": [39], "tier": "minor", "match": "rolling (without|condition)|v ?= ?r|without slipping"},
+    {"id": "rolling-speed-vs-inertia", "pages": [40], "tier": "core", "match": "rolling|smaller moment|(speed|race).*inertia"},
+    {"id": "angular-momentum", "pages": [41], "tier": "core", "match": "^angular momentum$|angular momentum \\(|definition of angular"},
+    {"id": "conservation-angular-momentum", "pages": [42, 43, 44], "tier": "core", "match": "conservation of angular|angular momentum conservation"}
+  ]
+}

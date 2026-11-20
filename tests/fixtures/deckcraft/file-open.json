@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "ok": true,
+  "result": {
+    "document": "/path/to/deck.pptx",
+    "slides": 41,
+    "lostSlides": [],
+    "damagedMedia": [],
+    "missingFonts": [
+      "NimbusRomNo9L",
+      "CMSSBX10"
+    ]
+  }
+}

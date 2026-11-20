@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "rec-001",
+      "title": "Physics Lecture",
+      "folder_id": null,
+      "duration": 3600,
+      "state": "completed",
+      "language": "en",
+      "recording_at": 1731950000,
+      "created_at": 1731950000,
+      "updated_at": 1731953600,
+      "tags": []
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 1,
+    "total_pages": 1,
+    "has_more": false
+  }
+}

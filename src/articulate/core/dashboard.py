@@ -1,8 +1,11 @@
 """Generated dashboard snapshot _system/Dashboard.md (§3.11, Issue #45)."""
+import logging
 from datetime import UTC, datetime
 
 from articulate.core.db import Database
 from articulate.core.vault import Vault
+
+logger = logging.getLogger(__name__)
 
 
 class Dashboard:
@@ -216,14 +219,19 @@ class Dashboard:
         lines.append("")
 
         # Section 6: Dependencies
-        lines.append("## Dependencies")
-        lines.append("| Dependency | Status | Notes |")
-        lines.append("|---|---|---|")
-        lines.append("| Ollama | unknown | local daemon |")
-        lines.append("| DeckCraft / Keynote | unknown | PPTX converter |")
-        lines.append("| Canvas token | unknown | keychain item |")
-        lines.append("| Pocket API | unknown | keychain item |")
-        lines.append("| Google token | unknown | keychain item |")
+        from articulate.core.doctor import check_dependencies, format_dependencies_table
+        try:
+            lines.append(format_dependencies_table(check_dependencies()))
+        except Exception as e:  # noqa: BLE001
+            logger.warning("Could not check dependencies for dashboard: %s", e)
+            lines.append("## Dependencies")
+            lines.append("| Dependency | Status | Notes |")
+            lines.append("|---|---|---|")
+            lines.append("| Ollama | unknown | local daemon |")
+            lines.append("| DeckCraft / Keynote | unknown | PPTX converter |")
+            lines.append("| Canvas token | unknown | keychain item |")
+            lines.append("| Pocket API | unknown | keychain item |")
+            lines.append("| Google token | unknown | keychain item |")
         lines.append("")
 
         return "\n".join(lines)

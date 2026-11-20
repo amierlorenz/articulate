@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "5194b8b6-ec40-4d99-91a9-059fb610141e",
+      "name": "Private",
+      "kind": "space",
+      "parent_folder_id": null,
+      "space_id": "space-1",
+      "color": "#000000",
+      "recording_count": 1,
+      "total_recording_count": 1,
+      "created_at": 1731950000,
+      "updated_at": 1731950000,
+      "children": []
+    }
+  ]
+}

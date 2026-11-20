@@ -1,0 +1,12 @@
+{
+  "id": "evt-class-01",
+  "summary": "MAT 305 Lecture",
+  "description": "mat305\nRoom 238\nProbability and Statistics",
+  "start": {
+    "dateTime": "2026-11-20T17:30:00-05:00"
+  },
+  "end": {
+    "dateTime": "2026-11-20T18:45:00-05:00"
+  },
+  "recurringEventId": "rec-mat305"
+}

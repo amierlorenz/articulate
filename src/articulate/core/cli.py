@@ -27,11 +27,18 @@ def main(argv: list[str] | None = None) -> int:
     # articulate quota
     subparsers.add_parser("quota", help="Today's ledger per model (stub in Phase 0 slice 1)")
 
-    # articulate setup
-    subparsers.add_parser("setup", help="Interactive one-time setup (stub in Phase 0 slice 1)")
+    # articulate setup [secrets]
+    setup_parser = subparsers.add_parser("setup", help="Interactive one-time setup")
+    setup_parser.add_argument(
+        "target",
+        nargs="?",
+        choices=["secrets"],
+        default=None,
+        help="Optional setup target (e.g. 'secrets')",
+    )
 
     # articulate doctor
-    subparsers.add_parser("doctor", help="Read-only checks of dependencies (stub in Phase 0 slice 1)")
+    subparsers.add_parser("doctor", help="Read-only checks of dependencies (§3.12)")
 
     # articulate schemas
     subparsers.add_parser("schemas", help="Write schemas/*.json from Pydantic models (stub in Phase 0 slice 1)")
@@ -64,12 +71,12 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.subcommand == "setup":
-        print("Setup helper will be available in issue #53.")
-        return 0
+        from articulate.core.setup import run_setup
+        return run_setup(secrets_only=(getattr(args, "target", None) == "secrets"), interactive=True)
 
     if args.subcommand == "doctor":
-        print("Doctor helper will be available in issue #53.")
-        return 0
+        from articulate.core.doctor import run_doctor
+        return run_doctor()
 
     if args.subcommand == "schemas":
         from articulate.core.handoff_schemas import write_schemas

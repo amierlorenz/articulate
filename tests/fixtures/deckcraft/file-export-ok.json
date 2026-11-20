@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "ok": true,
+  "result": {
+    "path": "export.pdf",
+    "pages": 41,
+    "files": [
+      "s1.png",
+      "s2.png"
+    ]
+  }
+}

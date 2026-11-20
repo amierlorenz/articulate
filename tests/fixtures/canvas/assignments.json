@@ -1,0 +1,16 @@
+[
+  {
+    "id": 201,
+    "name": "Homework 1",
+    "due_at": "2026-11-25T23:59:59Z",
+    "unlock_at": "2026-11-18T00:00:00Z",
+    "lock_at": "2026-11-26T23:59:59Z"
+  },
+  {
+    "id": 202,
+    "name": "Reading Assignment",
+    "due_at": null,
+    "unlock_at": null,
+    "lock_at": null
+  }
+]

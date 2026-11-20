@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": {
+    "id": "rec-004",
+    "title": "Processing Note",
+    "folder_id": null,
+    "duration": 78,
+    "state": "pending",
+    "language": "en",
+    "recording_at": 1731950000,
+    "created_at": 1731950000,
+    "updated_at": 1731950000,
+    "tags": []
+  }
+}

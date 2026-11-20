@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.amierlorenz.articulate.pass2</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>{{UV_PATH}}</string>
+        <string>run</string>
+        <string>--project</string>
+        <string>{{REPO_PATH}}</string>
+        <string>articulate</string>
+        <string>run</string>
+        <string>pass2</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>5</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>{{LOG_DIR}}/launchd.pass2.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>{{LOG_DIR}}/launchd.pass2.err.log</string>
+</dict>
+</plist>

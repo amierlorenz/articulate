@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": {
+    "id": "rec-002",
+    "title": "Merged Lecture",
+    "folder_id": null,
+    "duration": 7200,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1731950000,
+    "created_at": 1731950000,
+    "updated_at": 1731957200,
+    "tags": [],
+    "transcript": {
+      "metadata": {
+        "merged": true,
+        "sourceRecordingCount": 2
+      },
+      "text": "Combined lecture transcript lorem ipsum.",
+      "segments": [
+        {
+          "start": 0.5,
+          "end": 7500.0,
+          "text": "Combined segment text.",
+          "originalText": "Combined segment text."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}
