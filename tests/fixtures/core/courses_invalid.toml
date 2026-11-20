@@ -1,0 +1,6 @@
+default_skip = ["Syllabus"]
+
+[courses.mat305]
+# canvas_id is required integer, but provided as string without digits or omitted
+canvas_id = "not-an-integer"
+name = "MAT-305 Prob & Stats"

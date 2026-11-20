@@ -1,0 +1,7 @@
+default_skip = ["Syllabus"]
+random_future_field = "should be ignored"
+
+[courses.mat305]
+canvas_id = 12345
+name = "MAT-305 Prob & Stats"
+unrecognized_field = 42
