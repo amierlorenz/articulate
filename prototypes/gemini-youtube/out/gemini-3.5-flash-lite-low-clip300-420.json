@@ -1,0 +1,273 @@
+{
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+  "request": {
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "fileData": {
+              "fileUri": "https://www.youtube.com/watch?v=QLgH5_mqX28"
+            },
+            "videoMetadata": {
+              "startOffset": "300s",
+              "endOffset": "420s"
+            }
+          },
+          {
+            "text": "Transcribe the speech in this video verbatim, word for word, in English.\nDo not summarize, paraphrase, clean up, or skip anything; keep filler words.\nSplit the transcript into segments of one or two sentences (roughly 5-10 seconds each).\nFor each segment give start: the timestamp when the segment's first word is spoken,\nas M:SS (or H:MM:SS past an hour), and text: the exact words.\nReturn only JSON of the form {\"segments\": [{\"start\": \"0:00\", \"text\": \"...\"}]}."
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0,
+      "maxOutputTokens": 32768,
+      "responseMimeType": "application/json",
+      "responseJsonSchema": {
+        "type": "object",
+        "properties": {
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "start",
+                "text"
+              ]
+            }
+          }
+        },
+        "required": [
+          "segments"
+        ]
+      },
+      "mediaResolution": "MEDIA_RESOLUTION_LOW"
+    }
+  },
+  "started_at": "2026-11-19T21:45:49-0500",
+  "http_status": 200,
+  "wall_sec": 5.97,
+  "response": {
+    "candidates": [
+      {
+        "content": {
+          "parts": [
+            {
+              "text": "{\n  \"segments\": [\n    {\n      \"start\": \"05:00\",\n      \"text\": \"selves all the time.\"\n    },\n    {\n      \"start\": \"05:01\",\n      \"text\": \"We try to force ourselves to try harder instead of learning a different skill.\"\n    },\n    {\n      \"start\": \"05:05\",\n      \"text\": \"So, if you want to stop being so reactive, you've got to build muscle memory for a bunch of new tiny skills.\"\n    },\n    {\n      \"start\": \"05:12\",\n      \"text\": \"It's it's the same for learning to shoot a basketball or be more patient or be more assertive.\"\n    },\n    {\n      \"start\": \"05:18\",\n      \"text\": \"You have to break it down into tiny steps and then practice each one until you're good at it and then put all the pieces together.\"\n    },\n    {\n      \"start\": \"05:24\",\n      \"text\": \"And to do this, you need proper technique, visual aids, often coaching, and then with a bit of practice, you'll build the muscle memory to be able to do it even under pressure.\"\n    },\n    {\n      \"start\": \"05:33\",\n      \"text\": \"So, you can't just try harder.\"\n    },\n    {\n      \"start\": \"05:37\",\n      \"text\": \"That's the first principle.\"\n    },\n    {\n      \"start\": \"05:38\",\n      \"text\": \"Willpower doesn't work, okay?\"\n    },\n    {\n      \"start\": \"05:40\",\n      \"text\": \"You've got to train some new reflexes.\"\n    },\n    {\n      \"start\": \"05:42\",\n      \"text\": \"And the way you do that is through practicing tiny skills.\"\n    },\n    {\n      \"start\": \"05:45\",\n      \"text\": \"Okay.\"\n    },\n    {\n      \"start\": \"05:46\",\n      \"text\": \"Second principle is that our brains do not comprehend don't do that.\"\n    },\n    {\n      \"start\": \"05:51\",\n      \"text\": \"When we try to be less impulsive, that's called a negative goal because it's something you're trying to subtract.\"\n    },\n    {\n      \"start\": \"05:57\",\n      \"text\": \"The brain doesn't know what to do with negative goals.\"\n    },\n    {\n      \"start\": \"06:00\",\n      \"text\": \"There's no action there, there's no verb.\"\n    },\n    {\n      \"start\": \"06:02\",\n      \"text\": \"So principle two for being less impulsive is stop it is less effective than do this instead.\"\n    },\n    {\n      \"start\": \"06:09\",\n      \"text\": \"You have to train yourself to do a different action.\"\n    },\n    {\n      \"start\": \"06:12\",\n      \"text\": \"You can see this with toddlers.\"\n    },\n    {\n      \"start\": \"06:14\",\n      \"text\": \"If you tell them don't hit the cat, they have no idea what you're telling them to do.\"\n    },\n    {\n      \"start\": \"06:19\",\n      \"text\": \"The only action word there is hit and their developing brain just can't process the don't in front of it.\"\n    },\n    {\n      \"start\": \"06:26\",\n      \"text\": \"It can't process that negative word.\"\n    },\n    {\n      \"start\": \"06:27\",\n      \"text\": \"A toddler does much better when you tell them what to do.\"\n    },\n    {\n      \"start\": \"06:31\",\n      \"text\": \"So you say something like, use soft hands with the cat.\"\n    },\n    {\n      \"start\": \"06:36\",\n      \"text\": \"Here, let me show you.\"\n    },\n    {\n      \"start\": \"06:38\",\n      \"text\": \"Now, we adults aren't much different.\"\n    },\n    {\n      \"start\": \"06:40\",\n      \"text\": \"Our brains are not that that different.\"\n    },\n    {\n      \"start\": \"06:42\",\n      \"text\": \"When we want to be less impulsive, we have to give our brain an action word.\"\n    },\n    {\n      \"start\": \"06:46\",\n      \"text\": \"What are we doing instead?\"\n    },\n    {\n      \"start\": \"06:49\",\n      \"text\": \"So, here's a quick example.\"\n    },\n    {\n      \"start\": \"06:50\",\n      \"text\": \"When people train adults who have a tendency to hit their kids, when they train them, they don't tell them to stop hitting their kids.\"\n    },\n    {\n      \"start\": \"06:58\",\n      \"text\": \"They tell them to replace that behavior\"\n    }\n  ]\n}",
+              "thoughtSignature": "EnsKeQFpFH0Tprd9X59Ib4wwrldUymP3DDTOmWstKMM3DTnb/Yq9KhPTDnLR474cZa050tj9gcSNuV/A5fMewfDuoCk+SYKjkh/a8j0EFz/r9Kj7ufhjnFXmrRh1yApx4xO3yfMVa7C3rMEJ18WISDiXy/hiAU20n/YLHA4="
+            }
+          ],
+          "role": "model"
+        },
+        "finishReason": "STOP",
+        "index": 0
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 11045,
+      "candidatesTokenCount": 1254,
+      "totalTokenCount": 12299,
+      "promptTokensDetails": [
+        {
+          "modality": "VIDEO",
+          "tokenCount": 10921
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 124
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "modelVersion": "gemini-3.5-flash-lite",
+    "responseId": "XbT_aujjL_el5NoPuqmxmQE"
+  },
+  "usageMetadata": {
+    "promptTokenCount": 11045,
+    "candidatesTokenCount": 1254,
+    "totalTokenCount": 12299,
+    "promptTokensDetails": [
+      {
+        "modality": "VIDEO",
+        "tokenCount": 10921
+      },
+      {
+        "modality": "TEXT",
+        "tokenCount": 124
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "segments": [
+    {
+      "start": "05:00",
+      "text": "selves all the time.",
+      "start_sec": 300.0
+    },
+    {
+      "start": "05:01",
+      "text": "We try to force ourselves to try harder instead of learning a different skill.",
+      "start_sec": 301.0
+    },
+    {
+      "start": "05:05",
+      "text": "So, if you want to stop being so reactive, you've got to build muscle memory for a bunch of new tiny skills.",
+      "start_sec": 305.0
+    },
+    {
+      "start": "05:12",
+      "text": "It's it's the same for learning to shoot a basketball or be more patient or be more assertive.",
+      "start_sec": 312.0
+    },
+    {
+      "start": "05:18",
+      "text": "You have to break it down into tiny steps and then practice each one until you're good at it and then put all the pieces together.",
+      "start_sec": 318.0
+    },
+    {
+      "start": "05:24",
+      "text": "And to do this, you need proper technique, visual aids, often coaching, and then with a bit of practice, you'll build the muscle memory to be able to do it even under pressure.",
+      "start_sec": 324.0
+    },
+    {
+      "start": "05:33",
+      "text": "So, you can't just try harder.",
+      "start_sec": 333.0
+    },
+    {
+      "start": "05:37",
+      "text": "That's the first principle.",
+      "start_sec": 337.0
+    },
+    {
+      "start": "05:38",
+      "text": "Willpower doesn't work, okay?",
+      "start_sec": 338.0
+    },
+    {
+      "start": "05:40",
+      "text": "You've got to train some new reflexes.",
+      "start_sec": 340.0
+    },
+    {
+      "start": "05:42",
+      "text": "And the way you do that is through practicing tiny skills.",
+      "start_sec": 342.0
+    },
+    {
+      "start": "05:45",
+      "text": "Okay.",
+      "start_sec": 345.0
+    },
+    {
+      "start": "05:46",
+      "text": "Second principle is that our brains do not comprehend don't do that.",
+      "start_sec": 346.0
+    },
+    {
+      "start": "05:51",
+      "text": "When we try to be less impulsive, that's called a negative goal because it's something you're trying to subtract.",
+      "start_sec": 351.0
+    },
+    {
+      "start": "05:57",
+      "text": "The brain doesn't know what to do with negative goals.",
+      "start_sec": 357.0
+    },
+    {
+      "start": "06:00",
+      "text": "There's no action there, there's no verb.",
+      "start_sec": 360.0
+    },
+    {
+      "start": "06:02",
+      "text": "So principle two for being less impulsive is stop it is less effective than do this instead.",
+      "start_sec": 362.0
+    },
+    {
+      "start": "06:09",
+      "text": "You have to train yourself to do a different action.",
+      "start_sec": 369.0
+    },
+    {
+      "start": "06:12",
+      "text": "You can see this with toddlers.",
+      "start_sec": 372.0
+    },
+    {
+      "start": "06:14",
+      "text": "If you tell them don't hit the cat, they have no idea what you're telling them to do.",
+      "start_sec": 374.0
+    },
+    {
+      "start": "06:19",
+      "text": "The only action word there is hit and their developing brain just can't process the don't in front of it.",
+      "start_sec": 379.0
+    },
+    {
+      "start": "06:26",
+      "text": "It can't process that negative word.",
+      "start_sec": 386.0
+    },
+    {
+      "start": "06:27",
+      "text": "A toddler does much better when you tell them what to do.",
+      "start_sec": 387.0
+    },
+    {
+      "start": "06:31",
+      "text": "So you say something like, use soft hands with the cat.",
+      "start_sec": 391.0
+    },
+    {
+      "start": "06:36",
+      "text": "Here, let me show you.",
+      "start_sec": 396.0
+    },
+    {
+      "start": "06:38",
+      "text": "Now, we adults aren't much different.",
+      "start_sec": 398.0
+    },
+    {
+      "start": "06:40",
+      "text": "Our brains are not that that different.",
+      "start_sec": 400.0
+    },
+    {
+      "start": "06:42",
+      "text": "When we want to be less impulsive, we have to give our brain an action word.",
+      "start_sec": 402.0
+    },
+    {
+      "start": "06:46",
+      "text": "What are we doing instead?",
+      "start_sec": 406.0
+    },
+    {
+      "start": "06:49",
+      "text": "So, here's a quick example.",
+      "start_sec": 409.0
+    },
+    {
+      "start": "06:50",
+      "text": "When people train adults who have a tendency to hit their kids, when they train them, they don't tell them to stop hitting their kids.",
+      "start_sec": 410.0
+    },
+    {
+      "start": "06:58",
+      "text": "They tell them to replace that behavior",
+      "start_sec": 418.0
+    }
+  ],
+  "finishReason": "STOP"
+}

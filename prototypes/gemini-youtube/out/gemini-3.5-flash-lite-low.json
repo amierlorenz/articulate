@@ -1,0 +1,64 @@
+{
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+  "request": {
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "fileData": {
+              "fileUri": "https://www.youtube.com/watch?v=QLgH5_mqX28"
+            }
+          },
+          {
+            "text": "Transcribe the speech in this video verbatim, word for word, in English.\nDo not summarize, paraphrase, clean up, or skip anything; keep filler words.\nSplit the transcript into segments of one or two sentences (roughly 5-10 seconds each).\nFor each segment give start: the timestamp when the segment's first word is spoken,\nas M:SS (or H:MM:SS past an hour), and text: the exact words.\nReturn only JSON of the form {\"segments\": [{\"start\": \"0:00\", \"text\": \"...\"}]}."
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0,
+      "maxOutputTokens": 32768,
+      "responseMimeType": "application/json",
+      "responseJsonSchema": {
+        "type": "object",
+        "properties": {
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "start",
+                "text"
+              ]
+            }
+          }
+        },
+        "required": [
+          "segments"
+        ]
+      },
+      "mediaResolution": "MEDIA_RESOLUTION_LOW"
+    }
+  },
+  "started_at": "2026-11-19T22:05:04-0500",
+  "http_status": 503,
+  "wall_sec": 57.05,
+  "response": {
+    "error": {
+      "code": 503,
+      "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "status": "UNAVAILABLE"
+    }
+  },
+  "usageMetadata": null,
+  "segments": null
+}

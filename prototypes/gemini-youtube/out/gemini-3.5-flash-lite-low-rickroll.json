@@ -1,0 +1,339 @@
+{
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+  "request": {
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "fileData": {
+              "fileUri": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            }
+          },
+          {
+            "text": "Transcribe the speech in this video verbatim, word for word, in English.\nDo not summarize, paraphrase, clean up, or skip anything; keep filler words.\nSplit the transcript into segments of one or two sentences (roughly 5-10 seconds each).\nFor each segment give start: the timestamp when the segment's first word is spoken,\nas M:SS (or H:MM:SS past an hour), and text: the exact words.\nReturn only JSON of the form {\"segments\": [{\"start\": \"0:00\", \"text\": \"...\"}]}."
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0,
+      "maxOutputTokens": 32768,
+      "responseMimeType": "application/json",
+      "responseJsonSchema": {
+        "type": "object",
+        "properties": {
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "start",
+                "text"
+              ]
+            }
+          }
+        },
+        "required": [
+          "segments"
+        ]
+      },
+      "mediaResolution": "MEDIA_RESOLUTION_LOW"
+    }
+  },
+  "started_at": "2026-11-19T21:45:55-0500",
+  "http_status": 200,
+  "wall_sec": 5.04,
+  "response": {
+    "candidates": [
+      {
+        "content": {
+          "parts": [
+            {
+              "text": "{\n  \"segments\": [\n    {\n      \"start\": \"0:18\",\n      \"text\": \"We're no strangers to love\"\n    },\n    {\n      \"start\": \"0:22\",\n      \"text\": \"You know the rules and so do I\"\n    },\n    {\n      \"start\": \"0:27\",\n      \"text\": \"A full commitment's what I'm thinking of\"\n    },\n    {\n      \"start\": \"0:31\",\n      \"text\": \"You wouldn't get this from any other guy\"\n    },\n    {\n      \"start\": \"0:35\",\n      \"text\": \"I just wanna tell you how I'm feeling\"\n    },\n    {\n      \"start\": \"0:40\",\n      \"text\": \"Gotta make you understand\"\n    },\n    {\n      \"start\": \"0:43\",\n      \"text\": \"Never gonna give you up, never gonna let you down\"\n    },\n    {\n      \"start\": \"0:48\",\n      \"text\": \"Never gonna run around and desert you\"\n    },\n    {\n      \"start\": \"0:52\",\n      \"text\": \"Never gonna make you cry, never gonna say goodbye\"\n    },\n    {\n      \"start\": \"0:57\",\n      \"text\": \"Never gonna tell a lie and hurt you\"\n    },\n    {\n      \"start\": \"1:00\",\n      \"text\": \"We've known each other for so long\"\n    },\n    {\n      \"start\": \"1:05\",\n      \"text\": \"Your heart's been aching, but you're too shy to say it\"\n    },\n    {\n      \"start\": \"1:10\",\n      \"text\": \"Inside, we both know what's been going on\"\n    },\n    {\n      \"start\": \"1:13\",\n      \"text\": \"We know the game and we're gonna play it\"\n    },\n    {\n      \"start\": \"1:19\",\n      \"text\": \"And if you ask me how I'm feeling\"\n    },\n    {\n      \"start\": \"1:23\",\n      \"text\": \"Don't tell me you're too blind to see\"\n    },\n    {\n      \"start\": \"1:26\",\n      \"text\": \"Never gonna give you up, never gonna let you down\"\n    },\n    {\n      \"start\": \"1:30\",\n      \"text\": \"Never gonna run around and desert you\"\n    },\n    {\n      \"start\": \"1:35\",\n      \"text\": \"Never gonna make you cry, never gonna say goodbye\"\n    },\n    {\n      \"start\": \"1:39\",\n      \"text\": \"Never gonna tell a lie and hurt you\"\n    },\n    {\n      \"start\": \"1:43\",\n      \"text\": \"Never gonna give you up, never gonna let you down\"\n    },\n    {\n      \"start\": \"1:47\",\n      \"text\": \"Never gonna run around and desert you\"\n    },\n    {\n      \"start\": \"1:51\",\n      \"text\": \"Never gonna make you cry, never gonna say goodbye\"\n    },\n    {\n      \"start\": \"1:56\",\n      \"text\": \"Never gonna tell a lie and hurt you\"\n    },\n    {\n      \"start\": \"2:08\",\n      \"text\": \"(Ooh) Give you up\"\n    },\n    {\n      \"start\": \"2:10\",\n      \"text\": \"(Ooh) Give you up\"\n    },\n    {\n      \"start\": \"2:12\",\n      \"text\": \"(Ooh) Never gonna give, never gonna give (give you up)\"\n    },\n    {\n      \"start\": \"2:15\",\n      \"text\": \"(Ooh) Never gonna give, never gonna give (give you up)\"\n    },\n    {\n      \"start\": \"2:16\",\n      \"text\": \"We've known each other for so long\"\n    },\n    {\n      \"start\": \"2:21\",\n      \"text\": \"Your heart's been aching, but you're too shy to say it\"\n    },\n    {\n      \"start\": \"2:26\",\n      \"text\": \"Inside, we both know what's been going on\"\n    },\n    {\n      \"start\": \"2:30\",\n      \"text\": \"We know the game and we're gonna play it\"\n    },\n    {\n      \"start\": \"2:35\",\n      \"text\": \"I just wanna tell you how I'm feeling\"\n    },\n    {\n      \"start\": \"2:39\",\n      \"text\": \"Gotta make you understand\"\n    },\n    {\n      \"start\": \"2:41\",\n      \"text\": \"Never gonna give you up, never gonna let you down\"\n    },\n    {\n      \"start\": \"2:46\",\n      \"text\": \"Never gonna run around and desert you\"\n    },\n    {\n      \"start\": \"2:50\",\n      \"text\": \"Never gonna make you cry, never gonna say goodbye\"\n    },\n    {\n      \"start\": \"2:55\",\n      \"text\": \"Never gonna tell a lie and hurt you\"\n    },\n    {\n      \"start\": \"2:59\",\n      \"text\": \"Never gonna give you up, never gonna let you down\"\n    },\n    {\n      \"start\": \"3:03\",\n      \"text\": \"Never gonna run around and desert you\"\n    },\n    {\n      \"start\": \"3:08\",\n      \"text\": \"Never gonna make you cry, never gonna say goodbye\"\n    },\n    {\n      \"start\": \"3:12\",\n      \"text\": \"Never gonna tell a lie and hurt you\"\n    },\n    {\n      \"start\": \"3:16\",\n      \"text\": \"Never gonna give you up, never gonna let you down\"\n    },\n    {\n      \"start\": \"3:20\",\n      \"text\": \"Never gonna run around and desert you\"\n    },\n    {\n      \"start\": \"3:24\",\n      \"text\": \"Never gonna make you cry, never gonna say goodbye\"\n    },\n    {\n      \"start\": \"3:29\",\n      \"text\": \"Never gonna tell a lie and hurt you\"\n    }\n  ]\n}",
+              "thoughtSignature": "EnsKeQFpFH0TobBv7NLMcp6XkKEwadUsmwrhwAHRn7MeIKQ6EH4RlMt/43YbjEFapfcq2VVGsDYFXPIjm8b0Z6g1plYp7+OUhztao0CSQZGUVs4MbuCIO8b48xwP6wwwMcg665TT0u8dmd08aRMSTPw9DLOfy/Q7mCUaj/o="
+            }
+          ],
+          "role": "model"
+        },
+        "finishReason": "STOP",
+        "index": 0
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 19511,
+      "candidatesTokenCount": 1555,
+      "totalTokenCount": 21066,
+      "promptTokensDetails": [
+        {
+          "modality": "VIDEO",
+          "tokenCount": 19387
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 124
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "modelVersion": "gemini-3.5-flash-lite",
+    "responseId": "Y7T_auOZNJKio_UPueHb6Qs"
+  },
+  "usageMetadata": {
+    "promptTokenCount": 19511,
+    "candidatesTokenCount": 1555,
+    "totalTokenCount": 21066,
+    "promptTokensDetails": [
+      {
+        "modality": "VIDEO",
+        "tokenCount": 19387
+      },
+      {
+        "modality": "TEXT",
+        "tokenCount": 124
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "segments": [
+    {
+      "start": "0:18",
+      "text": "We're no strangers to love",
+      "start_sec": 18.0
+    },
+    {
+      "start": "0:22",
+      "text": "You know the rules and so do I",
+      "start_sec": 22.0
+    },
+    {
+      "start": "0:27",
+      "text": "A full commitment's what I'm thinking of",
+      "start_sec": 27.0
+    },
+    {
+      "start": "0:31",
+      "text": "You wouldn't get this from any other guy",
+      "start_sec": 31.0
+    },
+    {
+      "start": "0:35",
+      "text": "I just wanna tell you how I'm feeling",
+      "start_sec": 35.0
+    },
+    {
+      "start": "0:40",
+      "text": "Gotta make you understand",
+      "start_sec": 40.0
+    },
+    {
+      "start": "0:43",
+      "text": "Never gonna give you up, never gonna let you down",
+      "start_sec": 43.0
+    },
+    {
+      "start": "0:48",
+      "text": "Never gonna run around and desert you",
+      "start_sec": 48.0
+    },
+    {
+      "start": "0:52",
+      "text": "Never gonna make you cry, never gonna say goodbye",
+      "start_sec": 52.0
+    },
+    {
+      "start": "0:57",
+      "text": "Never gonna tell a lie and hurt you",
+      "start_sec": 57.0
+    },
+    {
+      "start": "1:00",
+      "text": "We've known each other for so long",
+      "start_sec": 60.0
+    },
+    {
+      "start": "1:05",
+      "text": "Your heart's been aching, but you're too shy to say it",
+      "start_sec": 65.0
+    },
+    {
+      "start": "1:10",
+      "text": "Inside, we both know what's been going on",
+      "start_sec": 70.0
+    },
+    {
+      "start": "1:13",
+      "text": "We know the game and we're gonna play it",
+      "start_sec": 73.0
+    },
+    {
+      "start": "1:19",
+      "text": "And if you ask me how I'm feeling",
+      "start_sec": 79.0
+    },
+    {
+      "start": "1:23",
+      "text": "Don't tell me you're too blind to see",
+      "start_sec": 83.0
+    },
+    {
+      "start": "1:26",
+      "text": "Never gonna give you up, never gonna let you down",
+      "start_sec": 86.0
+    },
+    {
+      "start": "1:30",
+      "text": "Never gonna run around and desert you",
+      "start_sec": 90.0
+    },
+    {
+      "start": "1:35",
+      "text": "Never gonna make you cry, never gonna say goodbye",
+      "start_sec": 95.0
+    },
+    {
+      "start": "1:39",
+      "text": "Never gonna tell a lie and hurt you",
+      "start_sec": 99.0
+    },
+    {
+      "start": "1:43",
+      "text": "Never gonna give you up, never gonna let you down",
+      "start_sec": 103.0
+    },
+    {
+      "start": "1:47",
+      "text": "Never gonna run around and desert you",
+      "start_sec": 107.0
+    },
+    {
+      "start": "1:51",
+      "text": "Never gonna make you cry, never gonna say goodbye",
+      "start_sec": 111.0
+    },
+    {
+      "start": "1:56",
+      "text": "Never gonna tell a lie and hurt you",
+      "start_sec": 116.0
+    },
+    {
+      "start": "2:08",
+      "text": "(Ooh) Give you up",
+      "start_sec": 128.0
+    },
+    {
+      "start": "2:10",
+      "text": "(Ooh) Give you up",
+      "start_sec": 130.0
+    },
+    {
+      "start": "2:12",
+      "text": "(Ooh) Never gonna give, never gonna give (give you up)",
+      "start_sec": 132.0
+    },
+    {
+      "start": "2:15",
+      "text": "(Ooh) Never gonna give, never gonna give (give you up)",
+      "start_sec": 135.0
+    },
+    {
+      "start": "2:16",
+      "text": "We've known each other for so long",
+      "start_sec": 136.0
+    },
+    {
+      "start": "2:21",
+      "text": "Your heart's been aching, but you're too shy to say it",
+      "start_sec": 141.0
+    },
+    {
+      "start": "2:26",
+      "text": "Inside, we both know what's been going on",
+      "start_sec": 146.0
+    },
+    {
+      "start": "2:30",
+      "text": "We know the game and we're gonna play it",
+      "start_sec": 150.0
+    },
+    {
+      "start": "2:35",
+      "text": "I just wanna tell you how I'm feeling",
+      "start_sec": 155.0
+    },
+    {
+      "start": "2:39",
+      "text": "Gotta make you understand",
+      "start_sec": 159.0
+    },
+    {
+      "start": "2:41",
+      "text": "Never gonna give you up, never gonna let you down",
+      "start_sec": 161.0
+    },
+    {
+      "start": "2:46",
+      "text": "Never gonna run around and desert you",
+      "start_sec": 166.0
+    },
+    {
+      "start": "2:50",
+      "text": "Never gonna make you cry, never gonna say goodbye",
+      "start_sec": 170.0
+    },
+    {
+      "start": "2:55",
+      "text": "Never gonna tell a lie and hurt you",
+      "start_sec": 175.0
+    },
+    {
+      "start": "2:59",
+      "text": "Never gonna give you up, never gonna let you down",
+      "start_sec": 179.0
+    },
+    {
+      "start": "3:03",
+      "text": "Never gonna run around and desert you",
+      "start_sec": 183.0
+    },
+    {
+      "start": "3:08",
+      "text": "Never gonna make you cry, never gonna say goodbye",
+      "start_sec": 188.0
+    },
+    {
+      "start": "3:12",
+      "text": "Never gonna tell a lie and hurt you",
+      "start_sec": 192.0
+    },
+    {
+      "start": "3:16",
+      "text": "Never gonna give you up, never gonna let you down",
+      "start_sec": 196.0
+    },
+    {
+      "start": "3:20",
+      "text": "Never gonna run around and desert you",
+      "start_sec": 200.0
+    },
+    {
+      "start": "3:24",
+      "text": "Never gonna make you cry, never gonna say goodbye",
+      "start_sec": 204.0
+    },
+    {
+      "start": "3:29",
+      "text": "Never gonna tell a lie and hurt you",
+      "start_sec": 209.0
+    }
+  ],
+  "finishReason": "STOP"
+}
