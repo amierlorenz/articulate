@@ -603,6 +603,7 @@ stage, does its work, and advances them. Stage names are the contract:
 | Stage | Item kinds | Owner | Writes | Advances to |
 |---|---|---|---|---|
 | `pick` | `slides`, `guide_or_exam`, `other_file` | `intake/canvas` | `source_files` (all but `page_count`), `exams`, `units`, archive copy | `convert` (`other_file` → skipped + flag) |
+| `pick` (changed file) | same | `intake/canvas` | a new `source_files` row for the new version | `reintake` (no handler until Phase 3: the item waits) |
 | `convert` | `slides`, `guide_or_exam` | `intake/convert` | `pages`, `source_files.page_count`, `.pages.json` | `extract` (slides) or `guide_extract` |
 | `extract` | `slides` | `intake/extract` | candidate concepts and groups in `concepts`/`contrast_groups` with `status = held`, `hold_reason = 'library'` | `library` |
 | `guide_extract` | `guide_or_exam` | `intake/guides` | `guide_items` | `library` |

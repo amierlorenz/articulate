@@ -132,7 +132,7 @@ PR (`feat/new-app-identity`, [Create the Encore repo from MieracleStudy](https:/
 must be merged and the CloudKit container registered first.
 
 Not in Phase 2: the 10-day ramp and practice tests, post-class quiz, cross-deck contrasts, re-intake of changed
-files (a changed file is logged, not re-extracted), transcript-only concepts, lecture alignment. Without lecture
+files (a changed file is queued at stage `reintake`, not re-extracted), transcript-only concepts, lecture alignment. Without lecture
 alignment, tiers come from slide hints, guides and past exams only; concepts with no signal are `standard`
 ([Deciding what matters](https://github.com/amierlorenz/articulate/issues/10): slides-only fallback).
 
@@ -148,7 +148,7 @@ From [Running class intake unattended](https://github.com/amierlorenz/articulate
 | 2.2 | Real check on Fall 2026: finds Whitman Ch02 (CSC-382, module Page link), the HCAI reading (CSC-430), all PHY-203 slides and 8 practice tests (Files tab), CSC-395's past final (Files tab), and CSC-382/CSC-301's study guides (announcements); skips the CSC Department shell | R |
 | 2.3 | `courses.toml` skip rules: `default_skip` globs, a course's `skip` overrides them; skipped modules never download | F |
 | 2.4 | `Drop/<course_key>/` files are copied into the archive by content hash; a re-drop or rename is a no-op; nothing in `Drop/` is moved or deleted | F |
-| 2.5 | Slots per #23 recorded for every file; an identical re-upload does nothing; a changed file is logged in `Runs.md` and left for Phase 3 | F |
+| 2.5 | Slots per #23 recorded for every file; an identical re-upload does nothing; a changed file (known slot, new content hash) gets a `Runs.md` line and becomes an item at stage `reintake`, where it waits: no handler takes it until Phase 3 | F |
 | 2.6 | Routing check (Flash Lite, first 2 pages, filename and folder or announcement title as hints) sorts each file to `slides`, `guideOrExam` or `other`; `other` → weekly flags; .xlsx, video, links skipped with a flag | F, R |
 | 2.7 | Queue order: nearest dated exam first, undated after; the backlog rolls to the next night; ceilings set the volume | F |
 | 2.8 | Exams per §3.14: Canvas assignments filtered by name and group; posted announcements read nightly and parsed with a verbatim-quote check; unposted announcements ignored; precedence `courses.toml` → newest announcement → `due_at` (window → `unlock_at`); a changed date logs a `Runs.md` line; an undated exam raises one flag line | F, R |
