@@ -1,0 +1,20 @@
+[
+  {
+    "id": 101,
+    "name": "Week 1",
+    "items": [
+      {
+        "id": 1,
+        "type": "File",
+        "title": "Lecture 1.pdf",
+        "content_id": 501
+      },
+      {
+        "id": 2,
+        "type": "Page",
+        "title": "Week 1 Overview",
+        "page_url": "week-1-overview"
+      }
+    ]
+  }
+]

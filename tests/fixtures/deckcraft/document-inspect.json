@@ -1,0 +1,26 @@
+{
+  "id": 1,
+  "ok": true,
+  "result": {
+    "slides": [
+      {
+        "index": 1,
+        "title": "Overview",
+        "notes": "Introduction notes",
+        "hidden": false,
+        "animations": 0,
+        "layout": "title",
+        "shapes": 2
+      },
+      {
+        "index": 2,
+        "title": "Background",
+        "notes": "Secret notes",
+        "hidden": true,
+        "animations": 1,
+        "layout": "content",
+        "shapes": 4
+      }
+    ]
+  }
+}

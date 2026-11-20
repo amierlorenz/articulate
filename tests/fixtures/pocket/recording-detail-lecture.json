@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "data": {
+    "id": "rec-001",
+    "title": "Physics Lecture",
+    "folder_id": null,
+    "duration": 3600,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1731950000,
+    "created_at": 1731950000,
+    "updated_at": 1731953600,
+    "tags": [],
+    "transcript": {
+      "text": "Lorem ipsum dolor sit amet, lecture intro and concepts.",
+      "segments": [
+        {
+          "start": 0.5,
+          "end": 4.2,
+          "text": "Lorem ipsum dolor sit amet.",
+          "originalText": "Lorem ipsum dolor sit amet."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}

@@ -40,3 +40,22 @@ def test_cli_run_execution(tmp_path, monkeypatch):
     # Verify DB was created and migrated
     db_path = data_dir / "articulate.sqlite3"
     assert db_path.exists()
+
+
+def test_cli_doctor(capsys, monkeypatch):
+    import subprocess
+    monkeypatch.setattr(subprocess, "run", lambda *a, **k: subprocess.CompletedProcess([], 0, "dummy", ""))
+    ret = main(["doctor"])
+    assert ret == 0
+    captured = capsys.readouterr()
+    assert "## Dependencies" in captured.out
+
+
+def test_cli_setup_help(capsys):
+    with pytest.raises(SystemExit) as exc_info:
+        main(["setup", "--help"])
+    assert exc_info.value.code == 0
+    captured = capsys.readouterr()
+    assert "secrets" in captured.out
+
+

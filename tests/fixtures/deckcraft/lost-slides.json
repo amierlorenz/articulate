@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "ok": true,
+  "result": {
+    "document": "corrupted.pptx",
+    "slides": 10,
+    "lostSlides": [
+      3,
+      7
+    ],
+    "damagedMedia": [
+      "image1.png"
+    ],
+    "missingFonts": []
+  }
+}

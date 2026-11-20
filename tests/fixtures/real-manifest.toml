@@ -1,0 +1,123 @@
+# tests/fixtures/real-manifest.toml
+# Real fixture files manifest (§4, Acceptance check 0.18).
+# Maps real course files, decks, and recordings to sha256 hashes and evaluation metrics.
+# Real files live in DATA/fixtures/real/ (never committed to git).
+
+[[fixtures]]
+filename = "chapter25_4e.pptx"
+sha256 = "b502e4302474fa860c9d715533fd7788a388901f968832c786e184abda7f9167"
+source = "~/Downloads/chapter25_4e.pptx"
+tests = "convert"
+expected = "pages = slides (41); 0 fallbacks; inline OMML, pasted equations, missing fonts (#28)"
+
+[[fixtures]]
+filename = "Cryptography.pptx"
+sha256 = "5616401549ee16d3f3ced26fb69ebd94060643e131a9ed8e6f60824ef4d98a34"
+source = "~/Documents/School/fa26/CSC_382/Cryptography.pptx"
+tests = "convert"
+expected = "pages = slides (27); 16:9, groups, tables, JPEG backgrounds (#28)"
+
+[[fixtures]]
+filename = "ch10.pptx"
+sha256 = "79d9e769f9b36fd2a847fdd7a4d58ac35af4ef8c80fbf6b0cce7e3ea946637c1"
+source = "~/Documents/School/fa26/_Unsorted/ch10.pptx"
+tests = "convert"
+expected = "pages = slides (86); 4:3, OLE/EMF equations (#28)"
+
+[[fixtures]]
+filename = "risk assessment.pptx"
+sha256 = "7ab33cb77c3952eb0f7da25f26bb6dbc24b5c9f05c5ff870f5314be48262f807"
+source = "~/Documents/School/fa26/CSC_382/risk assessment.pptx"
+tests = "convert"
+expected = "pages = slides (22); 14 SmartArt (#28)"
+
+[[fixtures]]
+filename = "AmierDavis_FinalExam_Piracy.pptx"
+sha256 = "5dfd0e67dbe124ba5b7c7a1eb2d2c52bb8adcfa2eda87683fc033aefb674861d"
+source = "~/Documents/School/sp25/CSC_120/FinalExamFiles/AmierDavis_FinalExam_Piracy.pptx"
+tests = "convert"
+expected = "pages = slides (10); 4 SmartArt, native chart, builds (#28)"
+
+[[fixtures]]
+filename = "Ethics IN Computer Security.pptx"
+sha256 = "ee9975fde73867c04eaa8d3251d78c85019bc0497b77a04013b21c10fffbe2e8"
+source = "~/Documents/School/fa26/CSC_382/Ethics IN Computer Security.pptx"
+tests = "convert"
+expected = "pages = slides (52); builds on 6 slides (#28)"
+
+[[fixtures]]
+filename = "Davis_CVpresentation.pptx"
+sha256 = "16c0edbe8643d283c2f9218ccb005a1b44fc6c329bcbf56fcf27dfa54c5b0c6b"
+source = "~/Documents/School/sp26/CSC_330/Davis_CVpresentation.pptx"
+tests = "convert"
+expected = "pages = slides (14); embedded video on slide 13 (#28)"
+
+[[fixtures]]
+filename = "mat305-ch2.pdf"
+sha256 = "5a68c2440a700bfbcc47dea1728c46f652a3ad7553baf9a8a837f1e00011500d"
+source = "~/Library/Application Support/articulate/prototypes/40-damaged-layer/decks/chapter2.pdf"
+tests = "cite, damaged layer"
+expected = "63/64 verified; p7/p8 untrusted (#35, #40)"
+
+[[fixtures]]
+filename = "mat305-ch3.pdf"
+sha256 = "e9139ef31b381a31cf46e907bfae4b4ec893017e93f3675088f02c15fc47ff80"
+source = "~/Library/Application Support/articulate/prototypes/40-damaged-layer/decks/mat305-ch3.pdf"
+tests = "cite, damaged layer"
+expected = "100% verified; p6 untrusted (#35, #40)"
+
+[[fixtures]]
+filename = "phy203-ch09.pdf"
+sha256 = "3410d056b065708ff4bc307bdd797b15f70b45c7cd0f9645b570f0d9e81e6219"
+source = "~/Library/Application Support/articulate/prototypes/40-damaged-layer/decks/phy203-ch09.pdf"
+tests = "Extract split, cite"
+expected = "100% verified with VL; split neutral to positive (#35, #36)"
+
+[[fixtures]]
+filename = "csc382-whitman-ch03.pdf"
+sha256 = "f072478e02a8afdcccd2d410524005f1b7ed409234a39b1bda8fd9739bdaee53"
+source = "~/Library/Application Support/articulate/prototypes/40-damaged-layer/decks/csc382-whitman-ch03.pdf"
+tests = "long-deck split"
+expected = "core recall 42/52 with split + prompt line (#36)"
+
+[[fixtures]]
+filename = "phy203-test4.pdf"
+sha256 = "89bb69b64dbe1d1c50829afaa4c509d999335e339b8b026a0b2d4bb8327eba78"
+source = "~/Documents/School/fa26/PHY_203/203 TEST 4 Practice-2026.pdf"
+tests = "guides, cite"
+expected = "26 items, 26/26 question quotes, 21/22 answers on 3.6 Flash (#32, #34)"
+
+[[fixtures]]
+filename = "mat305-t3-review.pdf"
+sha256 = "536e521a8b39c9ad54b160f55f71a672a0e84e205222e282fbfddc7682cfd33c"
+source = "~/Documents/School/fa26/MAT_305/MAT_305_T3_Review.pdf"
+tests = "guides, answer-key join, formula check"
+expected = "316/318 true quotes, 0 altered pass (#37)"
+
+[[fixtures]]
+filename = "mat305-t3-solutions.pdf"
+sha256 = "f802bb2363c5de29f3f3ebdab567e675132dd8a9485dbfb78d3584305238f838"
+source = "~/Documents/School/fa26/MAT_305/MAT_305_T3_Review_detailed solutions.pdf"
+tests = "guides, answer-key join, formula check"
+expected = "316/318 true quotes, 0 altered pass (#37)"
+
+[[fixtures]]
+filename = "phy203-test1-practice.pdf"
+sha256 = "6cd43688140b58c835c7edd6cf0f50438578b712f8991e70256656b3f7f60560"
+source = "~/Documents/School/fa26/_Unsorted/TEST 1 Practice Q w Ans.pdf"
+tests = "damaged layer"
+expected = "p2 untrusted, p3 the one false flag (#40)"
+
+[[fixtures]]
+filename = "035ec6ce-3e84-41c2-8d61-fa86447b17a1.json"
+sha256 = "f891167ac344cb9944899d8fc02a4fb3456306123a3bb9df6dc3f584743e9353"
+source = "~/Library/Application Support/articulate/prototypes/39-transcript-concepts/data/035ec6ce-3e84-41c2-8d61-fa86447b17a1.json"
+tests = "pocket, inbox, tasks"
+expected = "Cybersecurity Staffing and Certifications Lecture, duration 3880s (#39, #42)"
+
+[[fixtures]]
+filename = "d7be217b-cfb4-44e6-b5f6-a3d5000eaeec.json"
+sha256 = "a6a623bb36781a4610901543bc986126760a0beff579890ca2fc03ae957843d7"
+source = "~/Library/Application Support/articulate/prototypes/39-transcript-concepts/data/d7be217b-cfb4-44e6-b5f6-a3d5000eaeec.json"
+tests = "pocket, inbox, tasks"
+expected = "Probability & Stats lecture, duration 2598s (#39, #42)"

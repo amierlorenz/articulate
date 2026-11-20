@@ -1,0 +1,19 @@
+[
+  {
+    "id": "evt-class-02",
+    "summary": "CSC 382 Lecture",
+    "description": "csc382\nComputer Security",
+    "start": {
+      "dateTime": "2026-11-20T14:00:00-05:00"
+    },
+    "end": {
+      "dateTime": "2026-11-20T15:15:00-05:00"
+    }
+  },
+  {
+    "id": "rec-overlap",
+    "title": "Pocket Recording",
+    "start": "2026-11-20T14:05:00-05:00",
+    "duration": 4200
+  }
+]

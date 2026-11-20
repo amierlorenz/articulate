@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.amierlorenz.articulate.watch</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>{{UV_PATH}}</string>
+        <string>run</string>
+        <string>--project</string>
+        <string>{{REPO_PATH}}</string>
+        <string>articulate</string>
+        <string>run</string>
+        <string>watch</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Minute</key>
+            <integer>15</integer>
+        </dict>
+        <dict>
+            <key>Minute</key>
+            <integer>45</integer>
+        </dict>
+    </array>
+    <key>StandardOutPath</key>
+    <string>{{LOG_DIR}}/launchd.watch.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>{{LOG_DIR}}/launchd.watch.err.log</string>
+</dict>
+</plist>

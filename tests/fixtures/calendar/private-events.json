@@ -1,0 +1,12 @@
+{
+  "id": "evt-priv-01",
+  "summary": "Therapy Appointment",
+  "description": "Personal health appointment",
+  "start": {
+    "dateTime": "2026-11-20T11:00:00-05:00"
+  },
+  "end": {
+    "dateTime": "2026-11-20T12:00:00-05:00"
+  },
+  "calendar": "private_events"
+}
