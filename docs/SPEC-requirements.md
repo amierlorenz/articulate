@@ -11,7 +11,7 @@ against real data (`@pytest.mark.real`, or a manual run noted in the PR); **U** 
 Dates: Phase 0 buildable by about 2026-11-22; Phase 1 and 2 start together after it; Phase 2 in Encore by about
 2026-12-01; finals 2026-12-07 to 2026-12-11.
 
-Status: **Phases 0–2 written.** Phases 3–5 follow.
+Status: **Phases 0–5 written.** Open questions Q12–Q17 (SPEC-implementation) carry defaults.
 
 ---
 
@@ -132,7 +132,7 @@ PR (`feat/new-app-identity`, [Create the Encore repo from MieracleStudy](https:/
 must be merged and the CloudKit container registered first.
 
 Not in Phase 2: the 10-day ramp and practice tests, post-class quiz, cross-deck contrasts, re-intake of changed
-files (a changed file is logged, not re-extracted), transcript-only concepts, lecture alignment. Without lecture
+files (a changed file is queued at stage `reintake`, not re-extracted), transcript-only concepts, lecture alignment. Without lecture
 alignment, tiers come from slide hints, guides and past exams only; concepts with no signal are `standard`
 ([Deciding what matters](https://github.com/amierlorenz/articulate/issues/10): slides-only fallback).
 
@@ -148,7 +148,7 @@ From [Running class intake unattended](https://github.com/amierlorenz/articulate
 | 2.2 | Real check on Fall 2026: finds Whitman Ch02 (CSC-382, module Page link), the HCAI reading (CSC-430), all PHY-203 slides and 8 practice tests (Files tab), CSC-395's past final (Files tab), and CSC-382/CSC-301's study guides (announcements); skips the CSC Department shell | R |
 | 2.3 | `courses.toml` skip rules: `default_skip` globs, a course's `skip` overrides them; skipped modules never download | F |
 | 2.4 | `Drop/<course_key>/` files are copied into the archive by content hash; a re-drop or rename is a no-op; nothing in `Drop/` is moved or deleted | F |
-| 2.5 | Slots per #23 recorded for every file; an identical re-upload does nothing; a changed file is logged in `Runs.md` and left for Phase 3 | F |
+| 2.5 | Slots per #23 recorded for every file; an identical re-upload does nothing; a changed file (known slot, new content hash) gets a `Runs.md` line and becomes an item at stage `reintake`, where it waits: no handler takes it until Phase 3 | F |
 | 2.6 | Routing check (Flash Lite, first 2 pages, filename and folder or announcement title as hints) sorts each file to `slides`, `guideOrExam` or `other`; `other` → weekly flags; .xlsx, video, links skipped with a flag | F, R |
 | 2.7 | Queue order: nearest dated exam first, undated after; the backlog rolls to the next night; ceilings set the volume | F |
 | 2.8 | Exams per §3.14: Canvas assignments filtered by name and group; posted announcements read nightly and parsed with a verbatim-quote check; unposted announcements ignored; precedence `courses.toml` → newest announcement → `due_at` (window → `unlock_at`); a changed date logs a `Runs.md` line; an undated exam raises one flag line | F, R |
@@ -231,3 +231,207 @@ From [Hand-off folder layout and file formats](https://github.com/amierlorenz/ar
 
 The 02:00/03:05 jobs run on real Canvas data and the Drop folder; Encore imports the batches and serves the plan;
 Amier has studied from it for 3 days before the first final (2026-12-07).
+
+---
+
+## Phase 3: ramp, post-class quiz, confusable pairs, re-intake
+
+**Delivers.** The daily plan follows exams (10-day ramps, 14 for finals, practice tests, a review quiz, no cramming),
+recovers from missed days, and ships corrections first. A 3–5 item quiz is ready shortly after each class. Concepts
+students mix up across decks get cited contrast prompts. A changed Canvas file updates what it taught without losing
+review history. Lecture-directive tasks join the task funnel. SPEC-implementation §7.1.
+
+Cross-repo: [Serve contrast prompts (kind: contrast)](https://github.com/amierlorenz/encore/issues/34), [Flag button with reason and suggested fix](https://github.com/amierlorenz/encore/issues/28),
+[Banner when Articulate's daily plan is stale](https://github.com/amierlorenz/encore/issues/33), [Export the library](https://github.com/amierlorenz/encore/issues/30), and the Encore ramp and post-class
+issues (Q14).
+
+### Plan
+
+From [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9), [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10), [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23).
+
+| # | Check | How |
+|---|---|---|
+| 3.1 | An exam 10 days out (14 for a final) moves its unit concepts to the front of `new`, sets `examFocus.rampDay`, allows up to 35 planned minutes and sets `readingShare` 0 | F |
+| 3.2 | Practice test on ramp days 9, 6 and 3 (15–20 items, exam scope, ≥½ free recall); review quiz the day before; no new concepts for that exam in its last 2 days | F |
+| 3.3 | Finals: every unit in scope; a concept emphasised in 2+ units or on a midterm moves up one tier in the final's ordering | F |
+| 3.4 | Missed days: a plan with no attempts expires; the next one limits reviews to what fits, puts ramp exams first, pauses new until the backlog fits; 3 idle days → exactly one `study:idle:<date>` task per streak | F |
+| 3.5 | A corrected prompt (new id) goes first in `new`, outside the 10 cap; a skipped post-class quiz's concepts lead the next day's `new` | F |
+| 3.6 | Interval cap 30 days while a course is active, dropped after its final | F |
+| 3.7 | Real check: the plans for Dec 1–11 show CSC-301, MAT-305, PHY-203, CSC-382 and CSC-430 ramps with practice tests on the right days | R |
+
+### Post-class quiz
+
+From [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9), [Model routing and budget](https://github.com/amierlorenz/articulate/issues/11).
+
+| # | Check | How |
+|---|---|---|
+| 3.8 | `watch` exits without calling Pocket when no class ended in the last 18 h; one quiz per lecture at most | F |
+| 3.9 | Once the class transcript is archived: one Flash Lite call on the class window only, 3–5 closed-book items, every quote checked exactly against the transcript | F |
+| 3.10 | Items attach to existing concepts through the library matcher or create `standard` concepts; batch written before the `postclass-<lectureId>.json` that names it; Encore opened with `open -g -b` | F |
+| 3.11 | Daytime calls stay inside the reserve (40 Flash Lite, 50 embeddings); the 02:00 run takes over waiting lectures | F |
+| 3.12 | Real check: after a real class, the quiz is in Encore within one `watch` pass of the transcript arriving, and the first review is ≥1 day later, uncalibrated | R, U |
+
+### Confusable pairs
+
+From [Confusable pairs across decks](https://github.com/amierlorenz/articulate/issues/41).
+
+| # | Check | How |
+|---|---|---|
+| 3.13 | The judge returns `group: <id> | new` per same-course confusable match in the same call; cross-course matches stay notes | F |
+| 3.14 | One batched contrast-writer call a night; each deciding-feature citation carries its own `sourceFileId` and passes the citation check against its own file | F |
+| 3.15 | No citable feature → uncontrasted and logged, never flagged; retried on new matched material, at most 3 tries | F |
+| 3.16 | `kind: contrast` prompts with id `contrast:<a>:<b>`; plan gives at most 2 a day, only when both members are introduced and reviewed ≥1 day later, both core or standard, exam scope only when both are in it | F |
+| 3.17 | A retired or `out` member suspends the contrasts; "split the pair" tombstones the membership and the judge never re-adds it | F |
+
+### Re-intake
+
+From [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23).
+
+| # | Check | How |
+|---|---|---|
+| 3.18 | A changed file whose old version never finished Shape runs as a new file; otherwise only changed and added pages are re-extracted (whole file above 30 %) | F |
+| 3.19 | Every citation is re-anchored by quote; each concept lands in exactly one bucket (unchanged, enriched, changed, new, unsupported) with the actions #23 lists | F |
+| 3.20 | Same answer → same `prompt_id`; changed answer → old prompt retired, new id, first in the next plan | F |
+| 3.21 | Old versions archived with `superseded_by`; no re-intake after the final; 2-day freeze ships corrections only; open card flags on changed concepts close as superseded with a weekly line | F |
+| 3.22 | Real check: re-uploading an edited copy of a real deck changes only the edited slides' concepts | R |
+
+### Lecture-directive tasks
+
+| # | Check | How |
+|---|---|---|
+| 3.23 | Instructor directives with a concrete action become tasks; one that matches a Canvas assignment in the same course due within ±2 days is dropped; a date change becomes a weekly flag | F, R |
+
+### Phase 3 done
+
+Ramps, practice tests and post-class quizzes have run for 3 days on real classes (or on the finals ramp), and a
+contrast prompt and a re-intake correction have each reached Encore.
+
+---
+
+## Phase 4: voice commands, Literature notes, people, transcript-only concepts
+
+**Delivers.** "Articulate, …" in any recording does what it says, within the whitelist, with a receipt and undo.
+Class and personal talks become one-claim Literature notes with checked quotes. Named speakers get person notes.
+Lectures add the concepts and claims that never appeared on a slide. SPEC-implementation §7.2.
+
+### Commands
+
+From [Voice commands for acting on recordings](https://github.com/amierlorenz/articulate/issues/29), [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31).
+
+| # | Check | How |
+|---|---|---|
+| 4.1 | Wake-phrase detection is fuzzy ("Articulate", "main agent", mis-hearings); class recordings only in their first and last 2 min; a local confirm step finds the command's end | F |
+| 4.2 | Parse returns action, target, span, speakers and instructions; instructions never change the folder, action or target | F |
+| 4.3 | Target rules (72 h for "last", 14 days for dates, course key or title, default same/previous); ambiguous or none → weekly flag with candidate checkboxes; ticking one re-runs it | F |
+| 4.4 | Span found by embeddings with position hints and a trimmed confidence; >30 min or low confidence → flag; timestamps skip the search | F |
+| 4.5 | Speakers named by the command; unclear attribution → no quote; first instructor written to `courses.toml` only when empty, a conflict flagged | F |
+| 4.6 | Whitelist only; refused part → `Inbox/` note; >12 notes → whole command flagged; `task` only when first-person | F |
+| 4.7 | Receipt per command with an undo box; undo (box or spoken) deletes only untouched notes and stubs it made, tombstones them, keeps tasks | F |
+| 4.8 | A command-only recording and `hands_off` spans get no Inbox note and no extracted tasks | F |
+| 4.9 | Private: local models only, notes `private: true`, nothing to Encore | F |
+| 4.10 | Real check: the AI301 command example (`5b20a9f2…` → `9891829e…`) resolves to the ~1:37–1:50 span and the named instructor | R |
+
+### Literature notes
+
+From [Claim breakdown from a guest speaker](https://github.com/amierlorenz/articulate/issues/30), [The new vault workflow](https://github.com/amierlorenz/articulate/issues/8).
+
+| # | Check | How |
+|---|---|---|
+| 4.11 | One note per claim, title = the claim; code writes the frontmatter; body has paraphrase, Citation, Speaker, Questions for Amier | F |
+| 4.12 | Mechanical quote check gates each note (pieces outside `[…]`/`…` in order); `≈H:MM:SS` interpolated; failure → one retry, then held + flagged | F |
+| 4.13 | Links only to titles from the provided list, minus Private in cloud runs | F |
+| 4.14 | Class targets on the `lecture_literature` chain; personal targets on `claude -p` within ceilings (held otherwise); `total_cost_usd` logged | F, R |
+| 4.15 | Real check: the AI301 talk gives ~6 notes with 25/25 quotes verified | R |
+
+### People
+
+From [Person notes for speakers and authors](https://github.com/amierlorenz/articulate/issues/33).
+
+| # | Check | How |
+|---|---|---|
+| 4.16 | A person note only when something links to it; fuzzy match on titles and aliases scoped to the course or source; unsure → flag, no note | F |
+| 4.17 | Stub shape (tags, aliases, role, affiliation, sources, Dataview incl. hub text matches); updated only while untouched, then suggestions go to flags | F |
+| 4.18 | From a Private recording → `private: true`, absent from cloud title lists and cloud matching | F |
+
+### Transcript-only concepts
+
+From [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues/39).
+
+| # | Check | How |
+|---|---|---|
+| 4.19 | Runs at 02:00 once the deck is matched, or after 3 nights without one; windows ~180 s (cap 300, tail <120 joins) | F |
+| 4.20 | Schema `{ newConcepts, spokenClaims, spokenHints, contrastGroups }`; citations checked exactly in the window ±1; failing quotes fail closed as #39 lists | F |
+| 4.21 | `correctsSlide` makes the spoken claim primary with a weekly undo line; unit-level hints cross-check exam scope; time share from cited windows | F |
+| 4.22 | Real check: a CSC-382 lecture with its real deck gives no re-invented deck concept and ≥22/23 verified quotes | R |
+
+### Phase 4 done
+
+Amier has used a spoken command, read its Literature notes, and studied transcript-only concepts for 3 days.
+
+---
+
+## Phase 5: reading, YouTube, LeetCode, evals and tuning
+
+**Delivers.** Literature notes and watched videos become quiz material in the reading slot. LeetCode problems
+dropped in `Drop/interview/` become pattern practice with tested code prompts. Prompt changes to tasks and commands
+are gated by local evals. Cloud agents can add tasks through the Google Tasks list. SPEC-implementation §7.3.
+
+Cross-repo: [Mac practice list from the daily plan](https://github.com/amierlorenz/encore/issues/32).
+
+### Reading
+
+From [Quizzes from reading and goals](https://github.com/amierlorenz/articulate/issues/43).
+
+| # | Check | How |
+|---|---|---|
+| 5.1 | Quizzable: written or touched Literature notes, minus `quiz: false` and `private: true`; `quiz: true` Permanent notes; untouched agent notes per Q12/Q13 | F |
+| 5.2 | One `book:<slug>` course per hub; videos and articles in `reading`; Permanent notes to their `from:` course | F |
+| 5.3 | Claims cite the title, restatement or Citation bullets, quotes exact against the note; book pages display-only | F |
+| 5.4 | `claude -p` on leftover budget, `qwen3:8b` after 7 days held, never Gemini | F |
+| 5.5 | ≤2 prompts a note; title-only → recall only; section edits follow #23; delete or `quiz: false` retires | F |
+| 5.6 | Plan: reading share ≤20 %, 0 in ramps, ~2 new a day round-robin, `#reading` first | F |
+| 5.7 | Real check: the 87 existing Literature notes produce prompts with every quote verified | R |
+
+### YouTube
+
+From [What GitHub, YouTube and Medium feed into](https://github.com/amierlorenz/articulate/issues/44), [Getting transcripts for watched YouTube videos](https://github.com/amierlorenz/articulate/issues/46),
+[Gemini reading watched YouTube videos by link](https://github.com/amierlorenz/articulate/issues/47), [Retest Flash Lite on YouTube links](https://github.com/amierlorenz/articulate/issues/48).
+
+| # | Check | How |
+|---|---|---|
+| 5.8 | Playlist "Articulate" read with `youtube.readonly`; Watched/Published/Duration from the Data API; ledger tracks what's done | F |
+| 5.9 | Video calls run last, on leftover quota only, never the daytime reserve | F |
+| 5.10 | ≤30-min windows; ≤5-min videos on Flash Lite first, longer on 3.6 Flash; `"M:SS"` converted in code; absolute clip times | F |
+| 5.11 | Non-public or refused → metadata-only stub + weekly flag; no yt-dlp | F |
+| 5.12 | Note shape `📺 <title>` with TL;DW and timestamped `?t=` notes, Key Ideas empty; `quiz: false` retires | F |
+| 5.13 | Real check: a public 20+ min video added to the playlist has a note by the next morning | R |
+
+### LeetCode
+
+From [LeetCode problems as a source](https://github.com/amierlorenz/articulate/issues/25).
+
+| # | Check | How |
+|---|---|---|
+| 5.14 | `interview` course: `public = true` drop files use the Gemini chain, `new_per_day = 2`, an interview date turns on the ramp | F |
+| 5.15 | Pattern = method concept in contrast groups; problem = cited worked example; no `pattern:` and no solution → gap-fill held | F |
+| 5.16 | Prompts: `methodPick` and `setUp` always; `codeImplement` with `implement: true` or a solution; `codeComplexity` on your solution | F |
+| 5.17 | Hidden tests from running reference and brute force in `sandbox-exec` (no network, temp writes, 5 s, memory cap); disagreements and timeouts flagged; works under the LaunchAgent | F, R |
+| 5.18 | `macPractice` lists ≤3 `codeImplement` prompts untried for 14+ days | F |
+
+### Evals and tuning
+
+From [Pulling to-dos from transcripts and tuning them](https://github.com/amierlorenz/articulate/issues/20), [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31),
+[Non-class recordings with no command](https://github.com/amierlorenz/articulate/issues/42), [Task funnel into master-todo](https://github.com/amierlorenz/articulate/issues/7).
+
+| # | Check | How |
+|---|---|---|
+| 5.19 | `articulate eval tasks` on the private labelled set: high-band precision ≥0.9 and not below the current version, recall drop ≤5 points; seeding writes `Inbox/Task labels.md` | F, U |
+| 5.20 | `articulate eval commands`: parse accuracy (span overlap ≥80 %), 100 % quote check, gate decision ≥90 %, `kind:` ≥80 % | F |
+| 5.21 | The `pre-push` hook runs the matching eval when task, command, inbox or literature prompts change, and refuses a failing push; nothing runs in CI | F |
+| 5.22 | Feedback signals (done, removed in 3 days, unticked 2 weeks, edited title) feed the labelled set; old recordings are re-scored, never re-extracted | F |
+| 5.23 | Google Tasks "Articulate" items become tasks with `gtasks:<id>` (due time from a `due:` line) and are deleted from Google | F, R |
+
+### Phase 5 done
+
+Amier has studied reading and video prompts and one LeetCode pattern for 3 days, and one prompt change has gone
+through an eval gate.
