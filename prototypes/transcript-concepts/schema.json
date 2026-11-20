@@ -1,0 +1,485 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "newConcepts",
+    "spokenClaims",
+    "spokenHints",
+    "contrastGroups"
+  ],
+  "properties": {
+    "newConcepts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "title",
+          "kind",
+          "explanation",
+          "aliases",
+          "useWhen",
+          "conditions",
+          "workedExamples",
+          "confidence",
+          "confidenceNote"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Short unique slug for this concept within this output, e.g. separation-of-duties",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "title": {
+            "type": "string",
+            "description": "Short name of the concept, spelled correctly even if the transcript misheard it",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "kind": {
+            "type": "string",
+            "description": "definition = a term's meaning; fact = a statement to recall; method = something you choose and apply to a problem",
+            "enum": [
+              "definition",
+              "fact",
+              "method"
+            ]
+          },
+          "explanation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "citations",
+              "text",
+              "gapFill"
+            ],
+            "properties": {
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "window",
+                    "quote"
+                  ],
+                  "properties": {
+                    "window": {
+                      "type": "integer",
+                      "description": "Number of the transcript window the quote is in"
+                    },
+                    "quote": {
+                      "type": "string",
+                      "description": "Words copied exactly from that window's transcript, as transcribed (keep misheard words as they are)",
+                      "pattern": "^[^\\t\\x08\\x0c]*$"
+                    }
+                  }
+                },
+                "description": "1 to 3 places in the transcript that support this claim; empty only when gapFill is true"
+              },
+              "text": {
+                "type": "string",
+                "description": "The claim, written clearly. Fix obvious mistranscriptions here (not in quotes). LaTeX in $...$ for math",
+                "pattern": "^[^\\t\\x08\\x0c]*$"
+              },
+              "gapFill": {
+                "type": "boolean",
+                "description": "true if the claim comes from outside the lecture (no citation)"
+              }
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Another name or tell-tale keyword",
+              "pattern": "^[^\\t\\x08\\x0c]*$"
+            },
+            "description": "Names and keywords that give the concept away; methods only"
+          },
+          "useWhen": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "citations",
+                "text",
+                "gapFill"
+              ],
+              "properties": {
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "window",
+                      "quote"
+                    ],
+                    "properties": {
+                      "window": {
+                        "type": "integer",
+                        "description": "Number of the transcript window the quote is in"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Words copied exactly from that window's transcript, as transcribed (keep misheard words as they are)",
+                        "pattern": "^[^\\t\\x08\\x0c]*$"
+                      }
+                    }
+                  },
+                  "description": "1 to 3 places in the transcript that support this claim; empty only when gapFill is true"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The claim, written clearly. Fix obvious mistranscriptions here (not in quotes). LaTeX in $...$ for math",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "gapFill": {
+                  "type": "boolean",
+                  "description": "true if the claim comes from outside the lecture (no citation)"
+                }
+              }
+            },
+            "description": "Cues visible in a problem that signal this method applies; methods only"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "citations",
+                "text",
+                "gapFill"
+              ],
+              "properties": {
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "window",
+                      "quote"
+                    ],
+                    "properties": {
+                      "window": {
+                        "type": "integer",
+                        "description": "Number of the transcript window the quote is in"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Words copied exactly from that window's transcript, as transcribed (keep misheard words as they are)",
+                        "pattern": "^[^\\t\\x08\\x0c]*$"
+                      }
+                    }
+                  },
+                  "description": "1 to 3 places in the transcript that support this claim; empty only when gapFill is true"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The claim, written clearly. Fix obvious mistranscriptions here (not in quotes). LaTeX in $...$ for math",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "gapFill": {
+                  "type": "boolean",
+                  "description": "true if the claim comes from outside the lecture (no citation)"
+                }
+              }
+            },
+            "description": "Assumptions that must hold to use it; methods only"
+          },
+          "workedExamples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "citations",
+                "text",
+                "gapFill"
+              ],
+              "properties": {
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "window",
+                      "quote"
+                    ],
+                    "properties": {
+                      "window": {
+                        "type": "integer",
+                        "description": "Number of the transcript window the quote is in"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "Words copied exactly from that window's transcript, as transcribed (keep misheard words as they are)",
+                        "pattern": "^[^\\t\\x08\\x0c]*$"
+                      }
+                    }
+                  },
+                  "description": "1 to 3 places in the transcript that support this claim; empty only when gapFill is true"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The claim, written clearly. Fix obvious mistranscriptions here (not in quotes). LaTeX in $...$ for math",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "gapFill": {
+                  "type": "boolean",
+                  "description": "true if the claim comes from outside the lecture (no citation)"
+                }
+              }
+            },
+            "description": "Examples the instructor works through or tells (board work, stories that illustrate the concept)"
+          },
+          "confidence": {
+            "type": "string",
+            "description": "How sure you are the concept is taught here and its explanation is right",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "confidenceNote": {
+            "type": "string",
+            "description": "Why it is not high (e.g. unclear transcription); empty when confidence is high",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          }
+        }
+      },
+      "description": "Concepts the lecture teaches that are not in the deck list"
+    },
+    "spokenClaims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "conceptKey",
+          "field",
+          "correctsSlide",
+          "claim"
+        ],
+        "properties": {
+          "conceptKey": {
+            "type": "string",
+            "description": "key of a deck concept from the list in the prompt",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "field": {
+            "type": "string",
+            "description": "Where this claim adds to the deck concept",
+            "enum": [
+              "explanation",
+              "workedExample",
+              "condition"
+            ]
+          },
+          "correctsSlide": {
+            "type": "boolean",
+            "description": "true only if the instructor explicitly says the slide is wrong"
+          },
+          "claim": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "citations",
+              "text",
+              "gapFill"
+            ],
+            "properties": {
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "window",
+                    "quote"
+                  ],
+                  "properties": {
+                    "window": {
+                      "type": "integer",
+                      "description": "Number of the transcript window the quote is in"
+                    },
+                    "quote": {
+                      "type": "string",
+                      "description": "Words copied exactly from that window's transcript, as transcribed (keep misheard words as they are)",
+                      "pattern": "^[^\\t\\x08\\x0c]*$"
+                    }
+                  }
+                },
+                "description": "1 to 3 places in the transcript that support this claim; empty only when gapFill is true"
+              },
+              "text": {
+                "type": "string",
+                "description": "The claim, written clearly. Fix obvious mistranscriptions here (not in quotes). LaTeX in $...$ for math",
+                "pattern": "^[^\\t\\x08\\x0c]*$"
+              },
+              "gapFill": {
+                "type": "boolean",
+                "description": "true if the claim comes from outside the lecture (no citation)"
+              }
+            }
+          }
+        }
+      },
+      "description": "What the lecture adds to deck concepts; empty when there is no deck list"
+    },
+    "spokenHints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "conceptKey",
+          "scope",
+          "window",
+          "quote"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "examHint = will be on a test/quiz; dismissal = won't be tested or can be skipped; emphasis = instructor stresses it as important",
+            "enum": [
+              "examHint",
+              "dismissal",
+              "emphasis"
+            ]
+          },
+          "conceptKey": {
+            "type": "string",
+            "description": "key of the concept (new or deck) the hint is about; empty if it is about a chapter/unit/topic",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "scope": {
+            "type": "string",
+            "description": "For a hint not tied to one concept: the chapter, unit or topic it names; empty otherwise",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "window": {
+            "type": "integer",
+            "description": "Window number"
+          },
+          "quote": {
+            "type": "string",
+            "description": "The instructor's exact sentence, copied from the window",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          }
+        }
+      },
+      "description": "Explicit statements about what is or isn't on a test, or is important"
+    },
+    "contrastGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "question",
+          "memberKeys",
+          "contrasts"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Short name for what the members compete over",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "question": {
+            "type": "string",
+            "description": "The choice a student faces; empty if there is none",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "memberKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "key of a member concept (new or deck)",
+              "pattern": "^[^\\t\\x08\\x0c]*$"
+            },
+            "description": "2 or more keys"
+          },
+          "contrasts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "a",
+                "b",
+                "decidingFeature"
+              ],
+              "properties": {
+                "a": {
+                  "type": "string",
+                  "description": "key of one member",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "b": {
+                  "type": "string",
+                  "description": "key of the other member",
+                  "pattern": "^[^\\t\\x08\\x0c]*$"
+                },
+                "decidingFeature": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "citations",
+                    "text",
+                    "gapFill"
+                  ],
+                  "properties": {
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "window",
+                          "quote"
+                        ],
+                        "properties": {
+                          "window": {
+                            "type": "integer",
+                            "description": "Number of the transcript window the quote is in"
+                          },
+                          "quote": {
+                            "type": "string",
+                            "description": "Words copied exactly from that window's transcript, as transcribed (keep misheard words as they are)",
+                            "pattern": "^[^\\t\\x08\\x0c]*$"
+                          }
+                        }
+                      },
+                      "description": "1 to 3 places in the transcript that support this claim; empty only when gapFill is true"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "The claim, written clearly. Fix obvious mistranscriptions here (not in quotes). LaTeX in $...$ for math",
+                      "pattern": "^[^\\t\\x08\\x0c]*$"
+                    },
+                    "gapFill": {
+                      "type": "boolean",
+                      "description": "true if the claim comes from outside the lecture (no citation)"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Pairs whose deciding feature the instructor states; leave a pair out when not"
+          }
+        }
+      },
+      "description": "Sets of concepts from this lecture a student could plausibly mix up"
+    }
+  }
+}
