@@ -11,7 +11,7 @@ against real data (`@pytest.mark.real`, or a manual run noted in the PR); **U** 
 Dates: Phase 0 buildable by about 2026-11-22; Phase 1 and 2 start together after it; Phase 2 in Encore by about
 2026-12-01; finals 2026-12-07 to 2026-12-11.
 
-Status: **Phases 0–5 written.** Open questions Q12–Q17 (SPEC-implementation) carry defaults.
+Status: **Phases 0–5 written.** Q12–Q17 (SPEC-implementation) are decided: the defaults stand.
 
 ---
 
@@ -242,8 +242,8 @@ students mix up across decks get cited contrast prompts. A changed Canvas file u
 review history. Lecture-directive tasks join the task funnel. SPEC-implementation §7.1.
 
 Cross-repo: [Serve contrast prompts (kind: contrast)](https://github.com/amierlorenz/encore/issues/34), [Flag button with reason and suggested fix](https://github.com/amierlorenz/encore/issues/28),
-[Banner when Articulate's daily plan is stale](https://github.com/amierlorenz/encore/issues/33), [Export the library](https://github.com/amierlorenz/encore/issues/30), and the Encore ramp and post-class
-issues (Q14).
+[Banner when Articulate's daily plan is stale](https://github.com/amierlorenz/encore/issues/33), [Export the library](https://github.com/amierlorenz/encore/issues/30), [Serve ramp fields from the daily plan](https://github.com/amierlorenz/encore/issues/41) and
+[Post-class quiz from Articulate](https://github.com/amierlorenz/encore/issues/42).
 
 ### Plan
 
@@ -384,7 +384,7 @@ From [Quizzes from reading and goals](https://github.com/amierlorenz/articulate/
 
 | # | Check | How |
 |---|---|---|
-| 5.1 | Quizzable: written or touched Literature notes, minus `quiz: false` and `private: true`; `quiz: true` Permanent notes; untouched agent notes per Q12/Q13 | F |
+| 5.1 | Quizzable: written or touched Literature notes, minus `quiz: false` and `private: true`; `quiz: true` Permanent notes; untouched agent notes only for videos (Q12) and command notes from class recordings (Q13) | F |
 | 5.2 | One `book:<slug>` course per hub; videos and articles in `reading`; Permanent notes to their `from:` course | F |
 | 5.3 | Claims cite the title, restatement or Citation bullets, quotes exact against the note; book pages display-only | F |
 | 5.4 | `claude -p` on leftover budget, `qwen3:8b` after 7 days held, never Gemini | F |
