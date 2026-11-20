@@ -1,0 +1,4 @@
+{"type":"init","claude_code_version":"2.1.327"}
+{"type":"rate_limit_event","status":"allowed_warning","utilization":0.85}
+{"type":"assistant","message":{"content":"Warning received"}}
+{"type":"result","total_cost_usd":0.01}
