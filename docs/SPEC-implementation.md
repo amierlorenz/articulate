@@ -94,7 +94,7 @@ articulate/
 | `pocket` | 1 | Poll, dedupe merged copies, Private (fail closed), sensitivity check, class window split, transcript archive | [Pocket for class lectures](https://github.com/amierlorenz/articulate/issues/2), [Check Pocket's REST API with the real key](https://github.com/amierlorenz/articulate/issues/15), [Model routing and budget](https://github.com/amierlorenz/articulate/issues/11), [Voice commands for acting on recordings](https://github.com/amierlorenz/articulate/issues/29) |
 | `inbox` | 1 | One fleeting `Inbox/` note per uncommanded non-class recording or stretch, on `qwen3:8b` | [Non-class recordings with no command](https://github.com/amierlorenz/articulate/issues/42), [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31), [The new vault workflow](https://github.com/amierlorenz/articulate/issues/8) |
 | `tasks` | 1 | Extract tasks, ledger, master-todo intents, Inbox fallback list, state poll | [Task funnel into master-todo](https://github.com/amierlorenz/articulate/issues/7), [Pulling to-dos from transcripts and tuning them](https://github.com/amierlorenz/articulate/issues/20) |
-| `intake/canvas` | 2 | Canvas client, Pick (module items, module-Page links, Files tab), slots, `courses.toml` skip rules, Drop folder, download, archive, Flash Lite routing check | [Running class intake unattended](https://github.com/amierlorenz/articulate/issues/14), [Files linked only from Canvas Pages](https://github.com/amierlorenz/articulate/issues/24), [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23) (slots only), [Study guide and past exam output](https://github.com/amierlorenz/articulate/issues/32) (routing) |
+| `intake/canvas` | 2 | Canvas client, Pick (module items, module-Page links, Files tab, posted-announcement attachments), slots, `courses.toml` skip rules, Drop folder, download, archive, Flash Lite routing check, exam list and dates ([§3.14](#314-exams-and-exam-dates)) | [Running class intake unattended](https://github.com/amierlorenz/articulate/issues/14), [Files linked only from Canvas Pages](https://github.com/amierlorenz/articulate/issues/24), [Re-intake when Canvas files change](https://github.com/amierlorenz/articulate/issues/23) (slots only), [Study guide and past exam output](https://github.com/amierlorenz/articulate/issues/32) (routing) |
 | `intake/convert` | 2 | DeckCraft → Keynote fallback, `wordcraft-cli`, pypdfium2 page text, `ocrmac`, damaged-layer signals, `.pages.json` | [Test DeckCraft on real Canvas decks](https://github.com/amierlorenz/articulate/issues/28), [Run the Keynote export once](https://github.com/amierlorenz/articulate/issues/21), [Spotting a damaged text layer](https://github.com/amierlorenz/articulate/issues/40) |
 | `intake/cite` | 2 | Quote check: text layer → OCR → VL, canonicaliser, boundary near math, label-aware, joined retry | [Vision transcript in the citation check](https://github.com/amierlorenz/articulate/issues/35), [Formula check for guide and exam quotes](https://github.com/amierlorenz/articulate/issues/37), [Spotting a damaged text layer](https://github.com/amierlorenz/articulate/issues/40) |
 | `intake/extract` | 2 | Slide/PDF Extract, long-deck split and merge, code checks | [Extract output schema](https://github.com/amierlorenz/articulate/issues/22), [Extract recall on long decks](https://github.com/amierlorenz/articulate/issues/36) |
@@ -186,12 +186,13 @@ skip = ["Week 0*"]               # overrides default_skip when set
 instructor = ""                  # written once by the commands slice when absent, never overwritten
 active = true                    # false after the final: no re-intake, interval cap lifted
 
-  # Exams and units: shape pending open question Q4. Draft:
+  # Exams found on Canvas need no entry here. An entry adds an exam Canvas lacks (PHY-203's final),
+  # pins a date (it beats every Canvas source) or lists units. See §3.14.
   [[courses.mat305.exams]]
-  key = "test3"
-  name = "Test 3"
-  kind = "test"                  # test | final
-  date = "2026-11-24"            # see Q4 for where dates come from
+  key = "final"
+  name = "Final Exam"            # matched to the Canvas assignment by name, case and spacing ignored
+  kind = "final"                 # test | final
+  date = "2026-12-07"            # optional; local date, optional time "2026-12-07T08:00"
   units = ["9.4 Single sample: estimating the mean", "9.5 Standard error of a point estimate"]
 ```
 
@@ -1064,6 +1065,47 @@ lock file (`DATA/run.lock`, `fcntl.flock`) keeps two jobs from running at once; 
   `ruff`. Slices add their own dependencies in their issue's PR (a one-line `pyproject.toml` change is allowed, like
   the registry).
 
+### 3.14 Exams and exam dates
+
+From a read-only Canvas survey on 2026-11-19 (all six Fall 2026 courses), agreed with Amier in this session as the
+answer to Q4. Owned by `intake/canvas`; the result lands in the `exams` table and feeds Pick order, `plan.json` and
+(Phase 3) the ramp.
+
+What the survey found:
+- Exams are Canvas **assignments**, in a group named Exams / Test / Final Exam or named `Test N`, `Exam N`,
+  `Final Exam`. Canvas's Quizzes list and calendar events add nothing.
+- Dates are often missing: MAT-305 and PHY-203 have no exam dated; PHY-203 has no final assignment. An online test's
+  `due_at` can be the close of a window (CSC-301's final: Nov 30 → Dec 7), not the sitting.
+- **Announcements carry the real dates and every reschedule** (6 this term: two midterms moved by a power outage,
+  PHY-203 Test 3 merged into the midterm, Test 4 moved then corrected, Test 5 moved), and often the units ("Chapters
+  are Work & Energy and Impulse & momentum"). Canvas due dates were never updated for any of them.
+- 14 announcements in MAT-305 and CSC-301 have `posted_at: null`: leftovers from last year's course copy, including
+  a "Final Exam: Tuesday, December 9" whose weekday only fits 2025.
+- **Study guides arrive as announcement attachments** in CSC-382 and CSC-301 (9 files, 8 in no module, Files tab
+  hidden).
+
+Rules:
+1. **Exam list:** Canvas assignments whose group or name matches `exam|test|midterm|final` and not
+   `project|presentation|quiz|report|proposal|peer`, plus `courses.toml` entries. Matched by normalised name.
+2. **Announcements:** each night, the course's **posted** announcements (`posted_at` set) since the term start.
+   New or edited ones (by id + `updated_at`) go through one Flash Lite call per course (step `exam_dates`, class
+   material) returning `[{ examName, date, time, units, quote }]`, every string with the control-character pattern.
+   `quote` must be found verbatim in the announcement text (HTML stripped), or the row is dropped and logged.
+   `examName` must match an exam from rule 1 (a new name such as "Test 3+Midterm" becomes a flag line, not an exam).
+3. **Which date wins:** `courses.toml` `date` → the newest posted announcement that dates the exam → the assignment's
+   `due_at` (for a window longer than a day, `unlock_at`'s date) → none.
+4. **Units:** `courses.toml` `units` → announcement `units`, kept only when each one is in the course's unit list.
+5. **No date from any source:** no ramp, sorted after dated exams in Pick, and one weekly flag line
+   ("<exam> has no date — add it to `courses.toml`").
+6. Every date change is one `Runs.md` line ("PHY-203 Test 4: Nov 1 → Nov 2, from announcement 2026-10-28") and
+   rebuilds the plan ([Running class intake unattended](https://github.com/amierlorenz/articulate/issues/14): exam
+   dates re-read nightly).
+7. **Pick also reads posted-announcement attachments** (`attachments[]` and `/files/:id` links in the message), a
+   fourth discovery place next to the three in [Files linked only from Canvas Pages](https://github.com/amierlorenz/articulate/issues/24).
+   Slot = announcement id + filename; the title is the role hint ("Test 3 Study Guide" → guide).
+
+`models.toml` gains `exam_dates = ["gemini-3.5-flash-lite"]` under `[chains]`.
+
 ---
 
 ## 4. Fixtures
@@ -1078,7 +1120,7 @@ never in the repo; every prototype kept decks and outputs gitignored). See Q6.
 |---|---|---|
 | `pocket/` | `recordings-list.json`, `recording-detail-lecture.json`, `recording-detail-merged.json` (`transcript.metadata.merged`), `recording-detail-null-duration.json`, `recording-pending.json`, `folders.json` (Private as `kind: space` with children), `tags.json`, `error-404.json`, rate-limit headers | `research/pocket-rest-api-check` field tables; text replaced with lorem |
 | `calendar/` | a Classes event with the course key on the first description line; overlapping and non-overlapping events; a `private_events` hit | [Pocket for class lectures](https://github.com/amierlorenz/articulate/issues/2) |
-| `canvas/` | modules + module items (File and Page), a Page body with `/files/:id` links, Files tab 200 and 403, folders `Practice test questions`, `course_image` | [Files linked only from Canvas Pages](https://github.com/amierlorenz/articulate/issues/24) |
+| `canvas/` | modules + module items (File and Page), a Page body with `/files/:id` links, Files tab 200 and 403, folders `Practice test questions`, `course_image`; assignments with and without `due_at` and a window; announcements: a reschedule, a correction, a final with time and room, an unposted course-copy leftover, one with a study-guide attachment | [Files linked only from Canvas Pages](https://github.com/amierlorenz/articulate/issues/24) |
 | `gemini/` | `ok-extract.json`, `max-tokens.json`, `503.json`, `429-perday.json` (`QuotaFailure.violations[].quotaId` with `PerDay`), `429-perminute.json` (`RetryInfo.retryDelay`), `404.json`, `raw-tab.json` | [How Gemini free-tier daily limits are counted](https://github.com/amierlorenz/articulate/issues/38) |
 | `claude/` | `/usage` stream-json: ok, missing row, past `resets_at`, non-zero exit; a `rate_limit_event` `allowed_warning` | `research/claude-usage-from-script` |
 | `deckcraft/` | control-port replies for `file.open`, `document.inspect` (hidden slide, notes), `file.export` ok and `ok:false`, `lostSlides` non-empty | `research/deckcraft-real-decks:docs/research/deckcraft-real-decks/dc.py` |
@@ -1158,7 +1200,7 @@ Not decided by any ticket, or two tickets disagree. Each has a default this spec
 | Q1 | Data dir case: `Application Support/articulate` ([Running class intake unattended](https://github.com/amierlorenz/articulate/issues/14)) or `Application Support/Articulate/transcripts` ([The new vault workflow](https://github.com/amierlorenz/articulate/issues/8))? | two tickets | lowercase `articulate` for everything (APFS is case-insensitive, so they'd collide anyway) |
 | Q2 | `models.toml`: next to `courses.toml` in iCloud ([Model routing and budget](https://github.com/amierlorenz/articulate/issues/11)), or local, since the map says only `courses.toml` and `Drop/` live in iCloud? | map vs #11 | iCloud, next to `courses.toml` |
 | Q3 | How does an `out` concept that was already shipped reach Encore? v2 has only `status: retired`; [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10) says "out" suspends cards and is reversible, and handed the "how" to #13, which doesn't say. | #10 → #13 | ship it as `status: retired` (hidden, history kept, reversible by re-import) with `tier: out` |
-| Q4 | Where do exam dates and exam → unit lists come from? #13 says "exam dates (from Canvas)"; #32 says the exam's units come from `courses.toml`. Which Canvas object holds an exam date isn't named. | #13, #32 | `courses.toml` lists exams with `units` and a manual `date`; reading dates from Canvas is a later addition |
+| Q4 | Where do exam dates and exam → unit lists come from? | #13, #32 | **Answered by Amier, 2026-11-19:** Canvas assignments + posted announcements + `courses.toml` overrides ([§3.14](#314-exams-and-exam-dates)) |
 | Q5 | Weekly list file: `_system/Weekly Flags.md` ([The new vault workflow](https://github.com/amierlorenz/articulate/issues/8)) or `Inbox/Intake flags.md` (#14 and every later ticket)? | two tickets | `Inbox/Intake flags.md` |
 | Q6 | Real fixtures: commit course PDFs and decks to this private repo, or keep them local with a committed manifest? | not decided | local + manifest ([§4](#4-fixtures)) |
 | Q7 | Phase 2's plan needs Encore's `state.json` (to know what's introduced and due) and the 02:00 run waits for it, but [v1 scope and phase plan](https://github.com/amierlorenz/articulate/issues/49) lists only encore#25–#27 for Phase 2. Add [Export schedule state and grading attempts](https://github.com/amierlorenz/encore/issues/29) (and [Export the library](https://github.com/amierlorenz/encore/issues/30)?) to Phase 2? | #49 vs #18 | add encore#29 to Phase 2; encore#30 stays later (Articulate's SQLite is the library until then) |
