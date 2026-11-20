@@ -178,7 +178,7 @@ From [Running class intake unattended](https://github.com/amierlorenz/articulate
 ```toml
 default_skip = ["Syllabus", "Start Here*", "Course Information*"]   # module-name globs
 
-[courses.mat305]                 # key = first line of the "Classes" calendar event description
+[courses.mat305]                 # key = first line of the "Classes" event description, normalised (below)
 canvas_id = 12345
 name = "MAT-305 Prob & Stats"
 skip = ["Week 0*"]               # overrides default_skip when set
@@ -195,7 +195,11 @@ active = true                    # false after the final: no re-intake, interval
   units = ["9.4 Single sample: estimating the mean", "9.5 Standard error of a point estimate"]
 ```
 
-The course key is the id Articulate uses everywhere (`course_key`). The unit and exam names are the lists the
+The course key is the id Articulate uses everywhere (`course_key`). **Normalising:** take the event description,
+strip HTML (`<br>` and block tags end a line), take the first non-empty line, lowercase it, and drop everything
+but `a–z` and `0–9`. The Classes calendar today has `MAT 305` → `mat305`, `CSC 301` → `csc301`, `CSC 430<br>…` →
+`csc430`. An event whose key isn't in `courses.toml` doesn't count as a class (fail closed, dashboard row). The unit
+and exam names are the lists the
 guide/exam prompt copies from (`prototype/37-formula-check:prototypes/extract-schema/courses/mat-305.json` has the
 current shape: `{"exams": [...], "units": [...]}`).
 
