@@ -1272,7 +1272,7 @@ Rules, all computed in plain code from `state.json`, the attempts ledger and the
    both members are in its units.
 8. **Interval cap:** 30 days while the course is `active`; dropped once its final has passed.
 
-Encore must serve these fields; see Q14.
+Encore serves these fields in [Serve ramp fields from the daily plan](https://github.com/amierlorenz/encore/issues/41) (Q14).
 
 #### Post-class quiz (`postclass`)
 
@@ -1300,7 +1300,7 @@ CREATE TABLE postclass_quizzes (
 ```
 
 Encore's side (introducing the concept on answer, first review ≥1 day later with `calibrated: false`, the "post-class
-quiz ready" and mid-afternoon notifications) is Q14.
+quiz ready" and mid-afternoon notifications) is [Post-class quiz from Articulate](https://github.com/amierlorenz/encore/issues/42) (Q14).
 
 #### Confusable pairs (`intake/contrast`, `intake/library`)
 
@@ -1467,7 +1467,7 @@ From [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues
 #### Reading (`reading`)
 
 - **Which notes:** Literature notes Amier wrote or touched, minus `quiz: false` and `private: true`; untouched agent
-  notes are not quizzed (see Q12, Q13). Permanent notes only with `quiz: true`.
+  notes are not quizzed, except video notes (Q12) and notes a command makes from a class recording (Q13). Permanent notes only with `quiz: true`.
 - **Courses:** one `book:<slug>` course per source hub, created when a quizzable note's `source:` points at it; videos
   and articles share `reading`. A Permanent note goes to its `from:` source's course, else `reading`.
 - **Claims:** #22's claim shape with citations `{ locator, quote }` from the note's title, restatement and
@@ -1492,9 +1492,9 @@ From [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues
   `youtube_long` (3.6 Flash). Timestamps asked as `"M:SS"` strings, converted in code; clip times are absolute.
 - **Non-public** (unlisted, private, removed) or refused → metadata-only stub note + weekly flag.
 - **Note:** `Literature Notes/📺 <video title>.md`, tag `video`, `agent: true`, Channel, Title, URL, Duration,
-  Published, Watched, TL;DW, timestamped notes with `?t=` links; `## Key Ideas` left empty for Amier. Which model writes
-  the TL;DW and notes is Q15.
-- `quiz: false` on the note retires its cards; whether an untouched video note is quizzed is Q12.
+  Published, Watched, TL;DW, timestamped notes with `?t=` links; `## Key Ideas` left empty for Amier. The Gemini URL call per
+  window writes the timestamped notes; one Flash Lite text call writes the TL;DW (Q15).
+- `quiz: false` on the note retires its cards; an untouched video note is quizzed by default (Q12).
 
 #### LeetCode (`leetcode`)
 
@@ -1536,7 +1536,7 @@ Each run drains the Google Tasks list "Articulate": each item goes through Add T
 
 | Phase | Repo | Issues |
 |---|---|---|
-| 3 | Encore | [Serve contrast prompts (kind: contrast)](https://github.com/amierlorenz/encore/issues/34), [Flag button with reason and suggested fix](https://github.com/amierlorenz/encore/issues/28), [Banner when Articulate's daily plan is stale](https://github.com/amierlorenz/encore/issues/33), [Export the library](https://github.com/amierlorenz/encore/issues/30), and the unfiled ramp and post-class work (Q14) |
+| 3 | Encore | [Serve contrast prompts (kind: contrast)](https://github.com/amierlorenz/encore/issues/34), [Flag button with reason and suggested fix](https://github.com/amierlorenz/encore/issues/28), [Banner when Articulate's daily plan is stale](https://github.com/amierlorenz/encore/issues/33), [Export the library](https://github.com/amierlorenz/encore/issues/30), [Serve ramp fields from the daily plan](https://github.com/amierlorenz/encore/issues/41), [Post-class quiz from Articulate](https://github.com/amierlorenz/encore/issues/42) |
 | 5 | Encore | [Mac practice list from the daily plan](https://github.com/amierlorenz/encore/issues/32) |
 
 ### 7.5 Registry orders for Phases 3–5
@@ -1580,15 +1580,15 @@ override the defaults above where they differ.
 
 No open questions remain for Phases 0–2.
 
-### Open questions for Phases 3–5
+### Decisions for Phases 3–5 (Q12–Q17)
 
-Each has a default this spec uses until Amier answers.
+Amier accepted every default on 2026-11-20.
 
-| # | Question | Where it comes from | Default |
+| # | Question | Where it comes from | Decision |
 |---|---|---|---|
 | Q12 | Are untouched agent video notes quizzed? [What GitHub, YouTube and Medium feed into](https://github.com/amierlorenz/articulate/issues/44) says every video is quizzed by default; [Quizzes from reading and goals](https://github.com/amierlorenz/articulate/issues/43) says untouched agent notes are not. | #44 vs #43 | videos quizzed by default (#44 decided videos specifically); `quiz: false` opts out |
 | Q13 | Literature notes a command makes from a **class** recording: [Voice commands for acting on recordings](https://github.com/amierlorenz/articulate/issues/29) says they join the course's quiz pool as reading material; #43 says untouched agent notes aren't quizzed. | #29 vs #43 | quizzed in the course's pool at reading priority (their quotes are mechanically checked) |
-| Q14 | Encore has no issue for the Phase 3 plan fields (`practiceTest`, `reviewQuiz`, `reviewLimit`, `reviewPriority`, `newPaused`, `holdNewForExams`) or for the post-class quiz (`kind: postclass` plans, introducing on answer, uncalibrated first review, the two notifications from [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9)). | #9, #18 | file two Encore issues: "Serve ramp fields from the daily plan" and "Post-class quiz from Articulate" |
+| Q14 | Encore has no issue for the Phase 3 plan fields (`practiceTest`, `reviewQuiz`, `reviewLimit`, `reviewPriority`, `newPaused`, `holdNewForExams`) or for the post-class quiz (`kind: postclass` plans, introducing on answer, uncalibrated first review, the two notifications from [Daily rhythm](https://github.com/amierlorenz/articulate/issues/9)). | #9, #18 | filed as [Serve ramp fields from the daily plan](https://github.com/amierlorenz/encore/issues/41) (blocks #70) and [Post-class quiz from Articulate](https://github.com/amierlorenz/encore/issues/42) (blocks #71) |
 | Q15 | Who writes a video note's TL;DW and timestamped notes? #44 first said "personal route only"; its amendment moves transcription to Gemini by URL but doesn't name the note writer. | #44, #47 | the same Gemini URL call per window returns timestamped notes; one Flash Lite text call writes the TL;DW (the video is public) |
 | Q16 | When does `articulate eval commands` start gating prompt changes? [Recording agent's instructions and allowed actions](https://github.com/amierlorenz/articulate/issues/31) says it gates every change to `prompts/`; [v1 scope and phase plan](https://github.com/amierlorenz/articulate/issues/49) puts evals in Phase 5. | #31 vs #49 | Phase 5; Phase 4 ships its prompts as version 1 with the fixtures seeded as it goes |
 | Q17 | Is [Deciding what matters](https://github.com/amierlorenz/articulate/issues/10)'s separate lecture-to-slide embedding alignment, and #11's Flash Lite "rank lecture concepts" step, still built? [Transcript-only concepts](https://github.com/amierlorenz/articulate/issues/39) gets spoken claims on deck concepts, hints and time share from one call. | #10, #11 vs #39 | not built: #39's call covers them |
