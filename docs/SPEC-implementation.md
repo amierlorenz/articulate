@@ -297,7 +297,7 @@ private_calendars = []
 base_url = "https://<school>.instructure.com"
 
 [encore]
-app_path = "/Applications/Encore.app"
+bundle_id = "com.amierlorenz.Encore"   # launched with `open -g -b <bundle_id>`, wherever Xcode installed it
 state_wait_s = 180                        # #18: wait ≤3 min for fresh state.json
 ```
 
