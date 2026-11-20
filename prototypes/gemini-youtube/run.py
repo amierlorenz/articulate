@@ -32,9 +32,9 @@ OUT_DIR = pathlib.Path(__file__).resolve().parent / "out"
 PROMPT = """Transcribe the speech in this video verbatim, word for word, in English.
 Do not summarize, paraphrase, clean up, or skip anything; keep filler words.
 Split the transcript into segments of one or two sentences (roughly 5-10 seconds each).
-For each segment give start_sec: the time in seconds from the start of the video
-when the segment's first word is spoken, and text: the exact words.
-Return only JSON of the form {"segments": [{"start_sec": 0.0, "text": "..."}]}."""
+For each segment give start: the timestamp when the segment's first word is spoken,
+as M:SS (or H:MM:SS past an hour), and text: the exact words.
+Return only JSON of the form {"segments": [{"start": "0:00", "text": "..."}]}."""
 
 SCHEMA = {
     "type": "object",
@@ -44,10 +44,10 @@ SCHEMA = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "start_sec": {"type": "number"},
+                    "start": {"type": "string"},
                     "text": {"type": "string"},
                 },
-                "required": ["start_sec", "text"],
+                "required": ["start", "text"],
             },
         }
     },
@@ -150,7 +150,20 @@ def parse_segments(text: str) -> list[dict] | None:
     except json.JSONDecodeError:
         return None
     segs = data.get("segments") if isinstance(data, dict) else data
-    return segs if isinstance(segs, list) else None
+    if not isinstance(segs, list):
+        return None
+    # Gemini writes clock times; ask for "M:SS" and convert in code (as numbers it emitted 21:25 as 2125).
+    for seg in segs:
+        if isinstance(seg, dict) and isinstance(seg.get("start"), str):
+            try:
+                parts = [float(x) for x in seg["start"].split(":")]
+                sec = 0.0
+                for x in parts:
+                    sec = sec * 60 + x
+                seg["start_sec"] = sec
+            except ValueError:
+                seg["start_sec"] = None
+    return segs
 
 
 def main() -> int:

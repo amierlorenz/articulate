@@ -1,0 +1,721 @@
+{
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+  "request": {
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "fileData": {
+              "fileUri": "https://www.youtube.com/watch?v=QLgH5_mqX28"
+            }
+          },
+          {
+            "text": "Transcribe the speech in this video verbatim, word for word, in English.\nDo not summarize, paraphrase, clean up, or skip anything; keep filler words.\nSplit the transcript into segments of one or two sentences (roughly 5-10 seconds each).\nFor each segment give start: the timestamp when the segment's first word is spoken,\nas M:SS (or H:MM:SS past an hour), and text: the exact words.\nReturn only JSON of the form {\"segments\": [{\"start\": \"0:00\", \"text\": \"...\"}]}."
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0,
+      "maxOutputTokens": 32768,
+      "responseMimeType": "application/json",
+      "responseJsonSchema": {
+        "type": "object",
+        "properties": {
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "start",
+                "text"
+              ]
+            }
+          }
+        },
+        "required": [
+          "segments"
+        ]
+      },
+      "mediaResolution": "MEDIA_RESOLUTION_LOW"
+    }
+  },
+  "started_at": "2026-11-19T21:33:26-0500",
+  "http_status": 200,
+  "wall_sec": 57.84,
+  "response": {
+    "candidates": [
+      {
+        "content": {
+          "parts": [
+            {
+              "text": "{\n  \"segments\": [\n    {\n      \"start\": \"0:00\",\n      \"text\": \"Hello all you impulsive, reactive people. I'm glad you're here. Have you seen this video?\"\n    },\n    {\n      \"start\": \"0:05\",\n      \"text\": \"Just get up. What? What are you doing? Come on. You gotta get up. Just stand up. Come on. Get up. What... I'm trying to get up. I don't... I'm I'm literally trying to get up. I don't know what to tell you.\"\n    },\n    {\n      \"start\": \"0:17\",\n      \"text\": \"The guy on the floor is learning how to fight. The coach keeps yelling \\\"Just get up! Get up!\\\" But the guy on the ground is literally being pummeled.\"\n    },\n    {\n      \"start\": \"0:25\",\n      \"text\": \"\\\"I am literally trying to get up,\\\" he says. He's trying harder, but nothing's changing.\"\n    },\n    {\n      \"start\": \"0:32\",\n      \"text\": \"What's going on? First, the coach stinks, and second, you can't just tell people to try harder to do a skill that they don't have yet.\"\n    },\n    {\n      \"start\": \"0:41\",\n      \"text\": \"Now, most people think that change happens here. Stop it!\"\n    },\n    {\n      \"start\": \"0:48\",\n      \"text\": \"You've probably tried over and over to force yourself to stop. But even when it's super important to you,\"\n    },\n    {\n      \"start\": \"0:56\",\n      \"text\": \"you keep falling back on impulsively spending, drugging, yelling, storming off, quitting, fighting, shutting down, mouthing off. And if you're here, all that reactivity is probably interfering with you being the person that you want to be.\"\n    },\n    {\n      \"start\": \"1:08\",\n      \"text\": \"Being more reactive or impulsive can be due to trauma loading, depression, anxiety, brain differences like ADHD, or just a lack of skills and practice.\"\n    },\n    {\n      \"start\": \"1:19\",\n      \"text\": \"But regardless of what causes it, you can't just try harder or use willpower to stop. This is most likely a reflexive nervous system response and you need to train a new reflex to replace it.\"\n    },\n    {\n      \"start\": \"1:33\",\n      \"text\": \"It's not that it's impossible to change. It's that lasting, sustainable change is different than most people assume. The reality is that real change doesn't happen here if we're looking for sustainable change.\"\n    },\n    {\n      \"start\": \"1:45\",\n      \"text\": \"It really happens here, here, and here, in prevention. Okay? You really can learn to train yourself to respond differently to these situations,\"\n    },\n    {\n      \"start\": \"1:57\",\n      \"text\": \"so that you can be less impulsive, less reactive, and gain control of your life. So in this video, you're going to learn four steps to doing that.\"\n    },\n    {\n      \"start\": \"2:11\",\n      \"text\": \"Okay, here's the problem. When you're impulsive or reactive, when you act in a way that doesn't line up with your values, what's usually happening is the emotional brain is activating, while the thinking brain is not engaged.\"\n    },\n    {\n      \"start\": \"2:24\",\n      \"text\": \"So you get criticized at work. Maybe you fear you're not good enough, right? The fight/flight response kicks in, and you defend yourself a little too aggressively.\"\n    },\n    {\n      \"start\": \"2:33\",\n      \"text\": \"Or your kids won't listen. Anger takes over and you snap at them. Maybe you see a big sale, and you spend way too much money.\"\n    },\n    {\n      \"start\": \"2:40\",\n      \"text\": \"Excitement is louder than your budget. Or you're stressed at work, so you binge on sweets. Or you're sad, so you drink too much. Or your boss pressures you to take on another project, and you're uncomfortable\"\n    },\n    {\n      \"start\": \"2:50\",\n      \"text\": \"saying what you really think. That's emotionally uncomfortable, so you just submit and you agree to do it. People pleasing takes over.\"\n    },\n    {\n      \"start\": \"2:58\",\n      \"text\": \"When you're highly emotional, the thinking, moderating part, the part of your brain that plans things out and lines up your life with your values is not activated. Plus, the emotional brain fires faster than the thinking brain.\"\n    },\n    {\n      \"start\": \"3:12\",\n      \"text\": \"With ADHD, impulsivity is not a lack of willpower, it's a brain difference. Your reactive amygdala fires much faster than the thoughtful prefrontal cortex.\"\n    },\n    {\n      \"start\": \"3:23\",\n      \"text\": \"And whether you have ADHD or you're just highly emotional in the moment, you can't just willpower yourself to stop doing it. You can't just turn on your thinking brain magically.\"\n    },\n    {\n      \"start\": \"3:33\",\n      \"text\": \"Not only is the emotional brain much faster than the thinking part of the brain, but a lot of these behaviors are old habits that we've repeated hundreds of times in our life. So this has built up thicker, smoother neural pathways that circumvent the thinking part.\"\n    },\n    {\n      \"start\": \"3:48\",\n      \"text\": \"These are reflexes a lot of the time. People pleasing has become your default, or lashing out, or just buying the thing. It's mental muscle memory, and you can't just change muscle memory by \\\"trying harder.\\\" You have to rewire it.\"\n    },\n    {\n      \"start\": \"4:02\",\n      \"text\": \"So to stop being impulsive, you've got to understand three essential principles of change. Okay, so in that video from earlier, the coach just keeps telling the guy to try harder,\"\n    },\n    {\n      \"start\": \"4:11\",\n      \"text\": \"but the guy on the ground doesn't have the skills to just get up. This is the first principle of changing impulsive behavior: Trying harder doesn't work. Learning new skills does.\"\n    },\n    {\n      \"start\": \"4:24\",\n      \"text\": \"Look what a good coach does. \\\"Elbow nice and tight, and I drop and push his head as much as possible. When I drop and push his head, his head, I want to get this knee in. Hips in the air now. Slide your leg out, and now back to your whizzer, and continue your fight.\\\"\"\n    },\n    {\n      \"start\": \"4:39\",\n      \"text\": \"A good coach would teach him little by little, tiny skills, to get up. \\\"Move your hand here, let's practice that. Move your legs this way, let's practice that. Let's analyze skilled fighters getting up.\\\"\"\n    },\n    {\n      \"start\": \"4:51\",\n      \"text\": \"The first coach has forgotten how he learned those skills for himself little by little, and he's expecting the guy to already know how to do it. Now, we do this to ourselves all the time. We try to force ourselves to try harder instead of learning a different skill.\"\n    },\n    {\n      \"start\": \"5:05\",\n      \"text\": \"So if you want to stop being so reactive, you've got to build muscle memory for a bunch of new tiny skills. It's the same for learning to shoot a basketball or be more patient or be more assertive.\"\n    },\n    {\n      \"start\": \"5:18\",\n      \"text\": \"You have to break it down into tiny steps and then practice each one until you're good at it, and then put all the pieces together. And to do this, you need proper technique, visual aids, often coaching,\"\n    },\n    {\n      \"start\": \"5:28\",\n      \"text\": \"and then with a bit of practice, you'll build the muscle memory to be able to do it even under pressure. So, you can't just try harder, that's the first principle.\"\n    },\n    {\n      \"start\": \"5:37\",\n      \"text\": \"Willpower doesn't work, okay? You've got to train some new reflexes. And the way you do that is through practicing tiny skills. Okay.\"\n    },\n    {\n      \"start\": \"5:46\",\n      \"text\": \"Second principle is that our brains do not comprehend \\\"don't do that.\\\" When we try to be less impulsive, that's called a negative goal, because it's something you're trying to subtract.\"\n    },\n    {\n      \"start\": \"5:57\",\n      \"text\": \"The brain doesn't know what to do with negative goals. There's no action there. There's no verb. So principle two for being less impulsive is:\"\n    },\n    {\n      \"start\": \"6:05\",\n      \"text\": \"\\\"Stop it\\\" is less effective than \\\"do this instead.\\\" You have to train yourself to do a different action.\"\n    },\n    {\n      \"start\": \"6:13\",\n      \"text\": \"You can see this with toddlers. If you tell them \\\"Don't hit the cat,\\\" they have no idea what you're telling them to do. The only action word there is \\\"hit.\\\" And their developing brain just can't process the \\\"don't\\\" in front of it. It can't process that negative word.\"\n    },\n    {\n      \"start\": \"6:27\",\n      \"text\": \"A toddler does much better when you tell them what to do. So you say something like, \\\"Use soft hands with the cat. Here, let me show you.\\\"\"\n    },\n    {\n      \"start\": \"6:38\",\n      \"text\": \"Now, we adults aren't much different. Our brains are not that that different. When we want to be less impulsive, we have to give our brain an action word. What are we doing instead?\"\n    },\n    {\n      \"start\": \"6:49\",\n      \"text\": \"So here's a quick example. When people train adults who have a tendency to hit their kids, when they train them, they don't tell them to stop hitting their kids.\"\n    },\n    {\n      \"start\": \"6:58\",\n      \"text\": \"They tell them to replace that behavior with something to do, like putting their hands in their pockets.\"\n    },\n    {\n      \"start\": \"7:05\",\n      \"text\": \"Then eventually, they'll add on skills like taking a break and authoritative parenting, but they start with a simple \\\"Here's what you do instead: Put your hands in your pocket.\\\"\"\n    },\n    {\n      \"start\": \"7:15\",\n      \"text\": \"If you have a tendency to yell, you'll start by training yourself to pause, and then build assertive communication skills.\"\n    },\n    {\n      \"start\": \"7:22\",\n      \"text\": \"If you have a tendency to spend money, instead of just saying \\\"don't spend so much money,\\\" we're going to replace that with \\\"Let's build in a pause, a delay,\\\" and then budgeting and emotion processing skills. And I know, this is like Medusa, right? Like these skills can be a lot, but little by little, you can learn to do it.\"\n    },\n    {\n      \"start\": \"7:38\",\n      \"text\": \"So, first one is you're going to train some new reflexes, you're going to build new muscle memory. And the second principle is you're going to add in a positive action word for what you're going to do instead.\"\n    },\n    {\n      \"start\": \"7:48\",\n      \"text\": \"Here's the third principle: Progress is going to look retroactive. You're going to go from not realizing you have a problem, to catching yourself after you've messed up,\"\n    },\n    {\n      \"start\": \"7:59\",\n      \"text\": \"to realizing you've messed up right after you're doing it, noticing you're about to mess up, but still messing up, and finally being able to stop yourself from doing that impulsive behavior.\"\n    },\n    {\n      \"start\": \"8:12\",\n      \"text\": \"Eventually, you'll be able to prevent a lot of these situations from happening beforehand. And this process can take a few weeks for a single small behavior.\"\n    },\n    {\n      \"start\": \"8:23\",\n      \"text\": \"If you're not stopping it right away, here's how you know you're making progress. So week 1 or 2 might look like you catch yourself after the reaction, and you get curious and learn from the situation, and start to become more aware of your triggers.\"\n    },\n    {\n      \"start\": \"8:38\",\n      \"text\": \"Week 3 through 4, you might catch yourself in the middle of the reaction, and you'll watch yourself doing the stupid thing, but you'll get a little curious about it. You'll see it differently. You'll be like, \\\"Oh no, I'm about to say it. Oh, I said it!\\\"\"\n    },\n    {\n      \"start\": \"8:51\",\n      \"text\": \"But then you'll be like, \\\"Huh, I wonder like what thoughts and triggers led up to that? I wonder what I could have done differently?\\\" And afterwards, you'll find yourself like rehearsing it and, um, practicing differently. And then by week 5, you'll start to catch the behavior at the start, right here,\"\n    },\n    {\n      \"start\": \"9:08\",\n      \"text\": \"and you'll actually be able to replace it with a different behavior. Even during weeks 1 through 4, when you're still doing the behavior, you're making progress toward being less impulsive.\"\n    },\n    {\n      \"start\": \"9:20\",\n      \"text\": \"So let me show you the four steps to changing impulsive behaviors. The first step to training yourself to act less impulsively is reflection right here, okay?\"\n    },\n    {\n      \"start\": \"9:28\",\n      \"text\": \"In the impulsive moment, your thinking brain isn't fully engaged. By writing or talking about an experience afterwards, you're allowing the thinking brain to engage.\"\n    },\n    {\n      \"start\": \"9:39\",\n      \"text\": \"Now, you don't want to ruminate or beat yourself up, you're just going to learn from it. Now, you see this all the time with sports. Coaches and players analyze the game afterwards, but not to beat themselves up—at least not good coaches, not to beat themselves up,\"\n    },\n    {\n      \"start\": \"9:48\",\n      \"text\": \"but to learn from it. Special ops, soccer teams, EMTs, business strategists, any high-performing team or person, they all use reflection time to improve their performance.\"\n    },\n    {\n      \"start\": \"9:58\",\n      \"text\": \"Now, I would say do this reflection with someone else or in writing. Don't do it in your head, because we are going to be looking at triggers and thoughts, and it can be hard to identify your own behaviors and your own thinking by yourself. It's easy to get stuck in these loops of ruminating or blaming or whatever.\"\n    },\n    {\n      \"start\": \"10:14\",\n      \"text\": \"So as part of exploring, you're going to be identifying your triggers. And this can be a couple of different types of triggers: outside triggers, like \\\"Oh, the kids were just being so loud, so I yelled,\\\"\"\n    },\n    {\n      \"start\": \"10:27\",\n      \"text\": \"or inside triggers, like \\\"I was feeling so lonely, so I had to buy something to feel better,\\\" or somatic signs, what's going on in your body,\"\n    },\n    {\n      \"start\": \"10:35\",\n      \"text\": \"\\\"I was tired, so I ate an entire box of donuts,\\\" \\\"I was overstimulated, so I shut down,\\\" \\\"I was excited and in a hurry, so I just bought all the things,\\\" \\\"My body was clenched with rage while driving, so I cut him off.\\\"\"\n    },\n    {\n      \"start\": \"10:48\",\n      \"text\": \"So we're going to learn to notice outside triggers (stuff going outside of you), feelings (internal triggers), and somatic triggers (what's going on in your body) that lead you to doing these impulsive behaviors.\"\n    },\n    {\n      \"start\": \"10:59\",\n      \"text\": \"It's important to identify your triggers, but one of the things I think a lot of people get wrong is that they think the trigger is the cause of the behavior. \\\"He triggered me, so I yelled.\\\" \\\"That situation triggered me, so I left.\\\" This is wrong. Triggers don't make you do stuff.\"\n    },\n    {\n      \"start\": \"11:15\",\n      \"text\": \"\\\"Between stimulus and response there is a space. In that space is our power to choose our response. In our response lies our growth and our freedom.\\\"\"\n    },\n    {\n      \"start\": \"11:23\",\n      \"text\": \"So the whole goal of noticing triggers is so that you gain so much awareness that you have space to choose to change your impulsive behavior. Now, in principle four, I'm going to teach you a few more ways to create space, but right now we're still on reflection.\"\n    },\n    {\n      \"start\": \"11:38\",\n      \"text\": \"So we've identified some triggers, now let's look at your thoughts. What were your thoughts that led to those feelings and led to those actions?\"\n    },\n    {\n      \"start\": \"11:47\",\n      \"text\": \"It's really helpful to do this with a therapist. I understand that many of you can't access therapy. I do have a lot of videos on identifying unhelpful thinking patterns.\"\n    },\n    {\n      \"start\": \"11:58\",\n      \"text\": \"Here's a couple examples: blaming thoughts. \\\"These kids are always so rude. I had to yell to get their attention,\\\" right? You're putting responsibility on the kids for your actions.\"\n    },\n    {\n      \"start\": \"12:07\",\n      \"text\": \"All-or-nothing thoughts. \\\"My day is ruined anyway, so why bother trying?\\\" \\\"I have so much debt already, there's no point in sticking to a budget.\\\"\"\n    },\n    {\n      \"start\": \"12:15\",\n      \"text\": \"Catastrophizing thoughts. \\\"This is never going to get better, I might as well quit,\\\" right?\"\n    },\n    {\n      \"start\": \"12:21\",\n      \"text\": \"Now, we clearly don't have time in this video to do a whole course on CBT, but learning to catch those thoughts can be really helpful with replacing impulsive behaviors with healthier ones.\"\n    },\n    {\n      \"start\": \"12:32\",\n      \"text\": \"If you'd like to see more of these, you could check out my Emotion Processing course, specifically videos 18, 19, and video 11 from my Anxiety course.\"\n    },\n    {\n      \"start\": \"12:42\",\n      \"text\": \"For this video, I'm going to assume that you know how to identify automatic negative thoughts and replace them with something healthier. If not, you could sign up for my membership to learn how.\"\n    },\n    {\n      \"start\": \"12:53\",\n      \"text\": \"And I get it, right? This is complicated, so we are going to break it down so that it's doable. Like you really can learn how to be less reactive. These are the pieces that you start practicing. And I'm going to talk to you about that system at the end of this video, okay?\"\n    },\n    {\n      \"start\": \"13:06\",\n      \"text\": \"So as we reflect on our reactivity, we can start to explore what went wrong, and what triggers led up to it, and what thoughts fueled it.\"\n    },\n    {\n      \"start\": \"13:16\",\n      \"text\": \"After reflecting on what went wrong, it's really important to do this next step. You don't want to dwell on your mistakes or get sucked into ruminating on your failures.\"\n    },\n    {\n      \"start\": \"13:23\",\n      \"text\": \"So instead, you got to get super specific on what you would do instead. So that's going back to that second principle, right? Write it down, what action you would take differently next time.\"\n    },\n    {\n      \"start\": \"13:31\",\n      \"text\": \"And writing it down is really key, because this is the beginning of rewiring your brain to do something different.\"\n    },\n    {\n      \"start\": \"13:39\",\n      \"text\": \"Now for this step, it's really helpful if you have a clear idea of what kind of person you want to be. And so if you don't know who you want to be, you could do a values exercise. That could help with that a lot, and I have a video on that.\"\n    },\n    {\n      \"start\": \"13:52\",\n      \"text\": \"Okay, so let me use the example of the parent who yelled at their kids. Write what would you do differently. Here's an example:\"\n    },\n    {\n      \"start\": \"13:59\",\n      \"text\": \"\\\"Next time I would get down on the child's level. I would put my hand on their shoulder. I would look her in the eyes and calmly say, \\\"Jane, you need to go brush your teeth right now.\\\"\"\n    },\n    {\n      \"start\": \"14:09\",\n      \"text\": \"If she refused, then I would ask her, \\\"what's the matter?\\\" and listen to her needs. If I do that, and she still refuses to brush her teeth, next time I'll say, \\\"Jane, if you don't brush your teeth right now, you will lose a privilege tomorrow.\\\"\"\n    },\n    {\n      \"start\": \"14:18\",\n      \"text\": \"And then if she didn't, then I would tell her which privilege she lost tomorrow.\\\"\"\n    },\n    {\n      \"start\": \"14:27\",\n      \"text\": \"Okay, so that's an example of like, \\\"This is how I will respond in this situation next time.\\\" Very specific, very positively oriented. \\\"These are the actions I will take.\\\"\"\n    },\n    {\n      \"start\": \"14:36\",\n      \"text\": \"I think it's really great to keep some 3x5 cards nearby or use your notes app in your phone, and then with each situation that comes up, you just quickly write down three things: What happened, what led up to it, and what would you do differently?\"\n    },\n    {\n      \"start\": \"14:51\",\n      \"text\": \"Okay? Now, in order to implement these changes, there's one more skill that is super duper important,\"\n    },\n    {\n      \"start\": \"14:58\",\n      \"text\": \"and that is building in a new reflex to slow down. This has to be super simple and easy to remember, but the goal here is to do anything to buy yourself time.\"\n    },\n    {\n      \"start\": \"15:09\",\n      \"text\": \"My two favorites are taking a slow breath before saying anything or using a delay phrase like saying, \\\"Hmm, let me think about this for a minute.\\\"\"\n    },\n    {\n      \"start\": \"15:18\",\n      \"text\": \"Like if my kids are pressuring me, \\\"Can I? Can I? Can I, Mom?\\\" I'll be like, \\\"I'm not going to decide right now. I need a minute to think about this.\\\" Or at work, \\\"Let's circle back on this tomorrow.\\\"\"\n    },\n    {\n      \"start\": \"15:27\",\n      \"text\": \"Here's another example of a delay phrase. Like when making a big decision, sometimes I just tell the person, \\\"Hmm, I got to check something before I answer.\\\" Or \\\"I've got to talk to Ryan about that before I buy it.\\\"\"\n    },\n    {\n      \"start\": \"15:37\",\n      \"text\": \"Even though Ryan doesn't care what I buy, I sometimes use that as a way just to delay myself. Another easy one is to say, \\\"Hang on a minute, I need to use the bathroom.\\\"\"\n    },\n    {\n      \"start\": \"15:48\",\n      \"text\": \"And of course, you can just say, \\\"I need a little break. Can we come back to this in an hour?\\\" Anything to help you slow down can give you time for your thinking brain to catch up.\"\n    },\n    {\n      \"start\": \"15:58\",\n      \"text\": \"And it's really important to practice this slowdown button over and over again in low-stress situations so that it's muscle memory when it's crunch time.\"\n    },\n    {\n      \"start\": \"16:05\",\n      \"text\": \"If you have ADHD or you struggle with reactivity, you're probably going to need visual reminders and physical barriers to help you slow down and support your thinking brain and your executive function.\"\n    },\n    {\n      \"start\": \"16:17\",\n      \"text\": \"So visual reminders are really key here, because when you're in your emotional brain, you're not remembering to like slow down or check things.\"\n    },\n    {\n      \"start\": \"16:25\",\n      \"text\": \"So this could be something like a note taped to your credit card that says \\\"Did you check the budget?\\\", or you write it on your hand, or you make your phone lock screen say something like \\\"Slow down,\\\" or your watch chime to remind you to do that.\"\n    },\n    {\n      \"start\": \"16:37\",\n      \"text\": \"You most likely need to build in physical reminders and barriers to impulsive behavior. So this might look like don't keep alcohol in the house or candy on your desk or social media apps on your phone.\"\n    },\n    {\n      \"start\": \"16:49\",\n      \"text\": \"Take your credit card off of your shopping apps so that you have to get up and manually type in a credit card instead of buying stuff with one click. Things like that create physical barriers to impulsive behavior. Put your snacks in the freezer so that if you want to eat them, you have to wait until they thaw.\"\n    },\n    {\n      \"start\": \"17:05\",\n      \"text\": \"You could also have a rule that you don't make any huge decisions like quitting a job or moving or breaking up with someone without first getting a good night's sleep. If your kids are driving you crazy and you notice yourself getting tense, give yourself permission to step outside of the house for a moment.\"\n    },\n    {\n      \"start\": \"17:20\",\n      \"text\": \"Right? So the whole goal here is to increase the space between stimulus and response. This gives our thinking brain time to kick on, help us make intentional instead of reactive responses.\"\n    },\n    {\n      \"start\": \"17:31\",\n      \"text\": \"Okay, that takes us to step four. These three principles are all fine and good, but just knowing about them doesn't build any muscle memory. You have to build an intentional system to practice them.\"\n    },\n    {\n      \"start\": \"17:40\",\n      \"text\": \"Check out my video on how to build systems to actually change. Basically, you want to pick one skill per month to work on.\"\n    },\n    {\n      \"start\": \"17:47\",\n      \"text\": \"You got to build a system with reminders, trackers, and accountability, and then start practicing that skill over and over again in low-pressure situations.\"\n    },\n    {\n      \"start\": \"17:57\",\n      \"text\": \"So for example, if you're training yourself to pause more, make a tracker where you give yourself a big check mark each time you pause more.\"\n    },\n    {\n      \"start\": \"18:08\",\n      \"text\": \"I think it's best to put this up on a wall and use a big red marker. Make it visual so you have reminders all over the place. Like you put a paper on the wall, you put a reminder on your phone lock screen, you set reminders to slow down in your phone's like automatic recurring reminders throughout the day.\"\n    },\n    {\n      \"start\": \"18:22\",\n      \"text\": \"You could add in a cue like on your calendar, like \\\"This meeting might be stressful. Take some slow breaths.\\\" And I like how Zoom already kind of does that.\"\n    },\n    {\n      \"start\": \"18:31\",\n      \"text\": \"So then, after you've built up kind of a system of reminders and trackers, then you start practicing. When the waiter asks you for your order, pause.\"\n    },\n    {\n      \"start\": \"18:40\",\n      \"text\": \"When an email comes in, pause. When your phone chimes, pause. When your kids get loud, pause. Breathe first, give yourself a big check mark, right?\"\n    },\n    {\n      \"start\": \"18:50\",\n      \"text\": \"The goal here isn't perfection. Perfectionism actually leads to more impulsivity with things like avoiding, catastrophizing, or shutting down. Instead, we want to focus on creativity and a growth mindset.\"\n    },\n    {\n      \"start\": \"19:00\",\n      \"text\": \"So every chance you get to mess up is a learning opportunity. Every mistake is an opportunity to learn. You're going to practice these new behaviors in calm situations at first,\"\n    },\n    {\n      \"start\": \"19:10\",\n      \"text\": \"gradually increasing the stress. For high-stress situations, like standing up to your boss, role-play calm, assertive behaviors with someone ahead of time. Role-play it, say it out loud in your room, say it to your therapist.\"\n    },\n    {\n      \"start\": \"19:24\",\n      \"text\": \"Now again, you got to think of yourself like SEAL Team 6. You're going to practice responding in drills so that in the heat of the moment, you can perform. After a relapse, write about it, write down what you would do differently, tell someone, practice it out loud.\"\n    },\n    {\n      \"start\": \"19:35\",\n      \"text\": \"This is how you rewire reactive behaviors. Okay, and I just have to say this again: Be patient with your progress. Don't beat yourself up. Do try something different.\"\n    },\n    {\n      \"start\": \"19:43\",\n      \"text\": \"This is all an experiment. We're all here in this life to learn and grow, and every experience is an opportunity to learn something new. Just be courageous and try again. I mean that, okay?\"\n    },\n    {\n      \"start\": \"19:53\",\n      \"text\": \"And I would just say, a really important part of growth is learning to get good at do-overs and apologies. This is what I sometimes have to say:\"\n    },\n    {\n      \"start\": \"20:01\",\n      \"text\": \"\\\"Okay, that was fast. Can I try that again?\\\" I do this all the time with my husband. \\\"Ooh, can we start that conversation again?\\\"\"\n    },\n    {\n      \"start\": \"20:10\",\n      \"text\": \"And then that slows me down and I'll remember, \\\"Oh, calm down, use a softer start-up, acknowledge his side of things, and focus on solving this together.\\\"\"\n    },\n    {\n      \"start\": \"20:24\",\n      \"text\": \"Let me just review real quick. If you want to actually stop doing stupid stuff, to replace impulsive behaviors with really intentional, values-driven behaviors, there's three principles, four steps.\"\n    },\n    {\n      \"start\": \"20:35\",\n      \"text\": \"Trying harder doesn't work in the long run, new skills are better. \\\"Stop it\\\" doesn't help as much as positive goals. Name the action you're going to do instead.\"\n    },\n    {\n      \"start\": \"20:43\",\n      \"text\": \"Progress is like Groundhog Day. It might take a lot of repetitions, but if you reflect and practice those new skills after mistakes, you'll start rewriting new behaviors. Okay.\"\n    },\n    {\n      \"start\": \"20:53\",\n      \"text\": \"Four steps: 1. Reflect on what went wrong. Identify your triggers and thoughts. 2. Rehearse. Choose a new behavior to replace the reactive behavior.\"\n    },\n    {\n      \"start\": \"21:03\",\n      \"text\": \"3. Delay. Build in a pause reflex. 4. Practice the new behaviors in writing, in talking, and in tiny moments, and then just track it, remind it, make it visual, use a growth mindset, and get good at apologies.\"\n    },\n    {\n      \"start\": \"21:15\",\n      \"text\": \"There's your system for how to be less impulsive. And again, I'm just going to encourage you: Pick one small skill, build a tracking system, build an accountability system, and work on it for a month, and you are going to improve.\"\n    },\n    {\n      \"start\": \"21:26\",\n      \"text\": \"Okay, I have several other videos that dive into these principles and skills. I mean, of course, like everything in mental health, these are all interconnected. No skill stands by itself. So check the video description for those links. And here's to you, changing your life by changing your impulsive behaviors. Thanks for being here. Please take care.\"\n    }\n  ]\n}",
+              "thoughtSignature": "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"
+            }
+          ],
+          "role": "model"
+        },
+        "finishReason": "STOP",
+        "index": 0
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 119249,
+      "candidatesTokenCount": 8130,
+      "totalTokenCount": 134432,
+      "promptTokensDetails": [
+        {
+          "modality": "VIDEO",
+          "tokenCount": 119125
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 124
+        }
+      ],
+      "thoughtsTokenCount": 7053,
+      "serviceTier": "standard"
+    },
+    "modelVersion": "gemini-3.6-flash",
+    "responseId": "drH_arL-C5ypxdIP_6eJgQE"
+  },
+  "usageMetadata": {
+    "promptTokenCount": 119249,
+    "candidatesTokenCount": 8130,
+    "totalTokenCount": 134432,
+    "promptTokensDetails": [
+      {
+        "modality": "VIDEO",
+        "tokenCount": 119125
+      },
+      {
+        "modality": "TEXT",
+        "tokenCount": 124
+      }
+    ],
+    "thoughtsTokenCount": 7053,
+    "serviceTier": "standard"
+  },
+  "segments": [
+    {
+      "start": "0:00",
+      "text": "Hello all you impulsive, reactive people. I'm glad you're here. Have you seen this video?",
+      "start_sec": 0.0
+    },
+    {
+      "start": "0:05",
+      "text": "Just get up. What? What are you doing? Come on. You gotta get up. Just stand up. Come on. Get up. What... I'm trying to get up. I don't... I'm I'm literally trying to get up. I don't know what to tell you.",
+      "start_sec": 5.0
+    },
+    {
+      "start": "0:17",
+      "text": "The guy on the floor is learning how to fight. The coach keeps yelling \"Just get up! Get up!\" But the guy on the ground is literally being pummeled.",
+      "start_sec": 17.0
+    },
+    {
+      "start": "0:25",
+      "text": "\"I am literally trying to get up,\" he says. He's trying harder, but nothing's changing.",
+      "start_sec": 25.0
+    },
+    {
+      "start": "0:32",
+      "text": "What's going on? First, the coach stinks, and second, you can't just tell people to try harder to do a skill that they don't have yet.",
+      "start_sec": 32.0
+    },
+    {
+      "start": "0:41",
+      "text": "Now, most people think that change happens here. Stop it!",
+      "start_sec": 41.0
+    },
+    {
+      "start": "0:48",
+      "text": "You've probably tried over and over to force yourself to stop. But even when it's super important to you,",
+      "start_sec": 48.0
+    },
+    {
+      "start": "0:56",
+      "text": "you keep falling back on impulsively spending, drugging, yelling, storming off, quitting, fighting, shutting down, mouthing off. And if you're here, all that reactivity is probably interfering with you being the person that you want to be.",
+      "start_sec": 56.0
+    },
+    {
+      "start": "1:08",
+      "text": "Being more reactive or impulsive can be due to trauma loading, depression, anxiety, brain differences like ADHD, or just a lack of skills and practice.",
+      "start_sec": 68.0
+    },
+    {
+      "start": "1:19",
+      "text": "But regardless of what causes it, you can't just try harder or use willpower to stop. This is most likely a reflexive nervous system response and you need to train a new reflex to replace it.",
+      "start_sec": 79.0
+    },
+    {
+      "start": "1:33",
+      "text": "It's not that it's impossible to change. It's that lasting, sustainable change is different than most people assume. The reality is that real change doesn't happen here if we're looking for sustainable change.",
+      "start_sec": 93.0
+    },
+    {
+      "start": "1:45",
+      "text": "It really happens here, here, and here, in prevention. Okay? You really can learn to train yourself to respond differently to these situations,",
+      "start_sec": 105.0
+    },
+    {
+      "start": "1:57",
+      "text": "so that you can be less impulsive, less reactive, and gain control of your life. So in this video, you're going to learn four steps to doing that.",
+      "start_sec": 117.0
+    },
+    {
+      "start": "2:11",
+      "text": "Okay, here's the problem. When you're impulsive or reactive, when you act in a way that doesn't line up with your values, what's usually happening is the emotional brain is activating, while the thinking brain is not engaged.",
+      "start_sec": 131.0
+    },
+    {
+      "start": "2:24",
+      "text": "So you get criticized at work. Maybe you fear you're not good enough, right? The fight/flight response kicks in, and you defend yourself a little too aggressively.",
+      "start_sec": 144.0
+    },
+    {
+      "start": "2:33",
+      "text": "Or your kids won't listen. Anger takes over and you snap at them. Maybe you see a big sale, and you spend way too much money.",
+      "start_sec": 153.0
+    },
+    {
+      "start": "2:40",
+      "text": "Excitement is louder than your budget. Or you're stressed at work, so you binge on sweets. Or you're sad, so you drink too much. Or your boss pressures you to take on another project, and you're uncomfortable",
+      "start_sec": 160.0
+    },
+    {
+      "start": "2:50",
+      "text": "saying what you really think. That's emotionally uncomfortable, so you just submit and you agree to do it. People pleasing takes over.",
+      "start_sec": 170.0
+    },
+    {
+      "start": "2:58",
+      "text": "When you're highly emotional, the thinking, moderating part, the part of your brain that plans things out and lines up your life with your values is not activated. Plus, the emotional brain fires faster than the thinking brain.",
+      "start_sec": 178.0
+    },
+    {
+      "start": "3:12",
+      "text": "With ADHD, impulsivity is not a lack of willpower, it's a brain difference. Your reactive amygdala fires much faster than the thoughtful prefrontal cortex.",
+      "start_sec": 192.0
+    },
+    {
+      "start": "3:23",
+      "text": "And whether you have ADHD or you're just highly emotional in the moment, you can't just willpower yourself to stop doing it. You can't just turn on your thinking brain magically.",
+      "start_sec": 203.0
+    },
+    {
+      "start": "3:33",
+      "text": "Not only is the emotional brain much faster than the thinking part of the brain, but a lot of these behaviors are old habits that we've repeated hundreds of times in our life. So this has built up thicker, smoother neural pathways that circumvent the thinking part.",
+      "start_sec": 213.0
+    },
+    {
+      "start": "3:48",
+      "text": "These are reflexes a lot of the time. People pleasing has become your default, or lashing out, or just buying the thing. It's mental muscle memory, and you can't just change muscle memory by \"trying harder.\" You have to rewire it.",
+      "start_sec": 228.0
+    },
+    {
+      "start": "4:02",
+      "text": "So to stop being impulsive, you've got to understand three essential principles of change. Okay, so in that video from earlier, the coach just keeps telling the guy to try harder,",
+      "start_sec": 242.0
+    },
+    {
+      "start": "4:11",
+      "text": "but the guy on the ground doesn't have the skills to just get up. This is the first principle of changing impulsive behavior: Trying harder doesn't work. Learning new skills does.",
+      "start_sec": 251.0
+    },
+    {
+      "start": "4:24",
+      "text": "Look what a good coach does. \"Elbow nice and tight, and I drop and push his head as much as possible. When I drop and push his head, his head, I want to get this knee in. Hips in the air now. Slide your leg out, and now back to your whizzer, and continue your fight.\"",
+      "start_sec": 264.0
+    },
+    {
+      "start": "4:39",
+      "text": "A good coach would teach him little by little, tiny skills, to get up. \"Move your hand here, let's practice that. Move your legs this way, let's practice that. Let's analyze skilled fighters getting up.\"",
+      "start_sec": 279.0
+    },
+    {
+      "start": "4:51",
+      "text": "The first coach has forgotten how he learned those skills for himself little by little, and he's expecting the guy to already know how to do it. Now, we do this to ourselves all the time. We try to force ourselves to try harder instead of learning a different skill.",
+      "start_sec": 291.0
+    },
+    {
+      "start": "5:05",
+      "text": "So if you want to stop being so reactive, you've got to build muscle memory for a bunch of new tiny skills. It's the same for learning to shoot a basketball or be more patient or be more assertive.",
+      "start_sec": 305.0
+    },
+    {
+      "start": "5:18",
+      "text": "You have to break it down into tiny steps and then practice each one until you're good at it, and then put all the pieces together. And to do this, you need proper technique, visual aids, often coaching,",
+      "start_sec": 318.0
+    },
+    {
+      "start": "5:28",
+      "text": "and then with a bit of practice, you'll build the muscle memory to be able to do it even under pressure. So, you can't just try harder, that's the first principle.",
+      "start_sec": 328.0
+    },
+    {
+      "start": "5:37",
+      "text": "Willpower doesn't work, okay? You've got to train some new reflexes. And the way you do that is through practicing tiny skills. Okay.",
+      "start_sec": 337.0
+    },
+    {
+      "start": "5:46",
+      "text": "Second principle is that our brains do not comprehend \"don't do that.\" When we try to be less impulsive, that's called a negative goal, because it's something you're trying to subtract.",
+      "start_sec": 346.0
+    },
+    {
+      "start": "5:57",
+      "text": "The brain doesn't know what to do with negative goals. There's no action there. There's no verb. So principle two for being less impulsive is:",
+      "start_sec": 357.0
+    },
+    {
+      "start": "6:05",
+      "text": "\"Stop it\" is less effective than \"do this instead.\" You have to train yourself to do a different action.",
+      "start_sec": 365.0
+    },
+    {
+      "start": "6:13",
+      "text": "You can see this with toddlers. If you tell them \"Don't hit the cat,\" they have no idea what you're telling them to do. The only action word there is \"hit.\" And their developing brain just can't process the \"don't\" in front of it. It can't process that negative word.",
+      "start_sec": 373.0
+    },
+    {
+      "start": "6:27",
+      "text": "A toddler does much better when you tell them what to do. So you say something like, \"Use soft hands with the cat. Here, let me show you.\"",
+      "start_sec": 387.0
+    },
+    {
+      "start": "6:38",
+      "text": "Now, we adults aren't much different. Our brains are not that that different. When we want to be less impulsive, we have to give our brain an action word. What are we doing instead?",
+      "start_sec": 398.0
+    },
+    {
+      "start": "6:49",
+      "text": "So here's a quick example. When people train adults who have a tendency to hit their kids, when they train them, they don't tell them to stop hitting their kids.",
+      "start_sec": 409.0
+    },
+    {
+      "start": "6:58",
+      "text": "They tell them to replace that behavior with something to do, like putting their hands in their pockets.",
+      "start_sec": 418.0
+    },
+    {
+      "start": "7:05",
+      "text": "Then eventually, they'll add on skills like taking a break and authoritative parenting, but they start with a simple \"Here's what you do instead: Put your hands in your pocket.\"",
+      "start_sec": 425.0
+    },
+    {
+      "start": "7:15",
+      "text": "If you have a tendency to yell, you'll start by training yourself to pause, and then build assertive communication skills.",
+      "start_sec": 435.0
+    },
+    {
+      "start": "7:22",
+      "text": "If you have a tendency to spend money, instead of just saying \"don't spend so much money,\" we're going to replace that with \"Let's build in a pause, a delay,\" and then budgeting and emotion processing skills. And I know, this is like Medusa, right? Like these skills can be a lot, but little by little, you can learn to do it.",
+      "start_sec": 442.0
+    },
+    {
+      "start": "7:38",
+      "text": "So, first one is you're going to train some new reflexes, you're going to build new muscle memory. And the second principle is you're going to add in a positive action word for what you're going to do instead.",
+      "start_sec": 458.0
+    },
+    {
+      "start": "7:48",
+      "text": "Here's the third principle: Progress is going to look retroactive. You're going to go from not realizing you have a problem, to catching yourself after you've messed up,",
+      "start_sec": 468.0
+    },
+    {
+      "start": "7:59",
+      "text": "to realizing you've messed up right after you're doing it, noticing you're about to mess up, but still messing up, and finally being able to stop yourself from doing that impulsive behavior.",
+      "start_sec": 479.0
+    },
+    {
+      "start": "8:12",
+      "text": "Eventually, you'll be able to prevent a lot of these situations from happening beforehand. And this process can take a few weeks for a single small behavior.",
+      "start_sec": 492.0
+    },
+    {
+      "start": "8:23",
+      "text": "If you're not stopping it right away, here's how you know you're making progress. So week 1 or 2 might look like you catch yourself after the reaction, and you get curious and learn from the situation, and start to become more aware of your triggers.",
+      "start_sec": 503.0
+    },
+    {
+      "start": "8:38",
+      "text": "Week 3 through 4, you might catch yourself in the middle of the reaction, and you'll watch yourself doing the stupid thing, but you'll get a little curious about it. You'll see it differently. You'll be like, \"Oh no, I'm about to say it. Oh, I said it!\"",
+      "start_sec": 518.0
+    },
+    {
+      "start": "8:51",
+      "text": "But then you'll be like, \"Huh, I wonder like what thoughts and triggers led up to that? I wonder what I could have done differently?\" And afterwards, you'll find yourself like rehearsing it and, um, practicing differently. And then by week 5, you'll start to catch the behavior at the start, right here,",
+      "start_sec": 531.0
+    },
+    {
+      "start": "9:08",
+      "text": "and you'll actually be able to replace it with a different behavior. Even during weeks 1 through 4, when you're still doing the behavior, you're making progress toward being less impulsive.",
+      "start_sec": 548.0
+    },
+    {
+      "start": "9:20",
+      "text": "So let me show you the four steps to changing impulsive behaviors. The first step to training yourself to act less impulsively is reflection right here, okay?",
+      "start_sec": 560.0
+    },
+    {
+      "start": "9:28",
+      "text": "In the impulsive moment, your thinking brain isn't fully engaged. By writing or talking about an experience afterwards, you're allowing the thinking brain to engage.",
+      "start_sec": 568.0
+    },
+    {
+      "start": "9:39",
+      "text": "Now, you don't want to ruminate or beat yourself up, you're just going to learn from it. Now, you see this all the time with sports. Coaches and players analyze the game afterwards, but not to beat themselves up—at least not good coaches, not to beat themselves up,",
+      "start_sec": 579.0
+    },
+    {
+      "start": "9:48",
+      "text": "but to learn from it. Special ops, soccer teams, EMTs, business strategists, any high-performing team or person, they all use reflection time to improve their performance.",
+      "start_sec": 588.0
+    },
+    {
+      "start": "9:58",
+      "text": "Now, I would say do this reflection with someone else or in writing. Don't do it in your head, because we are going to be looking at triggers and thoughts, and it can be hard to identify your own behaviors and your own thinking by yourself. It's easy to get stuck in these loops of ruminating or blaming or whatever.",
+      "start_sec": 598.0
+    },
+    {
+      "start": "10:14",
+      "text": "So as part of exploring, you're going to be identifying your triggers. And this can be a couple of different types of triggers: outside triggers, like \"Oh, the kids were just being so loud, so I yelled,\"",
+      "start_sec": 614.0
+    },
+    {
+      "start": "10:27",
+      "text": "or inside triggers, like \"I was feeling so lonely, so I had to buy something to feel better,\" or somatic signs, what's going on in your body,",
+      "start_sec": 627.0
+    },
+    {
+      "start": "10:35",
+      "text": "\"I was tired, so I ate an entire box of donuts,\" \"I was overstimulated, so I shut down,\" \"I was excited and in a hurry, so I just bought all the things,\" \"My body was clenched with rage while driving, so I cut him off.\"",
+      "start_sec": 635.0
+    },
+    {
+      "start": "10:48",
+      "text": "So we're going to learn to notice outside triggers (stuff going outside of you), feelings (internal triggers), and somatic triggers (what's going on in your body) that lead you to doing these impulsive behaviors.",
+      "start_sec": 648.0
+    },
+    {
+      "start": "10:59",
+      "text": "It's important to identify your triggers, but one of the things I think a lot of people get wrong is that they think the trigger is the cause of the behavior. \"He triggered me, so I yelled.\" \"That situation triggered me, so I left.\" This is wrong. Triggers don't make you do stuff.",
+      "start_sec": 659.0
+    },
+    {
+      "start": "11:15",
+      "text": "\"Between stimulus and response there is a space. In that space is our power to choose our response. In our response lies our growth and our freedom.\"",
+      "start_sec": 675.0
+    },
+    {
+      "start": "11:23",
+      "text": "So the whole goal of noticing triggers is so that you gain so much awareness that you have space to choose to change your impulsive behavior. Now, in principle four, I'm going to teach you a few more ways to create space, but right now we're still on reflection.",
+      "start_sec": 683.0
+    },
+    {
+      "start": "11:38",
+      "text": "So we've identified some triggers, now let's look at your thoughts. What were your thoughts that led to those feelings and led to those actions?",
+      "start_sec": 698.0
+    },
+    {
+      "start": "11:47",
+      "text": "It's really helpful to do this with a therapist. I understand that many of you can't access therapy. I do have a lot of videos on identifying unhelpful thinking patterns.",
+      "start_sec": 707.0
+    },
+    {
+      "start": "11:58",
+      "text": "Here's a couple examples: blaming thoughts. \"These kids are always so rude. I had to yell to get their attention,\" right? You're putting responsibility on the kids for your actions.",
+      "start_sec": 718.0
+    },
+    {
+      "start": "12:07",
+      "text": "All-or-nothing thoughts. \"My day is ruined anyway, so why bother trying?\" \"I have so much debt already, there's no point in sticking to a budget.\"",
+      "start_sec": 727.0
+    },
+    {
+      "start": "12:15",
+      "text": "Catastrophizing thoughts. \"This is never going to get better, I might as well quit,\" right?",
+      "start_sec": 735.0
+    },
+    {
+      "start": "12:21",
+      "text": "Now, we clearly don't have time in this video to do a whole course on CBT, but learning to catch those thoughts can be really helpful with replacing impulsive behaviors with healthier ones.",
+      "start_sec": 741.0
+    },
+    {
+      "start": "12:32",
+      "text": "If you'd like to see more of these, you could check out my Emotion Processing course, specifically videos 18, 19, and video 11 from my Anxiety course.",
+      "start_sec": 752.0
+    },
+    {
+      "start": "12:42",
+      "text": "For this video, I'm going to assume that you know how to identify automatic negative thoughts and replace them with something healthier. If not, you could sign up for my membership to learn how.",
+      "start_sec": 762.0
+    },
+    {
+      "start": "12:53",
+      "text": "And I get it, right? This is complicated, so we are going to break it down so that it's doable. Like you really can learn how to be less reactive. These are the pieces that you start practicing. And I'm going to talk to you about that system at the end of this video, okay?",
+      "start_sec": 773.0
+    },
+    {
+      "start": "13:06",
+      "text": "So as we reflect on our reactivity, we can start to explore what went wrong, and what triggers led up to it, and what thoughts fueled it.",
+      "start_sec": 786.0
+    },
+    {
+      "start": "13:16",
+      "text": "After reflecting on what went wrong, it's really important to do this next step. You don't want to dwell on your mistakes or get sucked into ruminating on your failures.",
+      "start_sec": 796.0
+    },
+    {
+      "start": "13:23",
+      "text": "So instead, you got to get super specific on what you would do instead. So that's going back to that second principle, right? Write it down, what action you would take differently next time.",
+      "start_sec": 803.0
+    },
+    {
+      "start": "13:31",
+      "text": "And writing it down is really key, because this is the beginning of rewiring your brain to do something different.",
+      "start_sec": 811.0
+    },
+    {
+      "start": "13:39",
+      "text": "Now for this step, it's really helpful if you have a clear idea of what kind of person you want to be. And so if you don't know who you want to be, you could do a values exercise. That could help with that a lot, and I have a video on that.",
+      "start_sec": 819.0
+    },
+    {
+      "start": "13:52",
+      "text": "Okay, so let me use the example of the parent who yelled at their kids. Write what would you do differently. Here's an example:",
+      "start_sec": 832.0
+    },
+    {
+      "start": "13:59",
+      "text": "\"Next time I would get down on the child's level. I would put my hand on their shoulder. I would look her in the eyes and calmly say, \"Jane, you need to go brush your teeth right now.\"",
+      "start_sec": 839.0
+    },
+    {
+      "start": "14:09",
+      "text": "If she refused, then I would ask her, \"what's the matter?\" and listen to her needs. If I do that, and she still refuses to brush her teeth, next time I'll say, \"Jane, if you don't brush your teeth right now, you will lose a privilege tomorrow.\"",
+      "start_sec": 849.0
+    },
+    {
+      "start": "14:18",
+      "text": "And then if she didn't, then I would tell her which privilege she lost tomorrow.\"",
+      "start_sec": 858.0
+    },
+    {
+      "start": "14:27",
+      "text": "Okay, so that's an example of like, \"This is how I will respond in this situation next time.\" Very specific, very positively oriented. \"These are the actions I will take.\"",
+      "start_sec": 867.0
+    },
+    {
+      "start": "14:36",
+      "text": "I think it's really great to keep some 3x5 cards nearby or use your notes app in your phone, and then with each situation that comes up, you just quickly write down three things: What happened, what led up to it, and what would you do differently?",
+      "start_sec": 876.0
+    },
+    {
+      "start": "14:51",
+      "text": "Okay? Now, in order to implement these changes, there's one more skill that is super duper important,",
+      "start_sec": 891.0
+    },
+    {
+      "start": "14:58",
+      "text": "and that is building in a new reflex to slow down. This has to be super simple and easy to remember, but the goal here is to do anything to buy yourself time.",
+      "start_sec": 898.0
+    },
+    {
+      "start": "15:09",
+      "text": "My two favorites are taking a slow breath before saying anything or using a delay phrase like saying, \"Hmm, let me think about this for a minute.\"",
+      "start_sec": 909.0
+    },
+    {
+      "start": "15:18",
+      "text": "Like if my kids are pressuring me, \"Can I? Can I? Can I, Mom?\" I'll be like, \"I'm not going to decide right now. I need a minute to think about this.\" Or at work, \"Let's circle back on this tomorrow.\"",
+      "start_sec": 918.0
+    },
+    {
+      "start": "15:27",
+      "text": "Here's another example of a delay phrase. Like when making a big decision, sometimes I just tell the person, \"Hmm, I got to check something before I answer.\" Or \"I've got to talk to Ryan about that before I buy it.\"",
+      "start_sec": 927.0
+    },
+    {
+      "start": "15:37",
+      "text": "Even though Ryan doesn't care what I buy, I sometimes use that as a way just to delay myself. Another easy one is to say, \"Hang on a minute, I need to use the bathroom.\"",
+      "start_sec": 937.0
+    },
+    {
+      "start": "15:48",
+      "text": "And of course, you can just say, \"I need a little break. Can we come back to this in an hour?\" Anything to help you slow down can give you time for your thinking brain to catch up.",
+      "start_sec": 948.0
+    },
+    {
+      "start": "15:58",
+      "text": "And it's really important to practice this slowdown button over and over again in low-stress situations so that it's muscle memory when it's crunch time.",
+      "start_sec": 958.0
+    },
+    {
+      "start": "16:05",
+      "text": "If you have ADHD or you struggle with reactivity, you're probably going to need visual reminders and physical barriers to help you slow down and support your thinking brain and your executive function.",
+      "start_sec": 965.0
+    },
+    {
+      "start": "16:17",
+      "text": "So visual reminders are really key here, because when you're in your emotional brain, you're not remembering to like slow down or check things.",
+      "start_sec": 977.0
+    },
+    {
+      "start": "16:25",
+      "text": "So this could be something like a note taped to your credit card that says \"Did you check the budget?\", or you write it on your hand, or you make your phone lock screen say something like \"Slow down,\" or your watch chime to remind you to do that.",
+      "start_sec": 985.0
+    },
+    {
+      "start": "16:37",
+      "text": "You most likely need to build in physical reminders and barriers to impulsive behavior. So this might look like don't keep alcohol in the house or candy on your desk or social media apps on your phone.",
+      "start_sec": 997.0
+    },
+    {
+      "start": "16:49",
+      "text": "Take your credit card off of your shopping apps so that you have to get up and manually type in a credit card instead of buying stuff with one click. Things like that create physical barriers to impulsive behavior. Put your snacks in the freezer so that if you want to eat them, you have to wait until they thaw.",
+      "start_sec": 1009.0
+    },
+    {
+      "start": "17:05",
+      "text": "You could also have a rule that you don't make any huge decisions like quitting a job or moving or breaking up with someone without first getting a good night's sleep. If your kids are driving you crazy and you notice yourself getting tense, give yourself permission to step outside of the house for a moment.",
+      "start_sec": 1025.0
+    },
+    {
+      "start": "17:20",
+      "text": "Right? So the whole goal here is to increase the space between stimulus and response. This gives our thinking brain time to kick on, help us make intentional instead of reactive responses.",
+      "start_sec": 1040.0
+    },
+    {
+      "start": "17:31",
+      "text": "Okay, that takes us to step four. These three principles are all fine and good, but just knowing about them doesn't build any muscle memory. You have to build an intentional system to practice them.",
+      "start_sec": 1051.0
+    },
+    {
+      "start": "17:40",
+      "text": "Check out my video on how to build systems to actually change. Basically, you want to pick one skill per month to work on.",
+      "start_sec": 1060.0
+    },
+    {
+      "start": "17:47",
+      "text": "You got to build a system with reminders, trackers, and accountability, and then start practicing that skill over and over again in low-pressure situations.",
+      "start_sec": 1067.0
+    },
+    {
+      "start": "17:57",
+      "text": "So for example, if you're training yourself to pause more, make a tracker where you give yourself a big check mark each time you pause more.",
+      "start_sec": 1077.0
+    },
+    {
+      "start": "18:08",
+      "text": "I think it's best to put this up on a wall and use a big red marker. Make it visual so you have reminders all over the place. Like you put a paper on the wall, you put a reminder on your phone lock screen, you set reminders to slow down in your phone's like automatic recurring reminders throughout the day.",
+      "start_sec": 1088.0
+    },
+    {
+      "start": "18:22",
+      "text": "You could add in a cue like on your calendar, like \"This meeting might be stressful. Take some slow breaths.\" And I like how Zoom already kind of does that.",
+      "start_sec": 1102.0
+    },
+    {
+      "start": "18:31",
+      "text": "So then, after you've built up kind of a system of reminders and trackers, then you start practicing. When the waiter asks you for your order, pause.",
+      "start_sec": 1111.0
+    },
+    {
+      "start": "18:40",
+      "text": "When an email comes in, pause. When your phone chimes, pause. When your kids get loud, pause. Breathe first, give yourself a big check mark, right?",
+      "start_sec": 1120.0
+    },
+    {
+      "start": "18:50",
+      "text": "The goal here isn't perfection. Perfectionism actually leads to more impulsivity with things like avoiding, catastrophizing, or shutting down. Instead, we want to focus on creativity and a growth mindset.",
+      "start_sec": 1130.0
+    },
+    {
+      "start": "19:00",
+      "text": "So every chance you get to mess up is a learning opportunity. Every mistake is an opportunity to learn. You're going to practice these new behaviors in calm situations at first,",
+      "start_sec": 1140.0
+    },
+    {
+      "start": "19:10",
+      "text": "gradually increasing the stress. For high-stress situations, like standing up to your boss, role-play calm, assertive behaviors with someone ahead of time. Role-play it, say it out loud in your room, say it to your therapist.",
+      "start_sec": 1150.0
+    },
+    {
+      "start": "19:24",
+      "text": "Now again, you got to think of yourself like SEAL Team 6. You're going to practice responding in drills so that in the heat of the moment, you can perform. After a relapse, write about it, write down what you would do differently, tell someone, practice it out loud.",
+      "start_sec": 1164.0
+    },
+    {
+      "start": "19:35",
+      "text": "This is how you rewire reactive behaviors. Okay, and I just have to say this again: Be patient with your progress. Don't beat yourself up. Do try something different.",
+      "start_sec": 1175.0
+    },
+    {
+      "start": "19:43",
+      "text": "This is all an experiment. We're all here in this life to learn and grow, and every experience is an opportunity to learn something new. Just be courageous and try again. I mean that, okay?",
+      "start_sec": 1183.0
+    },
+    {
+      "start": "19:53",
+      "text": "And I would just say, a really important part of growth is learning to get good at do-overs and apologies. This is what I sometimes have to say:",
+      "start_sec": 1193.0
+    },
+    {
+      "start": "20:01",
+      "text": "\"Okay, that was fast. Can I try that again?\" I do this all the time with my husband. \"Ooh, can we start that conversation again?\"",
+      "start_sec": 1201.0
+    },
+    {
+      "start": "20:10",
+      "text": "And then that slows me down and I'll remember, \"Oh, calm down, use a softer start-up, acknowledge his side of things, and focus on solving this together.\"",
+      "start_sec": 1210.0
+    },
+    {
+      "start": "20:24",
+      "text": "Let me just review real quick. If you want to actually stop doing stupid stuff, to replace impulsive behaviors with really intentional, values-driven behaviors, there's three principles, four steps.",
+      "start_sec": 1224.0
+    },
+    {
+      "start": "20:35",
+      "text": "Trying harder doesn't work in the long run, new skills are better. \"Stop it\" doesn't help as much as positive goals. Name the action you're going to do instead.",
+      "start_sec": 1235.0
+    },
+    {
+      "start": "20:43",
+      "text": "Progress is like Groundhog Day. It might take a lot of repetitions, but if you reflect and practice those new skills after mistakes, you'll start rewriting new behaviors. Okay.",
+      "start_sec": 1243.0
+    },
+    {
+      "start": "20:53",
+      "text": "Four steps: 1. Reflect on what went wrong. Identify your triggers and thoughts. 2. Rehearse. Choose a new behavior to replace the reactive behavior.",
+      "start_sec": 1253.0
+    },
+    {
+      "start": "21:03",
+      "text": "3. Delay. Build in a pause reflex. 4. Practice the new behaviors in writing, in talking, and in tiny moments, and then just track it, remind it, make it visual, use a growth mindset, and get good at apologies.",
+      "start_sec": 1263.0
+    },
+    {
+      "start": "21:15",
+      "text": "There's your system for how to be less impulsive. And again, I'm just going to encourage you: Pick one small skill, build a tracking system, build an accountability system, and work on it for a month, and you are going to improve.",
+      "start_sec": 1275.0
+    },
+    {
+      "start": "21:26",
+      "text": "Okay, I have several other videos that dive into these principles and skills. I mean, of course, like everything in mental health, these are all interconnected. No skill stands by itself. So check the video description for those links. And here's to you, changing your life by changing your impulsive behaviors. Thanks for being here. Please take care.",
+      "start_sec": 1286.0
+    }
+  ],
+  "finishReason": "STOP"
+}

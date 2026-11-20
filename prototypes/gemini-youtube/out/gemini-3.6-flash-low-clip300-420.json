@@ -1,0 +1,200 @@
+{
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+  "request": {
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "fileData": {
+              "fileUri": "https://www.youtube.com/watch?v=QLgH5_mqX28"
+            },
+            "videoMetadata": {
+              "startOffset": "300s",
+              "endOffset": "420s"
+            }
+          },
+          {
+            "text": "Transcribe the speech in this video verbatim, word for word, in English.\nDo not summarize, paraphrase, clean up, or skip anything; keep filler words.\nSplit the transcript into segments of one or two sentences (roughly 5-10 seconds each).\nFor each segment give start: the timestamp when the segment's first word is spoken,\nas M:SS (or H:MM:SS past an hour), and text: the exact words.\nReturn only JSON of the form {\"segments\": [{\"start\": \"0:00\", \"text\": \"...\"}]}."
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0,
+      "maxOutputTokens": 32768,
+      "responseMimeType": "application/json",
+      "responseJsonSchema": {
+        "type": "object",
+        "properties": {
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "start",
+                "text"
+              ]
+            }
+          }
+        },
+        "required": [
+          "segments"
+        ]
+      },
+      "mediaResolution": "MEDIA_RESOLUTION_LOW"
+    }
+  },
+  "started_at": "2026-11-19T21:35:04-0500",
+  "http_status": 200,
+  "wall_sec": 8.66,
+  "response": {
+    "candidates": [
+      {
+        "content": {
+          "parts": [
+            {
+              "text": "{\n  \"segments\": [\n    {\n      \"start\": \"5:00\",\n      \"text\": \"ourselves all the time. We try to force ourselves to try harder instead of learning a different skill. So,\"\n    },\n    {\n      \"start\": \"5:05\",\n      \"text\": \"if you want to stop being so reactive, you've got to build muscle memory for a bunch of new tiny skills.\"\n    },\n    {\n      \"start\": \"5:13\",\n      \"text\": \"It's the same for learning to shoot a basketball or be more patient or be more assertive.\"\n    },\n    {\n      \"start\": \"5:18\",\n      \"text\": \"You have to break it down into tiny steps and then practice each one until you're good at it, and then put all the pieces together.\"\n    },\n    {\n      \"start\": \"5:24\",\n      \"text\": \"And to do this, you need proper technique, visual aids, often coaching, and then with a bit of practice, you'll build the muscle memory to be able to do it even under pressure.\"\n    },\n    {\n      \"start\": \"5:34\",\n      \"text\": \"So, you can't just try harder. That's the first principle. Willpower doesn't work, okay?\"\n    },\n    {\n      \"start\": \"5:40\",\n      \"text\": \"You've got to train some new reflexes, and the way you do that is through practicing tiny skills. Okay.\"\n    },\n    {\n      \"start\": \"5:46\",\n      \"text\": \"Second principle is that our brains do not comprehend \\\"don't do that\\\".\"\n    },\n    {\n      \"start\": \"5:51\",\n      \"text\": \"When we try to be less impulsive, that's called a negative goal because it's something you're trying to subtract.\"\n    },\n    {\n      \"start\": \"5:58\",\n      \"text\": \"The brain doesn't know what to do with negative goals. There's no action there. There's no verb. So principle two for being less impulsive is,\"\n    },\n    {\n      \"start\": \"6:06\",\n      \"text\": \"\\\"stop it\\\" is less effective than \\\"do this instead\\\". You have to train yourself to do a different action.\"\n    },\n    {\n      \"start\": \"6:12\",\n      \"text\": \"You can see this with toddlers. If you tell them, \\\"don't hit the cat\\\", they have no idea what you're telling them to do.\"\n    },\n    {\n      \"start\": \"6:19\",\n      \"text\": \"The only action word there is \\\"hit\\\", and their developing brain just can't process the \\\"don't\\\" in front of it. It can't process that negative word.\"\n    },\n    {\n      \"start\": \"6:28\",\n      \"text\": \"A toddler does much better when you tell them what to do. So you say something like, \\\"use soft hands with the cat. Here, let me show you.\\\"\"\n    },\n    {\n      \"start\": \"6:38\",\n      \"text\": \"Now, we adults aren't much different. Our brains are not that different. When we want to be less impulsive, we have to give our brain an action word. What are we doing instead?\"\n    },\n    {\n      \"start\": \"6:48\",\n      \"text\": \"So, here's a quick example. When people train adults who have a tendency to hit their kids,\"\n    },\n    {\n      \"start\": \"6:54\",\n      \"text\": \"when they train them, they don't tell them to stop hitting their kids. They tell them to replace that behavior\"\n    }\n  ]\n}",
+              "thoughtSignature": "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"
+            }
+          ],
+          "role": "model"
+        },
+        "finishReason": "STOP",
+        "index": 0
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 11045,
+      "candidatesTokenCount": 888,
+      "totalTokenCount": 12822,
+      "promptTokensDetails": [
+        {
+          "modality": "VIDEO",
+          "tokenCount": 10921
+        },
+        {
+          "modality": "TEXT",
+          "tokenCount": 124
+        }
+      ],
+      "thoughtsTokenCount": 889,
+      "serviceTier": "standard"
+    },
+    "modelVersion": "gemini-3.6-flash",
+    "responseId": "2LH_apjOIoWB1sgPysfR6Q4"
+  },
+  "usageMetadata": {
+    "promptTokenCount": 11045,
+    "candidatesTokenCount": 888,
+    "totalTokenCount": 12822,
+    "promptTokensDetails": [
+      {
+        "modality": "VIDEO",
+        "tokenCount": 10921
+      },
+      {
+        "modality": "TEXT",
+        "tokenCount": 124
+      }
+    ],
+    "thoughtsTokenCount": 889,
+    "serviceTier": "standard"
+  },
+  "segments": [
+    {
+      "start": "5:00",
+      "text": "ourselves all the time. We try to force ourselves to try harder instead of learning a different skill. So,",
+      "start_sec": 300.0
+    },
+    {
+      "start": "5:05",
+      "text": "if you want to stop being so reactive, you've got to build muscle memory for a bunch of new tiny skills.",
+      "start_sec": 305.0
+    },
+    {
+      "start": "5:13",
+      "text": "It's the same for learning to shoot a basketball or be more patient or be more assertive.",
+      "start_sec": 313.0
+    },
+    {
+      "start": "5:18",
+      "text": "You have to break it down into tiny steps and then practice each one until you're good at it, and then put all the pieces together.",
+      "start_sec": 318.0
+    },
+    {
+      "start": "5:24",
+      "text": "And to do this, you need proper technique, visual aids, often coaching, and then with a bit of practice, you'll build the muscle memory to be able to do it even under pressure.",
+      "start_sec": 324.0
+    },
+    {
+      "start": "5:34",
+      "text": "So, you can't just try harder. That's the first principle. Willpower doesn't work, okay?",
+      "start_sec": 334.0
+    },
+    {
+      "start": "5:40",
+      "text": "You've got to train some new reflexes, and the way you do that is through practicing tiny skills. Okay.",
+      "start_sec": 340.0
+    },
+    {
+      "start": "5:46",
+      "text": "Second principle is that our brains do not comprehend \"don't do that\".",
+      "start_sec": 346.0
+    },
+    {
+      "start": "5:51",
+      "text": "When we try to be less impulsive, that's called a negative goal because it's something you're trying to subtract.",
+      "start_sec": 351.0
+    },
+    {
+      "start": "5:58",
+      "text": "The brain doesn't know what to do with negative goals. There's no action there. There's no verb. So principle two for being less impulsive is,",
+      "start_sec": 358.0
+    },
+    {
+      "start": "6:06",
+      "text": "\"stop it\" is less effective than \"do this instead\". You have to train yourself to do a different action.",
+      "start_sec": 366.0
+    },
+    {
+      "start": "6:12",
+      "text": "You can see this with toddlers. If you tell them, \"don't hit the cat\", they have no idea what you're telling them to do.",
+      "start_sec": 372.0
+    },
+    {
+      "start": "6:19",
+      "text": "The only action word there is \"hit\", and their developing brain just can't process the \"don't\" in front of it. It can't process that negative word.",
+      "start_sec": 379.0
+    },
+    {
+      "start": "6:28",
+      "text": "A toddler does much better when you tell them what to do. So you say something like, \"use soft hands with the cat. Here, let me show you.\"",
+      "start_sec": 388.0
+    },
+    {
+      "start": "6:38",
+      "text": "Now, we adults aren't much different. Our brains are not that different. When we want to be less impulsive, we have to give our brain an action word. What are we doing instead?",
+      "start_sec": 398.0
+    },
+    {
+      "start": "6:48",
+      "text": "So, here's a quick example. When people train adults who have a tendency to hit their kids,",
+      "start_sec": 408.0
+    },
+    {
+      "start": "6:54",
+      "text": "when they train them, they don't tell them to stop hitting their kids. They tell them to replace that behavior",
+      "start_sec": 414.0
+    }
+  ],
+  "finishReason": "STOP"
+}

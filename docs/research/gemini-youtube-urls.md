@@ -124,19 +124,47 @@ transcript quality and timestamp accuracy need the measurements below.
 
 ## Results
 
-_Placeholder: filled in by the main session after running `prototypes/gemini-youtube/README.md`._
+Run 2026-11-19 by the main session from the home Mac (the Mac never contacts YouTube: Google fetches the
+video). Video `QLgH5_mqX28` (21:49, public, Therapy in a Nutshell); reference = the creator's English captions
+(4,124 words, 239 lines). `temperature 0`, JSON schema on, `generateContent`.
 
-| Call | Model | Res / options | HTTP | Wall s | Prompt tokens | Output tokens | WER | Median drift s | p90 abs drift s |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | gemini-3.6-flash | default | | | | | | | |
-| 2 | gemini-3.6-flash | low | | | | | | | |
-| 3 | gemini-3.5-flash-lite | low | | | | | | | |
-| 4 | gemini-3.6-flash | low, clip 300-420 | | | | | | | |
+| Call | Model | Res / options | HTTP | Wall s | Video tokens | Output + thinking | WER | Median drift s | p90 abs drift s | Within 2 s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | gemini-3.6-flash | default | 200 | 98.6 | 119,125 | 9,157 + 14,739 | 2.5 % | −0.24* | 1.4* | 97 %* |
+| 2 | gemini-3.6-flash | low | 200 | 57.8 | 119,125 | 8,130 + 7,053 | 2.1 % | −0.16 | 3.45 | 87 % (max 8.3 s) |
+| 3 | gemini-3.5-flash-lite | low | 503 ×2 | — | — | — | — | — | — | — |
+| 4 | gemini-3.6-flash | low, clip 300–420 | 200 | 8.7 | 10,921 | 888 + 889 | 1.1 % | 0.08 | 0.5 | 100 % (max 0.6 s) |
 
-Open questions the results should answer:
-- Does `--low-res` change prompt tokens at all on 3.x?
-- Are clipped timestamps absolute or clip-relative?
-- Is WER close enough to the creator's captions to suggest captions are being read?
+\* Call 1 asked for `start_sec` as a number and Gemini wrote clock digits: 21:25 came back as `2125`
+(no value had seconds ≥ 60). Re-read as M:SS, drift is as shown; raw it was 360 s median. `run.py` now asks for a
+`"start": "M:SS"` string and converts in code; calls 2–4 used that.
+
+Answers:
+- **Low resolution changes nothing on 3.6 Flash:** identical 119,125 video tokens (~91 tokens/s). The default is
+  already low; `fps` is the only lever left (not tested).
+- **Clipped timestamps are absolute** (video time, not clip time), so they map straight onto `?t=` links.
+- **Captions probably not read:** WER 1.1–2.5 % against the creator track, versus 0.8 % for YouTube's own auto
+  captions and 1.5 % for local mlx-whisper (#46). Differences are dropped fillers and small rewordings, i.e. the
+  model transcribes the audio. Good enough for timestamped notes; not a verbatim quote source without a check.
+- **Shorter windows are more precise:** the 2-minute clip was exact; full 22-minute calls drift up to 4–8 s on a
+  few segments. Clipping long videos into ≤20–30 min windows costs no extra tokens (same video seconds) but one
+  request per window.
+- **3.5 Flash Lite is untested:** two 503 "high demand" responses in a row. Its 500 RPD would matter (see below).
+
+## Recommendation
+
+- **Gemini with the URL replaces yt-dlp** for public videos: Google's documented feature, Google fetches the video,
+  nothing on the Mac touches YouTube, so no IP or account to block. Drop yt-dlp and the mlx-whisper fallback
+  (without a download there is nothing to transcribe locally).
+- **Non-public videos** (unlisted, private, members-only, removed; Data API `status.privacyStatus`) and refusals:
+  metadata-only stub note + weekly flag line. No fallback.
+- **Budget is the catch:** each window is one request on a 20-RPD model (3.6 Flash), the same pool class Extract
+  uses (#11). Videos should only spend what's left after class work (the 03:05 leftover pass), not the :15/:45
+  pass, unless 3.5 Flash Lite (500 RPD) proves good enough: retest it once demand drops.
+- **Ask for `M:SS` strings, never numbers**, and clip videos over ~30 min into windows.
+- **Decision needed:** this sends watched videos to the Gemini free tier, which [What GitHub, YouTube and Medium
+  feed into](https://github.com/amierlorenz/articulate/issues/44) ruled out (personal route only). Inputs here are
+  a public URL plus a fixed prompt, but free-tier review means Google can see which videos Amier watches.
 
 ## Sources
 
