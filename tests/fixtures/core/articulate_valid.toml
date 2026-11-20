@@ -1,0 +1,23 @@
+[vault]
+path = "~/Documents/Vault"
+name = "MyVault"
+
+[pocket]
+api_base = "https://public.heypocketai.com"
+mcp_url = "https://public.heypocketai.com/mcp"
+private_folder_id = "5194b8b6-ec40-4d99-91a9-059fb610141e"
+private_tag_id = "7dbebf3f-418b-4ea1-936d-61c67089d829"
+lookback_days = 3
+give_up_pending_days = 3
+
+[calendar]
+classes_calendar = "Classes"
+private_events = ["Therapy"]
+private_calendars = []
+
+[canvas]
+base_url = "https://myschool.instructure.com"
+
+[encore]
+bundle_id = "com.amierlorenz.Encore"
+state_wait_s = 180

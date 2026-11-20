@@ -1,0 +1,15 @@
+default_skip = ["Syllabus", "Start Here*", "Course Information*"]
+
+[courses.mat305]
+canvas_id = 12345
+name = "MAT-305 Prob & Stats"
+skip = ["Week 0*"]
+instructor = "Dr. Smith"
+active = true
+
+  [[courses.mat305.exams]]
+  key = "final"
+  name = "Final Exam"
+  kind = "final"
+  date = "2026-12-07"
+  units = ["9.4 Single sample: estimating the mean", "9.5 Standard error of a point estimate"]

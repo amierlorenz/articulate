@@ -1,0 +1,6 @@
+[gemini]
+keychain_service = "articulate-gemini"
+
+[gemini.models."gemini-3.8-flash"]
+rpm = "not-an-integer"
+rpd = 20
