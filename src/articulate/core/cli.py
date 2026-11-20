@@ -46,8 +46,21 @@ def main(argv: list[str] | None = None) -> int:
         return run_job(args.job, only_step=args.only_step)
 
     if args.subcommand == "quota":
-        print("Articulate Model Quota Ledger:")
-        print("(Quota tracking implemented in issue #51)")
+        from articulate.core.config import Config, load_models_config
+        from articulate.core.db import Database
+        from articulate.core.models.quota import format_quota_report
+        from articulate.core.paths import get_db_path, models_toml_path
+
+        db = Database(get_db_path())
+        db.migrate()
+        cfg: Config | None = None
+        try:
+            if models_toml_path().exists():
+                cfg = Config(models=load_models_config(db=db))
+        except Exception as e:  # noqa: BLE001
+            logger.warning("Could not load models config for quota report: %s", e)
+
+        print(format_quota_report(db, cfg))
         return 0
 
     if args.subcommand == "setup":

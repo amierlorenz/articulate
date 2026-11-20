@@ -1,0 +1,3 @@
+{"type":"init","claude_code_version":"2.1.327"}
+{"type":"assistant","message":{"content":"Current session: 35% used"},"usage_report":{"rate_limits":{"limits":[{"kind":"session","percent":35,"resets_at":"2026-11-20T23:00:00+00:00","is_active":true}]}}}
+{"type":"result","total_cost_usd":0,"num_turns":0,"credential_expires_at":"2026-12-18T00:00:00+00:00"}

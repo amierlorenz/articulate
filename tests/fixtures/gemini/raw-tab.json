@@ -1,0 +1,21 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"concepts\": [{\"title\": \"Tau \t parameter\", \"kind\": \"definition\"}], \"contrastGroups\": []}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 100,
+    "candidatesTokenCount": 30,
+    "totalTokenCount": 130
+  }
+}
