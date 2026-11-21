@@ -5,6 +5,7 @@ STEPS: list[Step] = [
     Step("core.encore_read", "articulate.core.steps:read_encore", jobs={"nightly", "pass2", "watch"}, order=10),
     Step("core.flags", "articulate.core.steps:apply_flags", jobs={"nightly"}, order=20),
     # Phase 1: 100–199
+    Step("tasks.extract_send", "articulate.tasks:step", jobs={"watch", "nightly"}, order=130),
     # Phase 2: 200–399
     # Phase 3: 400–499
     # Phase 4: 500–599
