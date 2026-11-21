@@ -3,7 +3,13 @@
 Reads `items` rows that `pocket` emitted and `inbox` finished (`status = 'done'`), so the Inbox note exists
 before its tasks link to it (1.16). Each item is extracted once; the result lands in core's `tasks` ledger:
 high → `pending` (sent this run), medium and unanswered requests → `flagged` (a `tasks.medium` line in
-`Inbox/Intake flags.md`), low → `dropped` (kept for eval). Lecture directives wait for Phase 3.
+`Inbox/Intake flags.md`), low → `dropped` (kept for eval).
+
+Ambient audio (a podcast, a tutorial, an interview playing nearby) is full of second-person advice that reads
+like a to-do ("create a thumbnail with motion blur"). Beyond the prompt, `gate` holds the model to it (#112): a
+commitment needs a first-person marker in its quote, an accepted request needs Amier's agreement, and an
+unanswered request must be aimed at Amier. Class lectures go through `tasks.lecture`, where instructor directives
+("read Chapter 4 before Monday") are the point and this gate does not apply.
 """
 import gzip
 import itertools
@@ -39,8 +45,8 @@ DEDUPE_COSINE = 0.9
 CHUNK_CHARS = 8000
 TITLE_MAX = 80
 
-KINDS = ["commitment", "accepted_request", "unanswered_request", "delegated", "musing"]
-NEVER_TASKS = {"delegated", "musing"}
+KINDS = ["commitment", "accepted_request", "unanswered_request", "delegated", "musing", "advice"]
+NEVER_TASKS = {"delegated", "musing", "advice"}
 CONFIDENCES = ["high", "medium", "low"]
 
 SCHEMA: dict[str, Any] = {
@@ -228,6 +234,40 @@ def find_quote(quote: str, segments: list[Segment]) -> Segment | None:
     return None
 
 
+# --- Gate: explicit first-person commitments only (#112) ---------------------------------------------
+
+_COMMIT_RE = re.compile(
+    r"\b(i'll|i will|i'm going to|i am going to|i'm gonna|i need to|i have to|i've got to|i got to|i gotta"
+    r"|i must|let me|remind me|note to self|action item|add (a )?task|to-?do)\b"
+)
+_ACCEPT_RE = re.compile(
+    r"\b(will do|i can|i could|i'm on it|no problem|sounds good|got it)\b"
+    r"|(?:^|[.,!?;:]\s*|\band\s+)(yes|yeah|yep|sure|ok|okay)\b"  # a bare yes, not "make sure you"
+)
+_AIMED_AT_AMIER_RE = re.compile(r"\b(i|i'm|i've|i'd|me|my|amier)\b")
+
+
+def gate(kind: str, quote: str, following: str = "") -> str | None:
+    """Why a candidate fails the commitment gate (a `task_drops` reason), or None when it passes.
+
+    `following` is the next transcript line, where an agreement to a request often lands.
+    """
+    q = _norm(quote)
+    if kind == "commitment" and not _COMMIT_RE.search(q):
+        return "no_commitment_marker"
+    said = (q, _norm(following))
+    if kind == "accepted_request" and not any(_COMMIT_RE.search(t) or _ACCEPT_RE.search(t) for t in said):
+        return "not_accepted"
+    if kind == "unanswered_request" and not _AIMED_AT_AMIER_RE.search(q):
+        return "second_person_advice"
+    return None
+
+
+def _following(seg: Segment, segments: list[Segment]) -> str:
+    idx = next((i for i, s in enumerate(segments) if s is seg), -1)
+    return segments[idx + 1].text if 0 <= idx < len(segments) - 1 else ""
+
+
 # --- Ledger helpers -------------------------------------------------------------------------------
 
 def cap_title(title: str) -> str:
@@ -356,6 +396,8 @@ def _extract_item(ctx: RunContext, item: dict[str, Any], summary: StepSummary) -
                 _log_drop(ctx.db, item_id, c, kind, ctx.now)
             elif seg is None:
                 _log_drop(ctx.db, item_id, c, "quote_not_found", ctx.now)
+            elif reason := gate(kind, str(c["quote"]), _following(seg, rec.segments)):
+                _log_drop(ctx.db, item_id, c, reason, ctx.now)
             else:
                 keep.append((c, seg))
         to_embed = [cap_title(c["title"]) for c, _ in keep if c["confidence"] != "low"]

@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "title": "Create a thumbnail with motion blur",
+      "quote": "First thing: create a thumbnail with motion blur so it reads as action.",
+      "kind": "commitment",
+      "confidence": "high",
+      "due_spoken": null
+    },
+    {
+      "title": "Put my face on the left third of thumbnails",
+      "quote": "You should always put your face on the left third of the frame.",
+      "kind": "unanswered_request",
+      "confidence": "high",
+      "due_spoken": null
+    },
+    {
+      "title": "Export videos at 4K",
+      "quote": "Make sure you export at 4K even if your audience watches on phones.",
+      "kind": "accepted_request",
+      "confidence": "medium",
+      "due_spoken": null
+    },
+    {
+      "title": "Redo the video intro under ten seconds",
+      "quote": "What I'd do is redo the whole intro and cut it to under ten seconds.",
+      "kind": "commitment",
+      "confidence": "medium",
+      "due_spoken": null
+    },
+    {
+      "title": "Add captions to videos",
+      "quote": "Don't forget to add captions, they boost retention a lot.",
+      "kind": "advice",
+      "confidence": "low",
+      "due_spoken": null
+    },
+    {
+      "title": "Batch record three videos",
+      "quote": "You want to batch record three videos every Sunday.",
+      "kind": "unanswered_request",
+      "confidence": "medium",
+      "due_spoken": "Sunday"
+    }
+  ]
+}
