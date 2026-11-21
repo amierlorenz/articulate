@@ -1,0 +1,22 @@
+{
+  "_note": "Synthetic study guide output. Text written for the tests, not taken from any course file.",
+  "display_name": "Final review sheet.pdf",
+  "pages": {
+    "1": "Review sheet\nKnow the definition of impulse.\nBe able to use conservation of momentum in collisions.\nState Bernoulli's principle."
+  },
+  "output": {
+    "document": {
+      "kind": "studyGuide",
+      "examHint": {"name": "", "page": 0, "quote": ""},
+      "unitHints": [
+        {"name": "Ch 9 Momentum-Impulse", "page": 0, "quote": ""},
+        {"name": "Ch 11 Fluids", "page": 0, "quote": ""}
+      ]
+    },
+    "items": [
+      {"number": "t1", "kind": "topic", "page": 1, "quote": "Know the definition of impulse.", "answer": {"page": 0, "quote": ""}},
+      {"number": "t2", "kind": "topic", "page": 1, "quote": "Be able to use conservation of momentum in collisions.", "answer": {"page": 0, "quote": ""}},
+      {"number": "t3", "kind": "topic", "page": 1, "quote": "State Bernoulli's principle.", "answer": {"page": 0, "quote": ""}}
+    ]
+  }
+}

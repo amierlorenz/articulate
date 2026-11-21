@@ -1,0 +1,24 @@
+{
+  "_note": "Synthetic answer key for practice_test.json. Text written for the tests, not taken from any course file.",
+  "display_name": "Unit 4 Practice Test solutions.pdf",
+  "pages": {
+    "1": "Solutions\n1. C\n2. True\n3(a) v = 9.9 m/s\n3(b) t = 1.01 s\n4(a) k = 250 N/m\n4(b) U = 5 J\nQ. 1 The exhaust carries momentum backward.\n5. Start from F = ma and integrate over the path."
+  },
+  "output": {
+    "document": {
+      "kind": "answerKey",
+      "examHint": {"name": "Test 4", "page": 0, "quote": ""},
+      "unitHints": []
+    },
+    "items": [
+      {"number": "1", "kind": "multipleChoice", "page": 1, "quote": "1.", "answer": {"page": 1, "quote": "C"}},
+      {"number": "2", "kind": "trueFalse", "page": 1, "quote": "2.", "answer": {"page": 1, "quote": "True"}},
+      {"number": "3a", "kind": "problem", "page": 1, "quote": "3(a)", "answer": {"page": 1, "quote": "v = 9.9 m/s"}},
+      {"number": "3b", "kind": "problem", "page": 1, "quote": "3(b)", "answer": {"page": 1, "quote": "t = 1.01 s"}},
+      {"number": "4a", "kind": "problem", "page": 1, "quote": "4(a)", "answer": {"page": 1, "quote": "k = 250 N/m"}},
+      {"number": "4b", "kind": "problem", "page": 1, "quote": "4(b)", "answer": {"page": 1, "quote": "U = 5 J"}},
+      {"number": "Q. 1", "kind": "explain", "page": 1, "quote": "Q. 1", "answer": {"page": 1, "quote": "The exhaust carries momentum backward."}},
+      {"number": "5", "kind": "proof", "page": 1, "quote": "5.", "answer": {"page": 1, "quote": "Start from F = ma and integrate over the path."}}
+    ]
+  }
+}
