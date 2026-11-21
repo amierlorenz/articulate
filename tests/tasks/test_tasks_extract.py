@@ -142,12 +142,20 @@ def test_private_class_and_unfinished_items_are_never_read(env):
     archive_transcript(env.data, load_fixture(VOICE_NOTE))
     add_item(env.db, item_id="p", native_id=REC, privacy="private")
     add_item(env.db, item_id="c", native_id=REC + "-c", privacy="class")
-    add_item(env.db, item_id="h", native_id=REC + "-h", status="held")
+    add_item(env.db, item_id="h", native_id=REC + "-h", status="held", inbox_status="held")
+    add_item(env.db, item_id="u", native_id=REC + "-u", status="pending", inbox_status=None)
     add_item(env.db, item_id="m", native_id=REC + "-m", payload={"merged": True})
     add_item(env.db, item_id="o", native_id=REC + "-o", source="canvas")
     extract_pending(env.ctx())
     assert env.runner.calls == []
     assert task_rows(env.db) == {}
+
+
+def test_item_with_pending_status_and_done_inbox_status_is_eligible(env):
+    archive_transcript(env.data, load_fixture(VOICE_NOTE))
+    add_item(env.db, item_id=ITEM, native_id=REC, status="pending", inbox_status="done")
+    extract_pending(env.ctx())
+    assert f"task:{REC}:12" in task_rows(env.db)
 
 
 def test_private_prompt_material_is_personal_and_local(env):

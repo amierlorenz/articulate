@@ -311,9 +311,11 @@ def _log_drop(db: Database, item_id: str, cand: dict[str, Any], reason: str, now
 def _eligible_items(db: Database) -> list[dict[str, Any]]:
     with db.connect() as conn:
         rows = conn.execute(
-            """SELECT i.* FROM items i LEFT JOIN task_extractions e ON e.item_id = i.item_id
+            """SELECT i.* FROM items i
+               JOIN inbox_items x ON x.item_id = i.item_id
+               LEFT JOIN task_extractions e ON e.item_id = i.item_id
                WHERE i.source = 'pocket' AND i.kind IN ('recording', 'span')
-                 AND i.privacy = 'personal' AND i.status = 'done' AND e.item_id IS NULL
+                 AND i.privacy = 'personal' AND x.status = 'done' AND e.item_id IS NULL
                ORDER BY i.created_at, i.item_id;"""
         ).fetchall()
     return [dict(r) for r in rows]
