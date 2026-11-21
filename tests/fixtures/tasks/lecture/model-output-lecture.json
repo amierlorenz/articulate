@@ -1,0 +1,39 @@
+{
+  "tasks": [
+    {
+      "title": "Read Chapter 4",
+      "quote": "Please read Chapter 4 before Monday.",
+      "kind": "directive",
+      "confidence": "high",
+      "due_spoken": "Monday"
+    },
+    {
+      "title": "Submit Homework 1",
+      "quote": "Also, remember to submit Homework 1 by Wednesday night.",
+      "kind": "directive",
+      "confidence": "high",
+      "due_spoken": "Wednesday"
+    },
+    {
+      "title": "Quiz moved to Friday",
+      "quote": "By the way, the quiz is moved to Friday instead of Thursday.",
+      "kind": "date_change",
+      "confidence": "high",
+      "due_spoken": "Friday"
+    },
+    {
+      "title": "Grade midterms",
+      "quote": "I will grade your midterms over the weekend.",
+      "kind": "instructor_commitment",
+      "confidence": "high",
+      "due_spoken": null
+    },
+    {
+      "title": "Review notes daily",
+      "quote": "You might want to review your notes every day.",
+      "kind": "musing",
+      "confidence": "high",
+      "due_spoken": null
+    }
+  ]
+}

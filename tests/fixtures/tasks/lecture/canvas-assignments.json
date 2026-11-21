@@ -1,0 +1,18 @@
+[
+  {
+    "id": 101,
+    "name": "Homework 1",
+    "due_at": "2026-11-25T23:59:59-05:00",
+    "unlock_at": "2026-11-18T00:00:00-05:00",
+    "lock_at": "2026-11-26T23:59:59-05:00",
+    "assignment_group": {"name": "Homework"}
+  },
+  {
+    "id": 102,
+    "name": "Homework 2",
+    "due_at": "2026-12-09T23:59:59-05:00",
+    "unlock_at": "2026-12-02T00:00:00-05:00",
+    "lock_at": "2026-12-10T23:59:59-05:00",
+    "assignment_group": {"name": "Homework"}
+  }
+]
