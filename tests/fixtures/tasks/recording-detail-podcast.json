@@ -1,0 +1,60 @@
+{
+  "data": {
+    "id": "rec-podcast-001",
+    "title": "Creator Lab: thumbnails that click",
+    "folder_id": null,
+    "duration": 1800,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795140000,
+    "created_at": 1795140000,
+    "updated_at": 1795142000,
+    "tags": [],
+    "speakers": {},
+    "summarizations": {},
+    "transcript": {
+      "segments": [
+        {
+          "start": 0.6,
+          "end": 12.6,
+          "text": "Welcome back to the Creator Lab podcast, I'm your host and today we're talking thumbnails."
+        },
+        {
+          "start": 14.2,
+          "end": 26.2,
+          "text": "First thing: create a thumbnail with motion blur so it reads as action."
+        },
+        {
+          "start": 29.8,
+          "end": 41.8,
+          "text": "You should always put your face on the left third of the frame."
+        },
+        {
+          "start": 44.1,
+          "end": 56.1,
+          "text": "Make sure you export at 4K even if your audience watches on phones."
+        },
+        {
+          "start": 60.3,
+          "end": 72.3,
+          "text": "What I'd do is redo the whole intro and cut it to under ten seconds."
+        },
+        {
+          "start": 75.5,
+          "end": 87.5,
+          "text": "Don't forget to add captions, they boost retention a lot."
+        },
+        {
+          "start": 90.9,
+          "end": 102.9,
+          "text": "You want to batch record three videos every Sunday."
+        },
+        {
+          "start": 1795.0,
+          "end": 1807.0,
+          "text": "Thanks for listening, see you next week."
+        }
+      ]
+    }
+  }
+}
