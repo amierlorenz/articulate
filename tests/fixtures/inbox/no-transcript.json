@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "data": {
+    "id": "inbox-empty",
+    "title": "Recording 17",
+    "folder_id": null,
+    "duration": 0,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795023600,
+    "created_at": 1795023600,
+    "updated_at": 1795023660,
+    "tags": [],
+    "transcript": {
+      "text": "",
+      "segments": []
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}

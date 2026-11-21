@@ -1,0 +1,58 @@
+{
+  "true_image_only": {
+    "quote": "E = mc^2",
+    "page_text_layer": "Introduction to Physics",
+    "ocr_text": "Introduction to Physics",
+    "vl_text": "Introduction to Physics\n$$E = mc^2$$\nEnergy equals mass times the speed of light squared."
+  },
+  "changed_digit": {
+    "quote": "P(X = 3) = 0.125",
+    "mutated_quote": "P(X = 4) = 0.125",
+    "page_text": "Probability distribution:\n$$P(X = 3) = 0.125$$\nGiven three independent trials."
+  },
+  "flipped_operator": {
+    "quote": "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)",
+    "mutated_quote": "P(A \\cap B) = P(A) + P(B) - P(A \\cup B)",
+    "page_text": "Addition rule for arbitrary events:\n$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$\nwhere A and B are subsets of S."
+  },
+  "swapped_subscript": {
+    "quote": "n_1 + n_2 + n_3 = n",
+    "mutated_quote": "n_1 + n_2 + n_4 = n",
+    "page_text": "Partitioning the set:\n$$n_1 + n_2 + n_3 = n$$\nwhere each subset is non-empty."
+  },
+  "dropped_term": {
+    "quote": "P(A \\cap B) = P(A)",
+    "full_quote": "P(A \\cap B) = P(A)P(B)",
+    "page_text": "Independent events:\n$$P(A \\cap B) = P(A)P(B)$$\nprovided P(A) > 0 and P(B) > 0."
+  },
+  "other_page": {
+    "quote": "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1",
+    "page_1": "Fundamental trigonometric limits:\n$$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$\nThis result follows from the squeeze theorem.",
+    "page_2": "Continuity of trigonometric functions:\nThe functions sine and cosine are continuous everywhere on R."
+  },
+  "label_only": {
+    "quote": "(c)",
+    "page_text": "Question 3:\n(a) Define torque.\n(b) State the work-energy theorem.\n(c) Calculate the net work done."
+  },
+  "part_label_math": {
+    "quote": "(a) impulse",
+    "page_text": "Problem 4: In this experiment, (a) impulse is delivered to the cart."
+  },
+  "joined_line": {
+    "question_quote": "(b) P(X \\le 60)",
+    "answer_quote": "\\approx P(Y \\le 60.5) = 0.8413.",
+    "page_text": "Item 2:\n(b) P(X \\le 60) \\approx P(Y \\le 60.5) = 0.8413."
+  },
+  "symbol_pua": {
+    "quote": "\uf077 = 2\\pi f",
+    "page_text": "Angular frequency: \\omega = 2\\pi f where f is the linear frequency."
+  },
+  "gemini_linear": {
+    "quote": "\\sum(i=1 to k) x_i = S",
+    "page_text": "Sum of sequence:\n$$\\sum_{i=1}^k x_i = S$$\nTotal accumulation."
+  },
+  "unicode_math": {
+    "quote": "µ = 12.00 cm, σ = 0.03 cm",
+    "page_text": "Measurement parameters: $\\mu = 12.00 \\text{ cm}, \\sigma = 0.03 \\text{ cm}$."
+  }
+}

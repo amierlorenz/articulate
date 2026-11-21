@@ -1,0 +1,262 @@
+{
+  "success": true,
+  "data": {
+    "id": "inbox-long",
+    "title": "Long walk",
+    "folder_id": null,
+    "duration": 2400.0,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795034000,
+    "created_at": 1795034000,
+    "updated_at": 1795034060,
+    "tags": [],
+    "transcript": {
+      "text": "In minute 0 I talked about part 0 of the semester plan, and the point for minute 0 is that habit 0 matters more than talent. In minute 1 I talked about part 1 of the semester plan, and the point for minute 1 is that habit 1 matters more than talent. In minute 2 I talked about part 2 of the semester plan, and the point for minute 2 is that habit 2 matters more than talent. In minute 3 I talked about part 3 of the semester plan, and the point for minute 3 is that habit 3 matters more than talent. In minute 4 I talked about part 4 of the semester plan, and the point for minute 4 is that habit 4 matters more than talent. In minute 5 I talked about part 5 of the semester plan, and the point for minute 5 is that habit 5 matters more than talent. In minute 6 I talked about part 6 of the semester plan, and the point for minute 6 is that habit 6 matters more than talent. In minute 7 I talked about part 7 of the semester plan, and the point for minute 7 is that habit 7 matters more than talent. In minute 8 I talked about part 8 of the semester plan, and the point for minute 8 is that habit 8 matters more than talent. In minute 9 I talked about part 9 of the semester plan, and the point for minute 9 is that habit 9 matters more than talent. In minute 10 I talked about part 10 of the semester plan, and the point for minute 10 is that habit 10 matters more than talent. In minute 11 I talked about part 11 of the semester plan, and the point for minute 11 is that habit 11 matters more than talent. In minute 12 I talked about part 12 of the semester plan, and the point for minute 12 is that habit 12 matters more than talent. In minute 13 I talked about part 13 of the semester plan, and the point for minute 13 is that habit 13 matters more than talent. In minute 14 I talked about part 14 of the semester plan, and the point for minute 14 is that habit 14 matters more than talent. In minute 15 I talked about part 15 of the semester plan, and the point for minute 15 is that habit 15 matters more than talent. In minute 16 I talked about part 16 of the semester plan, and the point for minute 16 is that habit 16 matters more than talent. In minute 17 I talked about part 17 of the semester plan, and the point for minute 17 is that habit 17 matters more than talent. In minute 18 I talked about part 18 of the semester plan, and the point for minute 18 is that habit 18 matters more than talent. In minute 19 I talked about part 19 of the semester plan, and the point for minute 19 is that habit 19 matters more than talent. In minute 20 I talked about part 20 of the semester plan, and the point for minute 20 is that habit 20 matters more than talent. In minute 21 I talked about part 21 of the semester plan, and the point for minute 21 is that habit 21 matters more than talent. In minute 22 I talked about part 22 of the semester plan, and the point for minute 22 is that habit 22 matters more than talent. In minute 23 I talked about part 23 of the semester plan, and the point for minute 23 is that habit 23 matters more than talent. In minute 24 I talked about part 24 of the semester plan, and the point for minute 24 is that habit 24 matters more than talent. In minute 25 I talked about part 25 of the semester plan, and the point for minute 25 is that habit 25 matters more than talent. In minute 26 I talked about part 26 of the semester plan, and the point for minute 26 is that habit 26 matters more than talent. In minute 27 I talked about part 27 of the semester plan, and the point for minute 27 is that habit 27 matters more than talent. In minute 28 I talked about part 28 of the semester plan, and the point for minute 28 is that habit 28 matters more than talent. In minute 29 I talked about part 29 of the semester plan, and the point for minute 29 is that habit 29 matters more than talent. In minute 30 I talked about part 30 of the semester plan, and the point for minute 30 is that habit 30 matters more than talent. In minute 31 I talked about part 31 of the semester plan, and the point for minute 31 is that habit 31 matters more than talent. In minute 32 I talked about part 32 of the semester plan, and the point for minute 32 is that habit 32 matters more than talent. In minute 33 I talked about part 33 of the semester plan, and the point for minute 33 is that habit 33 matters more than talent. In minute 34 I talked about part 34 of the semester plan, and the point for minute 34 is that habit 34 matters more than talent. In minute 35 I talked about part 35 of the semester plan, and the point for minute 35 is that habit 35 matters more than talent. In minute 36 I talked about part 36 of the semester plan, and the point for minute 36 is that habit 36 matters more than talent. In minute 37 I talked about part 37 of the semester plan, and the point for minute 37 is that habit 37 matters more than talent. In minute 38 I talked about part 38 of the semester plan, and the point for minute 38 is that habit 38 matters more than talent. In minute 39 I talked about part 39 of the semester plan, and the point for minute 39 is that habit 39 matters more than talent.",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 60.0,
+          "text": "In minute 0 I talked about part 0 of the semester plan, and the point for minute 0 is that habit 0 matters more than talent.",
+          "originalText": "In minute 0 I talked about part 0 of the semester plan, and the point for minute 0 is that habit 0 matters more than talent."
+        },
+        {
+          "start": 60.0,
+          "end": 120.0,
+          "text": "In minute 1 I talked about part 1 of the semester plan, and the point for minute 1 is that habit 1 matters more than talent.",
+          "originalText": "In minute 1 I talked about part 1 of the semester plan, and the point for minute 1 is that habit 1 matters more than talent."
+        },
+        {
+          "start": 120.0,
+          "end": 180.0,
+          "text": "In minute 2 I talked about part 2 of the semester plan, and the point for minute 2 is that habit 2 matters more than talent.",
+          "originalText": "In minute 2 I talked about part 2 of the semester plan, and the point for minute 2 is that habit 2 matters more than talent."
+        },
+        {
+          "start": 180.0,
+          "end": 240.0,
+          "text": "In minute 3 I talked about part 3 of the semester plan, and the point for minute 3 is that habit 3 matters more than talent.",
+          "originalText": "In minute 3 I talked about part 3 of the semester plan, and the point for minute 3 is that habit 3 matters more than talent."
+        },
+        {
+          "start": 240.0,
+          "end": 300.0,
+          "text": "In minute 4 I talked about part 4 of the semester plan, and the point for minute 4 is that habit 4 matters more than talent.",
+          "originalText": "In minute 4 I talked about part 4 of the semester plan, and the point for minute 4 is that habit 4 matters more than talent."
+        },
+        {
+          "start": 300.0,
+          "end": 360.0,
+          "text": "In minute 5 I talked about part 5 of the semester plan, and the point for minute 5 is that habit 5 matters more than talent.",
+          "originalText": "In minute 5 I talked about part 5 of the semester plan, and the point for minute 5 is that habit 5 matters more than talent."
+        },
+        {
+          "start": 360.0,
+          "end": 420.0,
+          "text": "In minute 6 I talked about part 6 of the semester plan, and the point for minute 6 is that habit 6 matters more than talent.",
+          "originalText": "In minute 6 I talked about part 6 of the semester plan, and the point for minute 6 is that habit 6 matters more than talent."
+        },
+        {
+          "start": 420.0,
+          "end": 480.0,
+          "text": "In minute 7 I talked about part 7 of the semester plan, and the point for minute 7 is that habit 7 matters more than talent.",
+          "originalText": "In minute 7 I talked about part 7 of the semester plan, and the point for minute 7 is that habit 7 matters more than talent."
+        },
+        {
+          "start": 480.0,
+          "end": 540.0,
+          "text": "In minute 8 I talked about part 8 of the semester plan, and the point for minute 8 is that habit 8 matters more than talent.",
+          "originalText": "In minute 8 I talked about part 8 of the semester plan, and the point for minute 8 is that habit 8 matters more than talent."
+        },
+        {
+          "start": 540.0,
+          "end": 600.0,
+          "text": "In minute 9 I talked about part 9 of the semester plan, and the point for minute 9 is that habit 9 matters more than talent.",
+          "originalText": "In minute 9 I talked about part 9 of the semester plan, and the point for minute 9 is that habit 9 matters more than talent."
+        },
+        {
+          "start": 600.0,
+          "end": 660.0,
+          "text": "In minute 10 I talked about part 10 of the semester plan, and the point for minute 10 is that habit 10 matters more than talent.",
+          "originalText": "In minute 10 I talked about part 10 of the semester plan, and the point for minute 10 is that habit 10 matters more than talent."
+        },
+        {
+          "start": 660.0,
+          "end": 720.0,
+          "text": "In minute 11 I talked about part 11 of the semester plan, and the point for minute 11 is that habit 11 matters more than talent.",
+          "originalText": "In minute 11 I talked about part 11 of the semester plan, and the point for minute 11 is that habit 11 matters more than talent."
+        },
+        {
+          "start": 720.0,
+          "end": 780.0,
+          "text": "In minute 12 I talked about part 12 of the semester plan, and the point for minute 12 is that habit 12 matters more than talent.",
+          "originalText": "In minute 12 I talked about part 12 of the semester plan, and the point for minute 12 is that habit 12 matters more than talent."
+        },
+        {
+          "start": 780.0,
+          "end": 840.0,
+          "text": "In minute 13 I talked about part 13 of the semester plan, and the point for minute 13 is that habit 13 matters more than talent.",
+          "originalText": "In minute 13 I talked about part 13 of the semester plan, and the point for minute 13 is that habit 13 matters more than talent."
+        },
+        {
+          "start": 840.0,
+          "end": 900.0,
+          "text": "In minute 14 I talked about part 14 of the semester plan, and the point for minute 14 is that habit 14 matters more than talent.",
+          "originalText": "In minute 14 I talked about part 14 of the semester plan, and the point for minute 14 is that habit 14 matters more than talent."
+        },
+        {
+          "start": 900.0,
+          "end": 960.0,
+          "text": "In minute 15 I talked about part 15 of the semester plan, and the point for minute 15 is that habit 15 matters more than talent.",
+          "originalText": "In minute 15 I talked about part 15 of the semester plan, and the point for minute 15 is that habit 15 matters more than talent."
+        },
+        {
+          "start": 960.0,
+          "end": 1020.0,
+          "text": "In minute 16 I talked about part 16 of the semester plan, and the point for minute 16 is that habit 16 matters more than talent.",
+          "originalText": "In minute 16 I talked about part 16 of the semester plan, and the point for minute 16 is that habit 16 matters more than talent."
+        },
+        {
+          "start": 1020.0,
+          "end": 1080.0,
+          "text": "In minute 17 I talked about part 17 of the semester plan, and the point for minute 17 is that habit 17 matters more than talent.",
+          "originalText": "In minute 17 I talked about part 17 of the semester plan, and the point for minute 17 is that habit 17 matters more than talent."
+        },
+        {
+          "start": 1080.0,
+          "end": 1140.0,
+          "text": "In minute 18 I talked about part 18 of the semester plan, and the point for minute 18 is that habit 18 matters more than talent.",
+          "originalText": "In minute 18 I talked about part 18 of the semester plan, and the point for minute 18 is that habit 18 matters more than talent."
+        },
+        {
+          "start": 1140.0,
+          "end": 1200.0,
+          "text": "In minute 19 I talked about part 19 of the semester plan, and the point for minute 19 is that habit 19 matters more than talent.",
+          "originalText": "In minute 19 I talked about part 19 of the semester plan, and the point for minute 19 is that habit 19 matters more than talent."
+        },
+        {
+          "start": 1200.0,
+          "end": 1260.0,
+          "text": "In minute 20 I talked about part 20 of the semester plan, and the point for minute 20 is that habit 20 matters more than talent.",
+          "originalText": "In minute 20 I talked about part 20 of the semester plan, and the point for minute 20 is that habit 20 matters more than talent."
+        },
+        {
+          "start": 1260.0,
+          "end": 1320.0,
+          "text": "In minute 21 I talked about part 21 of the semester plan, and the point for minute 21 is that habit 21 matters more than talent.",
+          "originalText": "In minute 21 I talked about part 21 of the semester plan, and the point for minute 21 is that habit 21 matters more than talent."
+        },
+        {
+          "start": 1320.0,
+          "end": 1380.0,
+          "text": "In minute 22 I talked about part 22 of the semester plan, and the point for minute 22 is that habit 22 matters more than talent.",
+          "originalText": "In minute 22 I talked about part 22 of the semester plan, and the point for minute 22 is that habit 22 matters more than talent."
+        },
+        {
+          "start": 1380.0,
+          "end": 1440.0,
+          "text": "In minute 23 I talked about part 23 of the semester plan, and the point for minute 23 is that habit 23 matters more than talent.",
+          "originalText": "In minute 23 I talked about part 23 of the semester plan, and the point for minute 23 is that habit 23 matters more than talent."
+        },
+        {
+          "start": 1440.0,
+          "end": 1500.0,
+          "text": "In minute 24 I talked about part 24 of the semester plan, and the point for minute 24 is that habit 24 matters more than talent.",
+          "originalText": "In minute 24 I talked about part 24 of the semester plan, and the point for minute 24 is that habit 24 matters more than talent."
+        },
+        {
+          "start": 1500.0,
+          "end": 1560.0,
+          "text": "In minute 25 I talked about part 25 of the semester plan, and the point for minute 25 is that habit 25 matters more than talent.",
+          "originalText": "In minute 25 I talked about part 25 of the semester plan, and the point for minute 25 is that habit 25 matters more than talent."
+        },
+        {
+          "start": 1560.0,
+          "end": 1620.0,
+          "text": "In minute 26 I talked about part 26 of the semester plan, and the point for minute 26 is that habit 26 matters more than talent.",
+          "originalText": "In minute 26 I talked about part 26 of the semester plan, and the point for minute 26 is that habit 26 matters more than talent."
+        },
+        {
+          "start": 1620.0,
+          "end": 1680.0,
+          "text": "In minute 27 I talked about part 27 of the semester plan, and the point for minute 27 is that habit 27 matters more than talent.",
+          "originalText": "In minute 27 I talked about part 27 of the semester plan, and the point for minute 27 is that habit 27 matters more than talent."
+        },
+        {
+          "start": 1680.0,
+          "end": 1740.0,
+          "text": "In minute 28 I talked about part 28 of the semester plan, and the point for minute 28 is that habit 28 matters more than talent.",
+          "originalText": "In minute 28 I talked about part 28 of the semester plan, and the point for minute 28 is that habit 28 matters more than talent."
+        },
+        {
+          "start": 1740.0,
+          "end": 1800.0,
+          "text": "In minute 29 I talked about part 29 of the semester plan, and the point for minute 29 is that habit 29 matters more than talent.",
+          "originalText": "In minute 29 I talked about part 29 of the semester plan, and the point for minute 29 is that habit 29 matters more than talent."
+        },
+        {
+          "start": 1800.0,
+          "end": 1860.0,
+          "text": "In minute 30 I talked about part 30 of the semester plan, and the point for minute 30 is that habit 30 matters more than talent.",
+          "originalText": "In minute 30 I talked about part 30 of the semester plan, and the point for minute 30 is that habit 30 matters more than talent."
+        },
+        {
+          "start": 1860.0,
+          "end": 1920.0,
+          "text": "In minute 31 I talked about part 31 of the semester plan, and the point for minute 31 is that habit 31 matters more than talent.",
+          "originalText": "In minute 31 I talked about part 31 of the semester plan, and the point for minute 31 is that habit 31 matters more than talent."
+        },
+        {
+          "start": 1920.0,
+          "end": 1980.0,
+          "text": "In minute 32 I talked about part 32 of the semester plan, and the point for minute 32 is that habit 32 matters more than talent.",
+          "originalText": "In minute 32 I talked about part 32 of the semester plan, and the point for minute 32 is that habit 32 matters more than talent."
+        },
+        {
+          "start": 1980.0,
+          "end": 2040.0,
+          "text": "In minute 33 I talked about part 33 of the semester plan, and the point for minute 33 is that habit 33 matters more than talent.",
+          "originalText": "In minute 33 I talked about part 33 of the semester plan, and the point for minute 33 is that habit 33 matters more than talent."
+        },
+        {
+          "start": 2040.0,
+          "end": 2100.0,
+          "text": "In minute 34 I talked about part 34 of the semester plan, and the point for minute 34 is that habit 34 matters more than talent.",
+          "originalText": "In minute 34 I talked about part 34 of the semester plan, and the point for minute 34 is that habit 34 matters more than talent."
+        },
+        {
+          "start": 2100.0,
+          "end": 2160.0,
+          "text": "In minute 35 I talked about part 35 of the semester plan, and the point for minute 35 is that habit 35 matters more than talent.",
+          "originalText": "In minute 35 I talked about part 35 of the semester plan, and the point for minute 35 is that habit 35 matters more than talent."
+        },
+        {
+          "start": 2160.0,
+          "end": 2220.0,
+          "text": "In minute 36 I talked about part 36 of the semester plan, and the point for minute 36 is that habit 36 matters more than talent.",
+          "originalText": "In minute 36 I talked about part 36 of the semester plan, and the point for minute 36 is that habit 36 matters more than talent."
+        },
+        {
+          "start": 2220.0,
+          "end": 2280.0,
+          "text": "In minute 37 I talked about part 37 of the semester plan, and the point for minute 37 is that habit 37 matters more than talent.",
+          "originalText": "In minute 37 I talked about part 37 of the semester plan, and the point for minute 37 is that habit 37 matters more than talent."
+        },
+        {
+          "start": 2280.0,
+          "end": 2340.0,
+          "text": "In minute 38 I talked about part 38 of the semester plan, and the point for minute 38 is that habit 38 matters more than talent.",
+          "originalText": "In minute 38 I talked about part 38 of the semester plan, and the point for minute 38 is that habit 38 matters more than talent."
+        },
+        {
+          "start": 2340.0,
+          "end": 2400.0,
+          "text": "In minute 39 I talked about part 39 of the semester plan, and the point for minute 39 is that habit 39 matters more than talent.",
+          "originalText": "In minute 39 I talked about part 39 of the semester plan, and the point for minute 39 is that habit 39 matters more than talent."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}
