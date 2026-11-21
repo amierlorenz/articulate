@@ -5,7 +5,6 @@ One fleeting `Inbox/` note per uncommanded, non-class, non-Private Pocket record
 can link the note through `vault_notes.source_item_id`.
 """
 import hashlib
-import importlib
 import json
 import logging
 from collections.abc import Callable
@@ -114,20 +113,35 @@ class RecordingView:
         return cls(item_id=row["item_id"], recording_id=row["native_id"], title=payload.get("title"))
 
 
-def _default_meeting_matcher(start: datetime, end: datetime, ctx: RunContext) -> Any:
-    """The calendar slice's non-class event match, if it ships one; otherwise no meetings."""
+MEETING_CALENDAR = "primary"  # non-class events; the Classes calendar and private events are skipped by calendar
+
+
+def meeting_from_calendar(
+    start: datetime, end: datetime, ctx: RunContext, client: Any = None
+) -> dict[str, Any] | None:
+    """The calendar slice's non-class event match (#54) for a recording's window, or None.
+
+    A calendar outage (no token, no network) means no meeting, never a failed note.
+    """
+    from articulate.calendar import CalendarClient, match_meeting_event
+    from articulate.core.config import CalendarConfig
+
+    cfg = getattr(getattr(ctx.config, "articulate", None), "calendar", None) or CalendarConfig()
     try:
-        calendar = importlib.import_module("articulate.calendar")
-    except ImportError:
-        return None
-    match = getattr(calendar, "match_meeting", None)
-    if match is None:
-        return None
-    try:
-        return match(start, end, ctx)
-    except Exception as e:  # noqa: BLE001  # a calendar outage must not stop notes
+        client = client or CalendarClient(config=cfg, health=ctx.health)
+        events = client.list_events(MEETING_CALENDAR, start - timedelta(hours=1), end + timedelta(hours=1))
+        hit = match_meeting_event(start, (end - start).total_seconds(), events, cfg)
+    except Exception as e:  # noqa: BLE001
         logger.warning("Meeting match failed: %s", type(e).__name__)
         return None
+    if hit is None:
+        return None
+    event = hit[0]
+    return {"title": event.summary, "start": event.start, "end": event.end, "attendees": []}
+
+
+def _default_meeting_matcher(start: datetime, end: datetime, ctx: RunContext) -> Any:
+    return meeting_from_calendar(start, end, ctx)
 
 
 @dataclass

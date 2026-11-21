@@ -20,6 +20,7 @@ IDEA_NOTE = {
 
 
 def run(env, **kw):
+    kw.setdefault("meeting_matcher", lambda start, end, ctx: None)  # never reach the real calendar
     return run_inbox(env.ctx(), tz=EASTERN, **kw)
 
 
