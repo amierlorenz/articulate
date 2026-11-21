@@ -8,6 +8,7 @@ from articulate.core.setup import (
     setup_gemini_models,
     setup_launch_agents_step,
     setup_pocket_host,
+    setup_shortcuts,
     store_secret,
 )
 
@@ -124,3 +125,20 @@ expected = "pages = slides"
     assert len(copied) == 1
     assert len(missing) == 0
     assert (real_data_dir / "sample.pptx").exists()
+
+
+def test_setup_shortcuts_flow(monkeypatch):
+    calls = 0
+
+    def mock_check(shortcuts_bin=None):
+        nonlocal calls
+        calls += 1
+        return calls > 1
+
+    monkeypatch.setattr("articulate.core.setup.check_shortcuts_available", mock_check)
+    monkeypatch.setattr("articulate.core.setup.build_master_todo", lambda **kw: True)
+    monkeypatch.setattr("articulate.core.setup.install_shortcuts", lambda **kw: True)
+
+    assert setup_shortcuts(interactive=False) is True
+    assert calls == 2
+
