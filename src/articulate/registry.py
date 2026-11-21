@@ -1,11 +1,23 @@
 """Job registry: the single shared file where slices register their steps (§3.12)."""
+
 from articulate.core.jobs import Step
 
 STEPS: list[Step] = [
-    Step("core.encore_read", "articulate.core.steps:read_encore", jobs={"nightly", "pass2", "watch"}, order=10),
+    Step(
+        "core.encore_read",
+        "articulate.core.steps:read_encore",
+        jobs={"nightly", "pass2", "watch"},
+        order=10,
+    ),
     Step("core.flags", "articulate.core.steps:apply_flags", jobs={"nightly"}, order=20),
     # Phase 1: 100–199
     # Phase 2: 200–399
+    Step(
+        "intake.convert",
+        "articulate.intake.convert:convert_step",
+        jobs={"nightly", "pass2"},
+        order=220,
+    ),
     # Phase 3: 400–499
     # Phase 4: 500–599
     # Phase 5: 600–699
