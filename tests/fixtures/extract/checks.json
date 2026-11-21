@@ -1,0 +1,304 @@
+{
+  "concepts": [
+    {
+      "key": "stack",
+      "title": "Stack",
+      "kind": "definition",
+      "explanation": {
+        "citations": [
+          {
+            "page": 1,
+            "quote": "a"
+          },
+          {
+            "page": 1,
+            "quote": "b"
+          },
+          {
+            "page": 2,
+            "quote": "c"
+          },
+          {
+            "page": 2,
+            "quote": "d"
+          }
+        ],
+        "text": "Last in, first out.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "queue",
+      "title": "Queue",
+      "kind": "definition",
+      "explanation": {
+        "citations": [
+          {
+            "page": 2,
+            "quote": "first in first out"
+          }
+        ],
+        "text": "First in, first out.",
+        "gapFill": false
+      },
+      "aliases": [
+        "FIFO"
+      ],
+      "useWhen": [
+        {
+          "citations": [
+            {
+              "page": 2,
+              "quote": "order"
+            }
+          ],
+          "text": "Order matters.",
+          "gapFill": false
+        }
+      ],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "bad-dollar",
+      "title": "Bad Dollar",
+      "kind": "fact",
+      "explanation": {
+        "citations": [
+          {
+            "page": 3,
+            "quote": "cost"
+          }
+        ],
+        "text": "Costs $O(n per step.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "stray",
+      "title": "Stray",
+      "kind": "fact",
+      "explanation": {
+        "citations": [
+          {
+            "page": 3,
+            "quote": "stray"
+          }
+        ],
+        "text": "Ends with a stray \\\\)",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "tabbed",
+      "title": "Tab\tbed",
+      "kind": "fact",
+      "explanation": {
+        "citations": [
+          {
+            "page": 3,
+            "quote": "tab"
+          }
+        ],
+        "text": "Has a raw tab.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "no-cite",
+      "title": "No Cite",
+      "kind": "fact",
+      "explanation": {
+        "citations": [],
+        "text": "Claims a citation but has none.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "hashing",
+      "title": "Hashing",
+      "kind": "method",
+      "explanation": {
+        "citations": [
+          {
+            "page": 4,
+            "quote": "map keys to buckets"
+          }
+        ],
+        "text": "Map keys to buckets.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [
+        {
+          "citations": [],
+          "text": "Cited with nothing.",
+          "gapFill": false
+        },
+        {
+          "citations": [
+            {
+              "page": 4,
+              "quote": "x"
+            }
+          ],
+          "text": "Gap fill with a cite.",
+          "gapFill": true
+        },
+        {
+          "citations": [
+            {
+              "page": 99,
+              "quote": "nowhere"
+            }
+          ],
+          "text": "Out of range page.",
+          "gapFill": false
+        },
+        {
+          "citations": [
+            {
+              "page": 4,
+              "quote": "constant time"
+            }
+          ],
+          "text": "Constant-time lookup is needed.",
+          "gapFill": false
+        }
+      ],
+      "conditions": [
+        {
+          "citations": [],
+          "text": "A good hash function exists.",
+          "gapFill": true
+        }
+      ],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "low",
+      "confidenceNote": ""
+    }
+  ],
+  "contrastGroups": [
+    {
+      "name": "Linear structures",
+      "question": "",
+      "memberKeys": [
+        "stack",
+        "queue",
+        "ghost"
+      ],
+      "contrasts": [
+        {
+          "a": "stack",
+          "b": "queue",
+          "decidingFeature": {
+            "citations": [
+              {
+                "page": 1,
+                "quote": "newest"
+              }
+            ],
+            "text": "Stack pops the newest.",
+            "gapFill": false
+          }
+        },
+        {
+          "a": "queue",
+          "b": "ghost",
+          "decidingFeature": {
+            "citations": [
+              {
+                "page": 2,
+                "quote": "ghost"
+              }
+            ],
+            "text": "Ghost.",
+            "gapFill": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lost member",
+      "question": "",
+      "memberKeys": [
+        "stack",
+        "bad-dollar"
+      ],
+      "contrasts": []
+    },
+    {
+      "name": "Three way",
+      "question": "Which structure?",
+      "memberKeys": [
+        "stack",
+        "queue",
+        "hashing"
+      ],
+      "contrasts": [
+        {
+          "a": "stack",
+          "b": "queue",
+          "decidingFeature": {
+            "citations": [
+              {
+                "page": 1,
+                "quote": "removal"
+              }
+            ],
+            "text": "Order of removal.",
+            "gapFill": false
+          }
+        },
+        {
+          "a": "queue",
+          "b": "hashing",
+          "decidingFeature": {
+            "citations": [],
+            "text": "General knowledge.",
+            "gapFill": true
+          }
+        }
+      ]
+    }
+  ]
+}

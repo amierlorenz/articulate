@@ -15,12 +15,23 @@ STEPS: list[Step] = [
     Step("inbox.notes", "articulate.inbox:step", jobs={"watch", "nightly"}, order=120),
     Step("tasks.extract_send", "articulate.tasks:step", jobs={"watch", "nightly"}, order=130),
     # Phase 2: 200–399
-    Step("intake.pick", "articulate.intake.canvas.pick:pick_step", jobs={"nightly", "pass2"}, order=200),
+    Step(
+        "intake.pick",
+        "articulate.intake.canvas.pick:pick_step",
+        jobs={"nightly", "pass2"},
+        order=200,
+    ),
     Step(
         "intake.convert",
         "articulate.intake.convert:convert_step",
         jobs={"nightly", "pass2"},
         order=220,
+    ),
+    Step(
+        "intake.extract",
+        "articulate.intake.extract:step",
+        jobs={"nightly", "pass2"},
+        order=260,
     ),
     Step("intake.library", "articulate.intake.library:step", jobs={"nightly", "pass2"}, order=300),
     Step("intake.shape", "articulate.intake.shape:step", jobs={"nightly", "pass2"}, order=320),

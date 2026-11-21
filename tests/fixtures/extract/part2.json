@@ -1,0 +1,140 @@
+{
+  "concepts": [
+    {
+      "key": "mergesort",
+      "title": "Merge sort",
+      "kind": "method",
+      "explanation": {
+        "citations": [
+          {
+            "page": 2,
+            "quote": "divide and conquer"
+          }
+        ],
+        "text": "Divide and conquer sort.",
+        "gapFill": false
+      },
+      "aliases": [
+        "top-down merge"
+      ],
+      "useWhen": [
+        {
+          "citations": [
+            {
+              "page": 3,
+              "quote": "linked lists"
+            }
+          ],
+          "text": "Input is a linked list.",
+          "gapFill": false
+        }
+      ],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "qs",
+      "title": "Quick Sort",
+      "kind": "method",
+      "explanation": {
+        "citations": [
+          {
+            "page": 4,
+            "quote": "in place"
+          }
+        ],
+        "text": "In-place pivot sort.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "binary-search",
+      "title": "Binary Search Tree",
+      "kind": "definition",
+      "explanation": {
+        "citations": [
+          {
+            "page": 5,
+            "quote": "left subtree smaller"
+          }
+        ],
+        "text": "Ordered binary tree.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "heap-sort",
+      "title": "Heap Sort",
+      "kind": "method",
+      "explanation": {
+        "citations": [
+          {
+            "page": 6,
+            "quote": "build a max heap"
+          }
+        ],
+        "text": "Sort with a binary heap.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    }
+  ],
+  "contrastGroups": [
+    {
+      "name": "Sorting choice again",
+      "question": "",
+      "memberKeys": [
+        "mergesort",
+        "qs"
+      ],
+      "contrasts": [
+        {
+          "a": "qs",
+          "b": "mergesort",
+          "decidingFeature": {
+            "citations": [
+              {
+                "page": 4,
+                "quote": "in place"
+              }
+            ],
+            "text": "Quick sort is in place.",
+            "gapFill": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trees vs heaps",
+      "question": "",
+      "memberKeys": [
+        "binary-search",
+        "heap-sort"
+      ],
+      "contrasts": []
+    }
+  ]
+}

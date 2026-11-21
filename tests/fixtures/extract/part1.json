@@ -1,0 +1,124 @@
+{
+  "concepts": [
+    {
+      "key": "binary-search",
+      "title": "Binary Search",
+      "kind": "definition",
+      "explanation": {
+        "citations": [
+          {
+            "page": 3,
+            "quote": "halve the interval"
+          }
+        ],
+        "text": "Search a sorted list by halving it.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "merge-sort",
+      "title": "Merge Sort",
+      "kind": "method",
+      "explanation": {
+        "citations": [
+          {
+            "page": 10,
+            "quote": "merge the sorted halves"
+          }
+        ],
+        "text": "Split, sort halves, merge.",
+        "gapFill": false
+      },
+      "aliases": [],
+      "useWhen": [
+        {
+          "citations": [
+            {
+              "page": 11,
+              "quote": "stable"
+            }
+          ],
+          "text": "A stable sort is required.",
+          "gapFill": false
+        }
+      ],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [
+        {
+          "kind": "examHint",
+          "page": 10,
+          "quote": "on the exam"
+        }
+      ],
+      "confidence": "high",
+      "confidenceNote": ""
+    },
+    {
+      "key": "quick-sort",
+      "title": "Quick Sort",
+      "kind": "method",
+      "explanation": {
+        "citations": [
+          {
+            "page": 12,
+            "quote": "partition around a pivot"
+          }
+        ],
+        "text": "Partition around a pivot.",
+        "gapFill": false
+      },
+      "aliases": [
+        "partition-exchange sort"
+      ],
+      "useWhen": [],
+      "conditions": [],
+      "workedExamples": [],
+      "slideHints": [],
+      "confidence": "high",
+      "confidenceNote": ""
+    }
+  ],
+  "contrastGroups": [
+    {
+      "name": "Sorting choice",
+      "question": "Which sort is stable?",
+      "memberKeys": [
+        "merge-sort",
+        "quick-sort"
+      ],
+      "contrasts": [
+        {
+          "a": "merge-sort",
+          "b": "quick-sort",
+          "decidingFeature": {
+            "citations": [
+              {
+                "page": 12,
+                "quote": "quick sort is not stable"
+              }
+            ],
+            "text": "Merge sort is stable.",
+            "gapFill": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Across the cut",
+      "question": "",
+      "memberKeys": [
+        "binary-search",
+        "heap-sort"
+      ],
+      "contrasts": []
+    }
+  ]
+}
