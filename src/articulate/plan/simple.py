@@ -1,7 +1,7 @@
 """Phase 2 daily plan rules (§3.7 `encore.plan` v1, SPEC-requirements 2.39, Daily rhythm #9).
 
 Plain code, no model calls. Each rule is its own small function so Phase 3 (#70: ramp, practice tests, missed
-days) can replace or wrap one rule at a time.
+days) can replace or wrap one rule at a time. Phase 3 assembles the daily plan in `plan.daily`.
 """
 from dataclasses import dataclass, field
 from datetime import UTC, date, datetime, time, timedelta, tzinfo
@@ -26,6 +26,7 @@ class Candidate:
     unit_name: str | None
     tier: str | None
     created_at: str | None = None
+    boosted: bool = False    # emphasised in 2+ units or on a midterm: one tier up in a final's ordering (#70)
 
 
 @dataclass(frozen=True)
@@ -34,6 +35,8 @@ class ExamDate:
     course_key: str
     date: date | None
     units: list[str] = field(default_factory=list)   # unit ids or unit names; empty = the whole course
+    kind: str | None = None                          # test | midterm | final | ...
+    name: str | None = None
 
 
 def introduced_ids(state: State | None) -> set[str]:
