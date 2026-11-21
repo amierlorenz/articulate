@@ -1,0 +1,29 @@
+[
+  {
+    "group_id": "cs101.g.sorting",
+    "course_key": "cs101",
+    "name": "Comparison Sorting Algorithms",
+    "question": "When is an in-place partition preferred over divide-and-conquer merging?",
+    "member_ids_json": "[\"lib.cs101.quicksort\", \"lib.cs101.mergesort\"]",
+    "contrasts_json": "[]",
+    "status": "held"
+  },
+  {
+    "group_id": "cs101.g.balanced_trees",
+    "course_key": "cs101",
+    "name": "Balanced Search Trees",
+    "question": "How do rebalancing rotations maintain logarithmic lookup time?",
+    "member_ids_json": "[\"lib.cs101.bst\", \"lib.cs101.red_black\"]",
+    "contrasts_json": "[]",
+    "status": "held"
+  },
+  {
+    "group_id": "cs101.g.tree_rotations",
+    "course_key": "cs101",
+    "name": "Search Tree Rebalancing Operations",
+    "question": "When is a double rotation required instead of a single rotation?",
+    "member_ids_json": "[\"lib.cs101.bst\"]",
+    "contrasts_json": "[]",
+    "status": "held"
+  }
+]

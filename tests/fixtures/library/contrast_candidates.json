@@ -1,0 +1,57 @@
+[
+  {
+    "concept_id": "cs101.selection_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Selection Sort",
+    "explanation": "Simple in-place comparison sort that divides input into sorted and unsorted regions, repeatedly selecting the smallest element.",
+    "details": {
+      "explanationCitations": []
+    }
+  },
+  {
+    "concept_id": "cs101.radix_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Radix Sort",
+    "explanation": "Non-comparative integer sorting algorithm that distributes keys into buckets based on individual digits.",
+    "details": {
+      "explanationCitations": []
+    }
+  },
+  {
+    "concept_id": "cs101.avl_tree",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.trees",
+    "kind": "definition",
+    "title": "AVL Tree",
+    "explanation": "Self-balancing binary search tree where the heights of the two child subtrees of any node differ by at most one.",
+    "details": {
+      "explanationCitations": []
+    }
+  },
+  {
+    "concept_id": "cs101.hash_map",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.hashing",
+    "kind": "definition",
+    "title": "Hash Map",
+    "explanation": "Data structure implementing an associative array mapping keys to values using a hash function.",
+    "details": {
+      "explanationCitations": []
+    }
+  },
+  {
+    "concept_id": "cs101.bubble_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Bubble Sort",
+    "explanation": "Simple comparison sort repeatedly swapping adjacent elements if in the wrong order.",
+    "details": {
+      "explanationCitations": []
+    }
+  }
+]

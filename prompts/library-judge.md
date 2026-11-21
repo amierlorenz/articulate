@@ -8,6 +8,12 @@ For each candidate, return every library concept or batch candidate it relates t
 Leave out library concepts that are merely on the same topic. Most candidates have no matches.
 
 For each "same" match, list in `adds` only what the candidate would add to the library concept: its kind, use-when cues and any statement the library explanation lacks. Empty if nothing new.
+
+For each "confusable" match within the same course, assign `group`:
+- If the shortlisted concept belongs to existing contrast group(s) and the candidate is confusable with its members and answers the group's question, return `group: <id>` (or `group:<id>`) to join that group. A candidate may join several groups if it matches and answers their questions.
+- Otherwise, return `new` to form a new contrast pair group.
+For cross-course confusable matches (different courses), cross-course matches stay notes only: leave `group` empty or omit it.
+
 Use the library ids exactly as given.
 
 ## Candidates from course "{{course}}":
