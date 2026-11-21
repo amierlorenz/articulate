@@ -27,14 +27,19 @@ def main(argv: list[str] | None = None) -> int:
     # articulate quota
     subparsers.add_parser("quota", help="Today's ledger per model (stub in Phase 0 slice 1)")
 
-    # articulate setup [secrets]
+    # articulate setup [secrets|shortcuts] [--shortcuts]
     setup_parser = subparsers.add_parser("setup", help="Interactive one-time setup")
     setup_parser.add_argument(
         "target",
         nargs="?",
-        choices=["secrets"],
+        choices=["secrets", "shortcuts"],
         default=None,
-        help="Optional setup target (e.g. 'secrets')",
+        help="Optional setup target (e.g. 'secrets', 'shortcuts')",
+    )
+    setup_parser.add_argument(
+        "--shortcuts",
+        action="store_true",
+        help="Setup master-todo bridge shortcuts",
     )
 
     # articulate doctor
@@ -71,6 +76,12 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.subcommand == "setup":
+        if getattr(args, "shortcuts", False) or getattr(args, "target", None) == "shortcuts":
+            from articulate.core.setup import setup_shortcuts
+
+            ok = setup_shortcuts(interactive=True)
+            return 0 if ok else 1
+
         from articulate.core.setup import run_setup
         return run_setup(secrets_only=(getattr(args, "target", None) == "secrets"), interactive=True)
 

@@ -181,3 +181,24 @@ def test_unparseable_output_counts_as_a_failure(env, client, tmp_path):
     send_pending(env.ctx(), ShortcutsClient(binary=str(bad)))
     row = task_rows(env.db)["task:rec-1:12"]
     assert row["state"] == "pending" and row["send_failures"] == 1
+
+
+def test_setup_shortcuts_enables_sending_pending_tasks(env, client, monkeypatch):
+    from articulate.core.setup import setup_shortcuts
+
+    env.shortcuts.set(installed=False)
+    assert client.available() is False
+
+    _enqueue(env)
+    send_pending(env.ctx(), client)
+    assert task_rows(env.db)["task:rec-1:12"]["state"] == "fallback"
+
+    monkeypatch.setattr("articulate.core.setup.build_master_todo", lambda **kw: True)
+    ok = setup_shortcuts(interactive=False, shortcuts_bin=env.shortcuts_bin)
+    assert ok is True
+    assert client.available() is True
+
+    send_pending(env.ctx(), client)
+    assert task_rows(env.db)["task:rec-1:12"]["state"] == "sent"
+    assert len(env.shortcuts.calls("Add Task")) == 1
+
