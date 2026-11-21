@@ -6,6 +6,7 @@ STEPS: list[Step] = [
     Step("core.flags", "articulate.core.steps:apply_flags", jobs={"nightly"}, order=20),
     # Phase 1: 100–199
     # Phase 2: 200–399
+    Step("intake.pick", "articulate.intake.canvas.pick:pick_step", jobs={"nightly", "pass2"}, order=200),
     # Phase 3: 400–499
     # Phase 4: 500–599
     # Phase 5: 600–699
