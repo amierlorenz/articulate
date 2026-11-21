@@ -1,0 +1,17 @@
+# Synthetic courses for the plan tests (no real course content).
+default_skip = []
+
+[courses.csc301]
+canvas_id = 1
+name = "CSC-301 Operating Systems"
+active = true
+
+[courses.mat305]
+canvas_id = 2
+name = "MAT-305 Prob & Stats"
+active = true
+
+[courses.phy203]
+canvas_id = 3
+name = "PHY-203 Physics"
+active = false
