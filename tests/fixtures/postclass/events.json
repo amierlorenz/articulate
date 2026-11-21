@@ -1,0 +1,57 @@
+[
+  {
+    "id": "evt-mat305-1120",
+    "summary": "MAT 305 Lecture",
+    "description": "mat305<br>Room 238",
+    "start": {
+      "dateTime": "2026-11-20T17:30:00-05:00"
+    },
+    "end": {
+      "dateTime": "2026-11-20T18:45:00-05:00"
+    }
+  },
+  {
+    "id": "evt-mat305-1120-review",
+    "summary": "MAT 305 Review",
+    "description": "mat305",
+    "start": {
+      "dateTime": "2026-11-20T18:50:00-05:00"
+    },
+    "end": {
+      "dateTime": "2026-11-20T19:05:00-05:00"
+    }
+  },
+  {
+    "id": "evt-csc430-1120",
+    "summary": "CSC 430 (dropped course)",
+    "description": "csc430",
+    "start": {
+      "dateTime": "2026-11-20T15:00:00-05:00"
+    },
+    "end": {
+      "dateTime": "2026-11-20T16:15:00-05:00"
+    }
+  },
+  {
+    "id": "evt-mat305-1119",
+    "summary": "MAT 305 Lecture",
+    "description": "mat305",
+    "start": {
+      "dateTime": "2026-11-19T09:00:00-05:00"
+    },
+    "end": {
+      "dateTime": "2026-11-19T10:15:00-05:00"
+    }
+  },
+  {
+    "id": "evt-mat305-1121",
+    "summary": "MAT 305 Lecture",
+    "description": "mat305",
+    "start": {
+      "dateTime": "2026-11-21T09:00:00-05:00"
+    },
+    "end": {
+      "dateTime": "2026-11-21T10:15:00-05:00"
+    }
+  }
+]

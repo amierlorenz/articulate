@@ -14,6 +14,7 @@ STEPS: list[Step] = [
     Step("pocket.poll", "articulate.pocket.source:step", jobs={"watch", "nightly"}, order=100),
     Step("inbox.notes", "articulate.inbox:step", jobs={"watch", "nightly"}, order=120),
     Step("tasks.extract_send", "articulate.tasks:step", jobs={"watch", "nightly"}, order=130),
+    Step("postclass.build", "articulate.postclass.build:step", jobs={"watch"}, order=140),  # Phase 3, §7.5
     # Phase 2: 200–399
     Step(
         "intake.pick",

@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "data": {
+    "id": "rec-pc-1",
+    "title": "MAT 305 lecture",
+    "duration": 6000,
+    "state": "completed",
+    "recording_at": 1795213500,
+    "transcript": {
+      "text": "Did anyone watch the game last night? Bayes' theorem lets us flip a conditional probability around. The posterior is proportional to the likelihood times the prior. A Type I error is rejecting the null hypothesis when it is actually true. The central limit theorem says sample means are approximately normal for large samples. Remember, the p-value is not the probability that the null is true. The variance of a sum is the sum of the variances for independent variables.",
+      "segments": [
+        {
+          "start": 10,
+          "end": 20,
+          "text": "Did anyone watch the game last night?"
+        },
+        {
+          "start": 400,
+          "end": 410,
+          "text": "Bayes' theorem lets us flip a conditional probability around."
+        },
+        {
+          "start": 410,
+          "end": 420,
+          "text": "The posterior is proportional to the likelihood times the prior."
+        },
+        {
+          "start": 1200,
+          "end": 1210,
+          "text": "A Type I error is rejecting the null hypothesis when it is actually true."
+        },
+        {
+          "start": 2400,
+          "end": 2410,
+          "text": "The central limit theorem says sample means are approximately normal for large samples."
+        },
+        {
+          "start": 3000,
+          "end": 3010,
+          "text": "Remember, the p-value is not the probability that the null is true."
+        },
+        {
+          "start": 5600,
+          "end": 5610,
+          "text": "The variance of a sum is the sum of the variances for independent variables."
+        }
+      ]
+    }
+  }
+}
