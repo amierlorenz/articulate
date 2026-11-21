@@ -36,6 +36,7 @@ STEPS: list[Step] = [
     Step("intake.guides", "articulate.intake.guides.run:step", jobs={"nightly", "pass2"}, order=270),
     Step("intake.library", "articulate.intake.library:step", jobs={"nightly", "pass2"}, order=300),
     Step("intake.shape", "articulate.intake.shape:step", jobs={"nightly", "pass2"}, order=320),
+    Step("handoff.export", "articulate.handoff:step", jobs={"nightly", "pass2"}, order=340),
     Step("plan.daily", "articulate.plan:step", jobs={"pass2"}, order=380),
     # Phase 3: 400–499
     # Phase 4: 500–599
