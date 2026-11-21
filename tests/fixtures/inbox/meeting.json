@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "data": {
+    "id": "inbox-meeting",
+    "title": "Recording 14",
+    "folder_id": null,
+    "duration": 110.0,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795017600,
+    "created_at": 1795017600,
+    "updated_at": 1795017660,
+    "tags": [],
+    "transcript": {
+      "text": "Thanks for making time, let's go through the poster plan for the showcase. We agreed the poster goes to the printer by Friday and Jordan owns the final layout. We still don't know whether the demo laptop can stay on the table all afternoon.",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 30.0,
+          "text": "Thanks for making time, let's go through the poster plan for the showcase.",
+          "originalText": "Thanks for making time, let's go through the poster plan for the showcase."
+        },
+        {
+          "start": 30.0,
+          "end": 70.0,
+          "text": "We agreed the poster goes to the printer by Friday and Jordan owns the final layout.",
+          "originalText": "We agreed the poster goes to the printer by Friday and Jordan owns the final layout."
+        },
+        {
+          "start": 70.0,
+          "end": 110.0,
+          "text": "We still don't know whether the demo laptop can stay on the table all afternoon.",
+          "originalText": "We still don't know whether the demo laptop can stay on the table all afternoon."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}
