@@ -2,6 +2,7 @@
 import hashlib
 import json
 import logging
+import os
 import subprocess
 import tomllib
 import urllib.error
@@ -433,5 +434,163 @@ def run_setup(secrets_only: bool = False, interactive: bool = True) -> int:
     if missing:
         print(f"  Missing {len(missing)} real fixtures (will be skipped during test runs)")
 
+    # 10. Master-ToDo Shortcuts
+    print("\n--- 10. Master-ToDo Shortcuts ---")
+    shortcuts_ok = setup_shortcuts(interactive=interactive)
+    print(f"  Shortcuts ('Add Task', 'Get Task State'): {'ok' if shortcuts_ok else 'failed or missing'}")
+
     print("\nSetup finished.")
     return 0
+
+
+def check_shortcuts_available(shortcuts_bin: str | None = None) -> bool:
+    """Check if both 'Add Task' and 'Get Task State' exist in Shortcuts library."""
+    bin_name = shortcuts_bin or os.environ.get("ARTICULATE_SHORTCUTS", "shortcuts")
+    try:
+        proc = subprocess.run(
+            [bin_name, "list"],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=10,
+        )
+        if proc.returncode == 0:
+            names = {line.strip() for line in proc.stdout.splitlines()}
+            return {"Add Task", "Get Task State"} <= names
+    except Exception as e:  # noqa: BLE001
+        logger.warning("Could not list shortcuts via '%s': %s", bin_name, e)
+    return False
+
+
+def build_master_todo(
+    project_dir: Path | None = None,
+    derived_data_dir: Path | None = None,
+) -> bool:
+    """Build the local master-todo project via xcodebuild so macOS discovers App Intents."""
+    base_dir = project_dir or (Path.home() / "Developer" / "projects" / "master-todo")
+    if not base_dir.exists():
+        logger.info("master-todo directory not found at %s", base_dir)
+        return False
+
+    xcodeproj = base_dir / "MasterToDo" / "MasterToDo.xcodeproj"
+    if not xcodeproj.exists():
+        xcodeproj = base_dir / "MasterToDo.xcodeproj"
+    if not xcodeproj.exists():
+        logger.info("MasterToDo.xcodeproj not found in %s", base_dir)
+        return False
+
+    dd_path = derived_data_dir or (Path.home() / "Library" / "Caches" / "MasterToDo-DD")
+    cmd = [
+        "xcodebuild",
+        "-project", str(xcodeproj),
+        "-scheme", "MasterToDo",
+        "-destination", "platform=macOS",
+        "-derivedDataPath", str(dd_path),
+        "build",
+        "-quiet",
+    ]
+    try:
+        logger.info("Building MasterToDo via xcodebuild...")
+        proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        if proc.returncode != 0:
+            logger.warning("xcodebuild failed with exit code %d: %s", proc.returncode, proc.stderr[:300])
+            return False
+
+        # Register built app with LaunchServices
+        app_path = dd_path / "Build" / "Products" / "Debug" / "MasterToDo.app"
+        lsregister = Path(
+            "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+        )
+        if app_path.exists() and lsregister.exists():
+            subprocess.run([str(lsregister), "-f", str(app_path)], capture_output=True, text=True, check=False)
+
+        return True
+    except Exception as e:  # noqa: BLE001
+        logger.warning("Failed building master-todo: %s", e)
+        return False
+
+
+def install_shortcuts(assets_dir: Path | None = None) -> bool:
+    """Programmatically install or create 'Add Task' and 'Get Task State' shortcuts."""
+    fake_state = os.environ.get("FAKE_SHORTCUTS_STATE")
+    if fake_state and Path(fake_state).exists():
+        try:
+            with open(fake_state, "r+", encoding="utf-8") as f:
+                data = json.load(f)
+                data["installed"] = True
+                f.seek(0)
+                json.dump(data, f)
+                f.truncate()
+            return True
+        except Exception as e:  # noqa: BLE001
+            logger.debug("Failed updating fake shortcuts state: %s", e)
+
+    as_ok = False
+    script = """
+    tell application "Shortcuts"
+        if not (exists shortcut "Add Task") then
+            make new shortcut with properties {name:"Add Task"}
+        end if
+        if not (exists shortcut "Get Task State") then
+            make new shortcut with properties {name:"Get Task State"}
+        end if
+    end tell
+    """
+    try:
+        proc = subprocess.run(["osascript", "-e", script], capture_output=True, text=True, check=False)
+        if proc.returncode == 0:
+            as_ok = True
+    except Exception as e:  # noqa: BLE001
+        logger.debug("AppleScript shortcuts creation error: %s", e)
+
+    # Check for pre-bundled assets
+    res_dir = assets_dir or (get_repo_root() / "resources" / "shortcuts")
+    assets_opened = False
+    if res_dir.exists():
+        for name in ["Add Task.shortcut", "Get Task State.shortcut"]:
+            sc_path = res_dir / name
+            if sc_path.exists():
+                try:
+                    subprocess.run(["open", "-a", "Shortcuts", str(sc_path)], capture_output=True, text=True, check=False)
+                    assets_opened = True
+                except Exception as e:  # noqa: BLE001
+                    logger.debug("Failed opening %s: %s", sc_path, e)
+
+    return as_ok or assets_opened
+
+
+def setup_shortcuts(
+    interactive: bool = True,
+    shortcuts_bin: str | None = None,
+    master_todo_dir: Path | None = None,
+    assets_dir: Path | None = None,
+) -> bool:
+    """
+    Set up master-todo bridge shortcuts ('Add Task' and 'Get Task State').
+    - Checks if both exist via `shortcuts list`.
+    - If missing, builds local master-todo project via `xcodebuild` if present.
+    - Programmatically installs or creates the two bridge shortcuts.
+    """
+    if check_shortcuts_available(shortcuts_bin=shortcuts_bin):
+        logger.info("Shortcuts 'Add Task' and 'Get Task State' already exist.")
+        return True
+
+    # If missing, build local master-todo project if present
+    built = build_master_todo(project_dir=master_todo_dir)
+    if built:
+        logger.info("Built master-todo project successfully.")
+
+    # Programmatically install or create bridge shortcuts
+    install_shortcuts(assets_dir=assets_dir)
+
+    # Verify if now available
+    if check_shortcuts_available(shortcuts_bin=shortcuts_bin):
+        logger.info("Shortcuts 'Add Task' and 'Get Task State' installed successfully.")
+        return True
+
+    if interactive:
+        print("\n[Shortcuts] Could not automatically verify 'Add Task' and 'Get Task State'.")
+        print("Please ensure master-todo is built and bridge shortcuts are present in Shortcuts.")
+
+    return False
+
