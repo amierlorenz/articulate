@@ -1,0 +1,121 @@
+[
+  {
+    "concept_id": "cs101.binary_search",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.searching",
+    "kind": "definition",
+    "title": "Binary Search",
+    "details": {
+      "explanationCitations": [
+        {
+          "sourceFileId": "f_slides_01",
+          "page": 3,
+          "quote": "Binary search finds target in sorted array in O(log n) time.",
+          "status": "verified"
+        }
+      ],
+      "aliases": ["Half-interval search"],
+      "useWhen": [
+        {
+          "text": "Array is sorted and random access is supported",
+          "provenance": "cited",
+          "citations": [
+            {
+              "sourceFileId": "f_slides_01",
+              "page": 4,
+              "quote": "Requires sorted array and random access.",
+              "status": "verified"
+            }
+          ]
+        }
+      ]
+    },
+    "explanation": "An efficient search algorithm that finds an element in a sorted list by repeatedly halving the search interval."
+  },
+  {
+    "concept_id": "cs101.quick_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Quick Sort",
+    "details": {
+      "explanationCitations": [
+        {
+          "sourceFileId": "f_slides_01",
+          "page": 10,
+          "quote": "Quicksort partitions elements around a pivot and sorts partitions recursively.",
+          "status": "verified"
+        }
+      ],
+      "aliases": ["Partition exchange sort"],
+      "useWhen": [
+        {
+          "text": "General purpose in-place average O(n log n) sorting",
+          "provenance": "cited",
+          "citations": []
+        }
+      ]
+    },
+    "explanation": "Divide-and-conquer sorting method that partitions an array around a selected pivot and sorts sub-arrays."
+  },
+  {
+    "concept_id": "cs101.merge_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Merge Sort",
+    "details": {
+      "explanationCitations": [
+        {
+          "sourceFileId": "f_slides_01",
+          "page": 15,
+          "quote": "Mergesort divides array into two halves, sorts them, and merges sorted halves.",
+          "status": "verified"
+        }
+      ],
+      "aliases": [],
+      "useWhen": []
+    },
+    "explanation": "Stable divide-and-conquer sorting method that divides input in half and merges sorted sub-lists."
+  },
+  {
+    "concept_id": "cs101.fast_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Fast Sort",
+    "details": {
+      "explanationCitations": [
+        {
+          "sourceFileId": "f_slides_01",
+          "page": 20,
+          "quote": "Fast sort partitions elements around a pivot recursively.",
+          "status": "verified"
+        }
+      ],
+      "aliases": [],
+      "useWhen": []
+    },
+    "explanation": "A partition-based recursive sorting algorithm dividing around a pivot element."
+  },
+  {
+    "concept_id": "cs101.intro_agenda",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.admin",
+    "kind": "fact",
+    "title": "Course Agenda and Administrative Details",
+    "details": {
+      "explanationCitations": [
+        {
+          "sourceFileId": "f_slides_01",
+          "page": 1,
+          "quote": "Lecture outline: syllabus review, lab office hours, grading policy.",
+          "status": "verified"
+        }
+      ],
+      "aliases": [],
+      "useWhen": []
+    },
+    "explanation": "Lecture outline covering office hours schedule and course grading policies."
+  }
+]

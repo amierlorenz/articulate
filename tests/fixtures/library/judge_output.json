@@ -1,0 +1,45 @@
+{
+  "candidates": [
+    {
+      "candidate": 0,
+      "matches": [
+        {
+          "id": "lib.cs101.bst",
+          "relation": "confusable",
+          "reason": "Both involve binary searching operations, but one is an array search algorithm while the other is a dynamic tree data structure.",
+          "adds": []
+        }
+      ]
+    },
+    {
+      "candidate": 1,
+      "matches": [
+        {
+          "id": "lib.cs101.quicksort",
+          "relation": "same",
+          "reason": "Both teach the quicksort partitioning and recursive sorting method.",
+          "adds": ["In-place average O(n log n) use-when cue", "Partition exchange sort alias"]
+        }
+      ]
+    },
+    {
+      "candidate": 2,
+      "matches": []
+    },
+    {
+      "candidate": 3,
+      "matches": [
+        {
+          "id": "candidate:1",
+          "relation": "same",
+          "reason": "Fast sort in this batch is identical to quick sort candidate 1.",
+          "adds": []
+        }
+      ]
+    },
+    {
+      "candidate": 4,
+      "matches": []
+    }
+  ]
+}
