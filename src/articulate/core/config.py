@@ -69,7 +69,7 @@ class ExamConfig(BaseModel):
 class CourseConfig(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
-    canvas_id: int
+    canvas_id: int | None = None
     name: str
     skip: list[str] | None = None
     instructor: str = ""

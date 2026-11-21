@@ -1,0 +1,148 @@
+{
+  "items": [
+    {
+      "concept": {
+        "title": "Bayes' theorem",
+        "kind": "method",
+        "explanation": {
+          "text": "Bayes' theorem reverses a conditional probability: the posterior is proportional to likelihood times prior.",
+          "citations": [
+            {
+              "startSec": 400,
+              "endSec": 410,
+              "quote": "Bayes' theorem lets us flip a conditional probability around"
+            },
+            {
+              "startSec": 410,
+              "endSec": 420,
+              "quote": "the posterior is proportional to the likelihood times the prior"
+            }
+          ]
+        }
+      },
+      "prompt": {
+        "kind": "shortAnswer",
+        "content": {
+          "question": "What does Bayes' theorem let you do with a conditional probability?",
+          "modelAnswer": "Flip it around: P(A|B) from P(B|A); posterior ∝ likelihood × prior.",
+          "keyPoints": [
+            "reverses the conditional",
+            "posterior ∝ likelihood × prior"
+          ]
+        }
+      }
+    },
+    {
+      "concept": {
+        "title": "Type I error",
+        "kind": "definition",
+        "explanation": {
+          "text": "Rejecting the null hypothesis when it is true.",
+          "citations": [
+            {
+              "startSec": 1200,
+              "endSec": 1210,
+              "quote": "a type i error is REJECTING the null hypothesis, when it's actually true"
+            },
+            {
+              "startSec": 1200,
+              "endSec": 1210,
+              "quote": "a type I error is rejecting the null hypothesis when it is actually true"
+            }
+          ]
+        }
+      },
+      "prompt": {
+        "kind": "flashcard",
+        "content": {
+          "front": "Type I error",
+          "back": "Rejecting the null hypothesis when it is actually true."
+        }
+      }
+    },
+    {
+      "concept": {
+        "title": "Central limit theorem",
+        "kind": "fact",
+        "explanation": {
+          "text": "Sample means are always normal.",
+          "citations": [
+            {
+              "startSec": 2400,
+              "endSec": 2410,
+              "quote": "sample means are always normal"
+            }
+          ]
+        }
+      },
+      "prompt": {
+        "kind": "shortAnswer",
+        "content": {
+          "question": "What does the central limit theorem say?",
+          "modelAnswer": "Sample means are approximately normal for large samples.",
+          "keyPoints": [
+            "sample means",
+            "approximately normal",
+            "large n"
+          ]
+        }
+      }
+    },
+    {
+      "concept": {
+        "title": "Variance of a sum",
+        "kind": "fact",
+        "explanation": {
+          "text": "For independent variables the variance of a sum is the sum of variances.",
+          "citations": [
+            {
+              "startSec": 5600,
+              "endSec": 5610,
+              "quote": "The variance of a sum is the sum of the variances for independent variables"
+            }
+          ]
+        }
+      },
+      "prompt": {
+        "kind": "shortAnswer",
+        "content": {
+          "question": "What is Var(X+Y) for independent X, Y?",
+          "modelAnswer": "Var(X)+Var(Y).",
+          "keyPoints": [
+            "sum of variances"
+          ]
+        }
+      }
+    },
+    {
+      "concept": {
+        "title": "p-value",
+        "kind": "definition",
+        "explanation": {
+          "text": "A p-value is not the probability that the null hypothesis is true.",
+          "citations": [
+            {
+              "startSec": 3000,
+              "endSec": 3010,
+              "quote": "the p-value is not the probability that the null is true"
+            }
+          ]
+        }
+      },
+      "prompt": {
+        "kind": "multipleChoice",
+        "content": {
+          "question": "Which statement about the p-value is right?",
+          "options": [
+            "It is P(null is true)",
+            "It is not P(null is true)",
+            "It is always below 0.05",
+            "It is the power"
+          ],
+          "correctIndex": 1,
+          "explanation": "The lecture stressed it is not the probability the null is true."
+        }
+      }
+    }
+  ]
+}
