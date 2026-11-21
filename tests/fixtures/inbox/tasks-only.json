@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "data": {
+    "id": "inbox-tasks",
+    "title": "Recording 16",
+    "folder_id": null,
+    "duration": 15.0,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795023000,
+    "created_at": 1795023000,
+    "updated_at": 1795023060,
+    "tags": [],
+    "transcript": {
+      "text": "Remind me to email the lab partner about the report draft tonight and to pick up batteries tomorrow.",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 15.0,
+          "text": "Remind me to email the lab partner about the report draft tonight and to pick up batteries tomorrow.",
+          "originalText": "Remind me to email the lab partner about the report draft tonight and to pick up batteries tomorrow."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}

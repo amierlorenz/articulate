@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "data": {
+    "id": "inbox-idea",
+    "title": "Walk notes",
+    "folder_id": null,
+    "duration": 70.0,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795014000,
+    "created_at": 1795014000,
+    "updated_at": 1795014060,
+    "tags": [],
+    "transcript": {
+      "text": "Okay so I keep coming back to this idea about the reading app. What if every highlight turned into a question the next morning, instead of just sitting in a list? The hard part is picking which highlights deserve a question, maybe only the ones I wrote a comment on.",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 20.0,
+          "text": "Okay so I keep coming back to this idea about the reading app.",
+          "originalText": "Okay so I keep coming back to this idea about the reading app."
+        },
+        {
+          "start": 20.0,
+          "end": 45.0,
+          "text": "What if every highlight turned into a question the next morning, instead of just sitting in a list?",
+          "originalText": "What if every highlight turned into a question the next morning, instead of just sitting in a list?"
+        },
+        {
+          "start": 45.0,
+          "end": 70.0,
+          "text": "The hard part is picking which highlights deserve a question, maybe only the ones I wrote a comment on.",
+          "originalText": "The hard part is picking which highlights deserve a question, maybe only the ones I wrote a comment on."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}

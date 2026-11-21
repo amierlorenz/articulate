@@ -1,0 +1,124 @@
+{
+  "success": true,
+  "data": {
+    "id": "inbox-lecture",
+    "title": "PHY 203 lecture",
+    "folder_id": null,
+    "duration": 4620.0,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1794927600,
+    "created_at": 1794927600,
+    "updated_at": 1794927660,
+    "tags": [],
+    "transcript": {
+      "text": "Lecture part 0 covers the material on chapter topic number 0 in detail. Lecture part 1 covers the material on chapter topic number 1 in detail. Lecture part 2 covers the material on chapter topic number 2 in detail. Lecture part 3 covers the material on chapter topic number 3 in detail. Lecture part 4 covers the material on chapter topic number 4 in detail. Lecture part 5 covers the material on chapter topic number 5 in detail. Lecture part 6 covers the material on chapter topic number 6 in detail. Lecture part 7 covers the material on chapter topic number 7 in detail. Lecture part 8 covers the material on chapter topic number 8 in detail. Lecture part 9 covers the material on chapter topic number 9 in detail. Lecture part 10 covers the material on chapter topic number 10 in detail. Lecture part 11 covers the material on chapter topic number 11 in detail. Lecture part 12 covers the material on chapter topic number 12 in detail. Lecture part 13 covers the material on chapter topic number 13 in detail. Lecture part 14 covers the material on chapter topic number 14 in detail. Okay class is over, walking out now, I want to remember the idea about grouping flashcards by the mistake I made. Grouping by mistake type might show me which confusions keep coming back each week.",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 300.0,
+          "text": "Lecture part 0 covers the material on chapter topic number 0 in detail.",
+          "originalText": "Lecture part 0 covers the material on chapter topic number 0 in detail."
+        },
+        {
+          "start": 300.0,
+          "end": 600.0,
+          "text": "Lecture part 1 covers the material on chapter topic number 1 in detail.",
+          "originalText": "Lecture part 1 covers the material on chapter topic number 1 in detail."
+        },
+        {
+          "start": 600.0,
+          "end": 900.0,
+          "text": "Lecture part 2 covers the material on chapter topic number 2 in detail.",
+          "originalText": "Lecture part 2 covers the material on chapter topic number 2 in detail."
+        },
+        {
+          "start": 900.0,
+          "end": 1200.0,
+          "text": "Lecture part 3 covers the material on chapter topic number 3 in detail.",
+          "originalText": "Lecture part 3 covers the material on chapter topic number 3 in detail."
+        },
+        {
+          "start": 1200.0,
+          "end": 1500.0,
+          "text": "Lecture part 4 covers the material on chapter topic number 4 in detail.",
+          "originalText": "Lecture part 4 covers the material on chapter topic number 4 in detail."
+        },
+        {
+          "start": 1500.0,
+          "end": 1800.0,
+          "text": "Lecture part 5 covers the material on chapter topic number 5 in detail.",
+          "originalText": "Lecture part 5 covers the material on chapter topic number 5 in detail."
+        },
+        {
+          "start": 1800.0,
+          "end": 2100.0,
+          "text": "Lecture part 6 covers the material on chapter topic number 6 in detail.",
+          "originalText": "Lecture part 6 covers the material on chapter topic number 6 in detail."
+        },
+        {
+          "start": 2100.0,
+          "end": 2400.0,
+          "text": "Lecture part 7 covers the material on chapter topic number 7 in detail.",
+          "originalText": "Lecture part 7 covers the material on chapter topic number 7 in detail."
+        },
+        {
+          "start": 2400.0,
+          "end": 2700.0,
+          "text": "Lecture part 8 covers the material on chapter topic number 8 in detail.",
+          "originalText": "Lecture part 8 covers the material on chapter topic number 8 in detail."
+        },
+        {
+          "start": 2700.0,
+          "end": 3000.0,
+          "text": "Lecture part 9 covers the material on chapter topic number 9 in detail.",
+          "originalText": "Lecture part 9 covers the material on chapter topic number 9 in detail."
+        },
+        {
+          "start": 3000.0,
+          "end": 3300.0,
+          "text": "Lecture part 10 covers the material on chapter topic number 10 in detail.",
+          "originalText": "Lecture part 10 covers the material on chapter topic number 10 in detail."
+        },
+        {
+          "start": 3300.0,
+          "end": 3600.0,
+          "text": "Lecture part 11 covers the material on chapter topic number 11 in detail.",
+          "originalText": "Lecture part 11 covers the material on chapter topic number 11 in detail."
+        },
+        {
+          "start": 3600.0,
+          "end": 3900.0,
+          "text": "Lecture part 12 covers the material on chapter topic number 12 in detail.",
+          "originalText": "Lecture part 12 covers the material on chapter topic number 12 in detail."
+        },
+        {
+          "start": 3900.0,
+          "end": 4200.0,
+          "text": "Lecture part 13 covers the material on chapter topic number 13 in detail.",
+          "originalText": "Lecture part 13 covers the material on chapter topic number 13 in detail."
+        },
+        {
+          "start": 4200.0,
+          "end": 4500.0,
+          "text": "Lecture part 14 covers the material on chapter topic number 14 in detail.",
+          "originalText": "Lecture part 14 covers the material on chapter topic number 14 in detail."
+        },
+        {
+          "start": 4500.0,
+          "end": 4560.0,
+          "text": "Okay class is over, walking out now, I want to remember the idea about grouping flashcards by the mistake I made.",
+          "originalText": "Okay class is over, walking out now, I want to remember the idea about grouping flashcards by the mistake I made."
+        },
+        {
+          "start": 4560.0,
+          "end": 4620.0,
+          "text": "Grouping by mistake type might show me which confusions keep coming back each week.",
+          "originalText": "Grouping by mistake type might show me which confusions keep coming back each week."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  }
+}
