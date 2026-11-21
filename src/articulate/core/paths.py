@@ -1,10 +1,13 @@
 """Path definitions and resolution for Articulate (§3.1)."""
+import logging
 import os
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from articulate.core.config import Config
+
+logger = logging.getLogger(__name__)
 
 
 def get_data_dir() -> Path:
@@ -144,8 +147,8 @@ def vault_path(cfg: "Config | None" = None) -> Path:
                 data = tomllib.load(f)
             if "vault" in data and "path" in data["vault"]:
                 return Path(data["vault"]["path"]).expanduser().resolve()
-        except Exception:
-            pass
+        except (OSError, tomllib.TOMLDecodeError) as e:
+            logger.debug("Failed reading %s: %s", cfg_file, e)
     # Default fallback if config not yet loaded
     icloud_vault = Path("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/iCloud Vault").expanduser().resolve()
     if icloud_vault.exists():
