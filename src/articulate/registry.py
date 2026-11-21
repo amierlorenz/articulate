@@ -11,6 +11,7 @@ STEPS: list[Step] = [
     # Phase 2: 200–399
     Step("intake.pick", "articulate.intake.canvas.pick:pick_step", jobs={"nightly", "pass2"}, order=200),
     Step("intake.library", "articulate.intake.library:step", jobs={"nightly", "pass2"}, order=300),
+    Step("handoff.export", "articulate.handoff:step", jobs={"nightly", "pass2"}, order=340),
     # Phase 3: 400–499
     # Phase 4: 500–599
     # Phase 5: 600–699
