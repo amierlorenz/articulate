@@ -1,0 +1,152 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "document",
+    "items"
+  ],
+  "properties": {
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "examHint",
+        "unitHints"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "studyGuide = topics/review list for an exam; pastExam = an exam given before; practiceTest = practice questions for an upcoming exam; answerKey = answers/solutions only",
+          "enum": [
+            "studyGuide",
+            "pastExam",
+            "practiceTest",
+            "answerKey"
+          ]
+        },
+        "examHint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "page",
+            "quote"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "A name copied exactly from the exam or unit list in the prompt",
+              "pattern": "^[^\\t\\x08\\x0c]*$"
+            },
+            "page": {
+              "type": "integer",
+              "description": "1-based page of the supporting quote; 0 when quote is empty"
+            },
+            "quote": {
+              "type": "string",
+              "description": "Printed sentence that says so, e.g. 'Test 4 covers Ch. 7-9'; empty if you inferred it from the content",
+              "pattern": "^[^\\t\\x08\\x0c]*$"
+            }
+          }
+        },
+        "unitHints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "page",
+              "quote"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A name copied exactly from the exam or unit list in the prompt",
+                "pattern": "^[^\\t\\x08\\x0c]*$"
+              },
+              "page": {
+                "type": "integer",
+                "description": "1-based page of the supporting quote; 0 when quote is empty"
+              },
+              "quote": {
+                "type": "string",
+                "description": "Printed sentence that says so, e.g. 'Test 4 covers Ch. 7-9'; empty if you inferred it from the content",
+                "pattern": "^[^\\t\\x08\\x0c]*$"
+              }
+            }
+          },
+          "description": "Units (from the unit list) this document covers"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "number",
+          "kind",
+          "page",
+          "quote",
+          "answer"
+        ],
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The item's number as printed, with part letter: '3', '3b'; for unnumbered topic lines, the next number in reading order prefixed with t: 't1', 't2'",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "kind": {
+            "type": "string",
+            "description": "topic = a study-guide line naming something to know; context = a shared stem or setup for lettered parts; the rest are question formats",
+            "enum": [
+              "topic",
+              "context",
+              "multipleChoice",
+              "trueFalse",
+              "matching",
+              "fillIn",
+              "shortAnswer",
+              "explain",
+              "problem",
+              "proof",
+              "code"
+            ]
+          },
+          "page": {
+            "type": "integer",
+            "description": "1-based page where the item starts"
+          },
+          "quote": {
+            "type": "string",
+            "description": "The item's printed text, copied character-for-character (line breaks allowed); for multipleChoice include the options; exclude the answer",
+            "pattern": "^[^\\t\\x08\\x0c]*$"
+          },
+          "answer": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "page",
+              "quote"
+            ],
+            "properties": {
+              "page": {
+                "type": "integer",
+                "description": "1-based page number; 0 when quote is empty"
+              },
+              "quote": {
+                "type": "string",
+                "description": "Printed text copied character-for-character from that page; empty if none",
+                "pattern": "^[^\\t\\x08\\x0c]*$"
+              }
+            }
+          }
+        }
+      },
+      "description": "Every item in reading order"
+    }
+  }
+}

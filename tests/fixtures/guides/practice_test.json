@@ -1,0 +1,44 @@
+{
+  "_note": "Synthetic guide/exam output in #32's shape. Text written for the tests, not taken from any course file.",
+  "display_name": "Unit 4 Practice Test.pdf",
+  "pages": {
+    "1": "Unit 4 Practice Test\nThis practice test covers Test 4.\n1. A cart of mass 2 kg moves at 3 m/s. What is its momentum?\nA) 1 kg m/s B) 5 kg m/s C) 6 kg m/s D) 9 kg m/s\n2. Impulse equals the change in momentum. True or false?\n3. A ball is dropped from a height of 5 m.\n(a) Find its speed just before it lands.\n(b) Find the time it takes to fall.",
+    "2": "4. A spring stretches 0.2 m. (a) Find the spring constant. (b) Find the stored energy.\nQ. 1 Explain why a rocket accelerates in empty space.\nAns: momentum of the exhaust balances the rocket's momentum\n5. Derive the work-energy theorem from Newton's second law."
+  },
+  "output": {
+    "document": {
+      "kind": "practiceTest",
+      "examHint": {"name": "Test 4", "page": 1, "quote": "This practice test covers Test 4."},
+      "unitHints": [
+        {"name": "Ch 9 Momentum-Impulse", "page": 0, "quote": ""},
+        {"name": "Ch 42 Not A Unit", "page": 0, "quote": ""}
+      ]
+    },
+    "items": [
+      {"number": "1", "kind": "multipleChoice", "page": 1,
+       "quote": "1. A cart of mass 2 kg moves at 3 m/s. What is its momentum?\nA) 1 kg m/s B) 5 kg m/s C) 6 kg m/s D) 9 kg m/s",
+       "answer": {"page": 0, "quote": ""}},
+      {"number": "2", "kind": "trueFalse", "page": 1,
+       "quote": "2. Impulse equals the change in momentum. True or false?",
+       "answer": {"page": 0, "quote": ""}},
+      {"number": "3", "kind": "context", "page": 1,
+       "quote": "3. A ball is dropped from a height of 5 m.",
+       "answer": {"page": 0, "quote": ""}},
+      {"number": "3a", "kind": "problem", "page": 1,
+       "quote": "(a) Find its speed just before it lands.",
+       "answer": {"page": 0, "quote": ""}},
+      {"number": "3b", "kind": "problem", "page": 1,
+       "quote": "(b) Find the time it takes to fall.",
+       "answer": {"page": 0, "quote": ""}},
+      {"number": "4", "kind": "problem", "page": 2,
+       "quote": "4. A spring stretches 0.2 m. (a) Find the spring constant. (b) Find the stored energy.",
+       "answer": {"page": 0, "quote": ""}},
+      {"number": "Q. 1", "kind": "explain", "page": 2,
+       "quote": "Q. 1 Explain why a rocket accelerates in empty space.",
+       "answer": {"page": 2, "quote": "Ans: momentum of the exhaust balances the rocket's momentum"}},
+      {"number": "5", "kind": "proof", "page": 2,
+       "quote": "5. Derive the work-energy theorem from Newton's third law.",
+       "answer": {"page": 0, "quote": ""}}
+    ]
+  }
+}
