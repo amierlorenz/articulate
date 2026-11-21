@@ -2,6 +2,7 @@
 
 Registry line `tasks.extract_send` (order 130, `watch` + `nightly`) calls `step`.
 """
+
 import logging
 
 from articulate.core.config import ConfigError, load_config
@@ -15,6 +16,11 @@ from articulate.core.runlog import RunLog
 from articulate.core.taskqueue import TaskQueue
 from articulate.core.vault import Vault
 from articulate.tasks.extract import FLAG_KIND, apply_flag_choices, extract_pending, resolve_flag
+from articulate.tasks.lecture import (
+    DATE_CHANGE_FLAG_KIND,
+    extract_lectures,
+    resolve_date_change_flag,
+)
 from articulate.tasks.poll import poll_states
 from articulate.tasks.send import SendError, ShortcutsClient, send_pending
 
@@ -24,6 +30,7 @@ __all__ = [
     "SendError",
     "ShortcutsClient",
     "apply_flag_choices",
+    "extract_lectures",
     "extract_pending",
     "poll_states",
     "send_pending",
@@ -56,16 +63,18 @@ def step(ctx: RunContext) -> StepSummary:
     """Apply flag choices, extract new recordings, send pending tasks; poll states in `nightly`."""
     _ensure_services(ctx)
     ctx.flags.register(FLAG_KIND, resolve_flag)
+    ctx.flags.register(DATE_CHANGE_FLAG_KIND, resolve_date_change_flag)
     apply_flag_choices(ctx)
 
     extracted = extract_pending(ctx)
+    lecture_summary = extract_lectures(ctx) if ctx.job == "nightly" else StepSummary()
     client = ShortcutsClient()
     sent = send_pending(ctx, client)
     polled = poll_states(ctx, client) if ctx.job == "nightly" else StepSummary()
 
     return StepSummary(
         done=sent.done,
-        held=extracted.held,
-        failed=sent.failed + polled.failed,
-        detail="; ".join(d for d in (sent.detail,) if d),
+        held=extracted.held + lecture_summary.held,
+        failed=sent.failed + polled.failed + lecture_summary.failed,
+        detail="; ".join(d for d in (sent.detail, lecture_summary.detail) if d),
     )

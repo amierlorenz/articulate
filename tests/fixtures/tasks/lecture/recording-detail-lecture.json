@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "data": {
+    "id": "rec-lecture-001",
+    "title": "MAT-305 Probability & Stats",
+    "folder_id": null,
+    "duration": 3600,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795435200,
+    "created_at": 1795435200,
+    "updated_at": 1795438800,
+    "tags": [],
+    "transcript": {
+      "text": "Good morning everyone. Welcome back to Probability and Stats. Before we begin today's lecture on estimation, a couple of administrative announcements. Please read Chapter 4 before Monday. Also, remember to submit Homework 1 by Wednesday night. By the way, the quiz is moved to Friday instead of Thursday. I will grade your midterms over the weekend. You might want to review your notes every day. Now let's turn to slide 3.",
+      "segments": [
+        {
+          "start": 0.5,
+          "end": 14.8,
+          "text": "Good morning everyone. Welcome back to Probability and Stats. Before we begin today's lecture on estimation, a couple of administrative announcements.",
+          "originalText": "Good morning everyone. Welcome back to Probability and Stats. Before we begin today's lecture on estimation, a couple of administrative announcements."
+        },
+        {
+          "start": 15.2,
+          "end": 28.6,
+          "text": "Please read Chapter 4 before Monday.",
+          "originalText": "Please read Chapter 4 before Monday."
+        },
+        {
+          "start": 29.1,
+          "end": 44.5,
+          "text": "Also, remember to submit Homework 1 by Wednesday night.",
+          "originalText": "Also, remember to submit Homework 1 by Wednesday night."
+        },
+        {
+          "start": 45.0,
+          "end": 59.8,
+          "text": "By the way, the quiz is moved to Friday instead of Thursday.",
+          "originalText": "By the way, the quiz is moved to Friday instead of Thursday."
+        },
+        {
+          "start": 60.5,
+          "end": 74.2,
+          "text": "I will grade your midterms over the weekend.",
+          "originalText": "I will grade your midterms over the weekend."
+        },
+        {
+          "start": 75.0,
+          "end": 89.9,
+          "text": "You might want to review your notes every day.",
+          "originalText": "You might want to review your notes every day."
+        },
+        {
+          "start": 91.0,
+          "end": 115.0,
+          "text": "Now let's turn to slide 3.",
+          "originalText": "Now let's turn to slide 3."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  },
+  "fetched_at": "2026-11-23T10:00:00-05:00"
+}
