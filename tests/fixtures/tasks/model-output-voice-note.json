@@ -1,0 +1,67 @@
+{
+  "tasks": [
+    {
+      "title": "Email Dana the lab budget",
+      "quote": "I'll email Dana the lab budget by Thursday.",
+      "kind": "commitment",
+      "confidence": "high",
+      "due_spoken": "Thursday"
+    },
+    {
+      "title": "Call the pharmacy",
+      "quote": "Remind me to call the pharmacy tomorrow at 3pm.",
+      "kind": "commitment",
+      "confidence": "high",
+      "due_spoken": "tomorrow at 3pm"
+    },
+    {
+      "title": "Review Jordan's poster draft",
+      "quote": "Jordan asked if I can review the poster draft, and yeah, I can do that.",
+      "kind": "accepted_request",
+      "confidence": "medium",
+      "due_spoken": null
+    },
+    {
+      "title": "Send the slides",
+      "quote": "Can you send me the slides, Sam?",
+      "kind": "delegated",
+      "confidence": "high",
+      "due_spoken": null
+    },
+    {
+      "title": "Learn to cook",
+      "quote": "I should really learn to cook someday.",
+      "kind": "musing",
+      "confidence": "high",
+      "due_spoken": null
+    },
+    {
+      "title": "Check the shared calendar for Riley",
+      "quote": "Riley wanted me to check the shared calendar but I never got back to them.",
+      "kind": "unanswered_request",
+      "confidence": "high",
+      "due_spoken": null
+    },
+    {
+      "title": "Look at the gym schedule",
+      "quote": "Maybe I need to look at the gym schedule at some point.",
+      "kind": "commitment",
+      "confidence": "low",
+      "due_spoken": null
+    },
+    {
+      "title": "Renew my library card",
+      "quote": "I need to renew my library card.",
+      "kind": "commitment",
+      "confidence": "high",
+      "due_spoken": "Friday"
+    },
+    {
+      "title": "Book the dentist",
+      "quote": "I'll book the dentist next week.",
+      "kind": "commitment",
+      "confidence": "high",
+      "due_spoken": null
+    }
+  ]
+}
