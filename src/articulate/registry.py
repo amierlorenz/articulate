@@ -11,6 +11,7 @@ STEPS: list[Step] = [
     ),
     Step("core.flags", "articulate.core.steps:apply_flags", jobs={"nightly"}, order=20),
     # Phase 1: 100–199
+    Step("pocket.poll", "articulate.pocket.source:step", jobs={"watch", "nightly"}, order=100),
     Step("inbox.notes", "articulate.inbox:step", jobs={"watch", "nightly"}, order=120),
     Step("tasks.extract_send", "articulate.tasks:step", jobs={"watch", "nightly"}, order=130),
     # Phase 2: 200–399
@@ -21,6 +22,7 @@ STEPS: list[Step] = [
         jobs={"nightly", "pass2"},
         order=220,
     ),
+    Step("intake.library", "articulate.intake.library:step", jobs={"nightly", "pass2"}, order=300),
     # Phase 3: 400–499
     # Phase 4: 500–599
     # Phase 5: 600–699
