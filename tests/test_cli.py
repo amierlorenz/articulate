@@ -57,5 +57,35 @@ def test_cli_setup_help(capsys):
     assert exc_info.value.code == 0
     captured = capsys.readouterr()
     assert "secrets" in captured.out
+    assert "shortcuts" in captured.out
+
+
+def test_cli_setup_shortcuts_target(monkeypatch):
+    called = False
+
+    def mock_setup_shortcuts(interactive=True):
+        nonlocal called
+        called = True
+        return True
+
+    monkeypatch.setattr("articulate.core.setup.setup_shortcuts", mock_setup_shortcuts)
+    ret = main(["setup", "shortcuts"])
+    assert ret == 0
+    assert called is True
+
+
+def test_cli_setup_shortcuts_flag(monkeypatch):
+    called = False
+
+    def mock_setup_shortcuts(interactive=True):
+        nonlocal called
+        called = True
+        return True
+
+    monkeypatch.setattr("articulate.core.setup.setup_shortcuts", mock_setup_shortcuts)
+    ret = main(["setup", "--shortcuts"])
+    assert ret == 0
+    assert called is True
+
 
 
