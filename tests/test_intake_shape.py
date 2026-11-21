@@ -2,7 +2,6 @@
 import json
 from datetime import UTC, datetime
 from pathlib import Path
-from unittest.mock import MagicMock
 
 import pytest
 
@@ -18,7 +17,6 @@ from articulate.intake.shape import (
     get_recipe,
     is_free_recall,
     regenerate,
-    run_deterministic_checks,
     shape_course,
     step,
     validate_prompt_payload,

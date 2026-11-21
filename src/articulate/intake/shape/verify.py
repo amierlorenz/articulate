@@ -25,7 +25,7 @@ def _get_verify_prompt_template() -> str:
     if prompt_file.exists():
         try:
             return prompt_file.read_text(encoding="utf-8")
-        except Exception:  # noqa: BLE001
+        except Exception:  # noqa: BLE001, S110
             pass
     return "You verify study prompts generated for a concept. Return JSON with valid and reason."
 

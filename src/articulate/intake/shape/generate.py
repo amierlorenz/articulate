@@ -1,5 +1,4 @@
 """Prompt generation for Shape slice (§3.5, §3.6, §3.7, SPEC-requirements 2.32, 2.33, Issue #64)."""
-import json
 import logging
 from pathlib import Path
 from typing import Any
@@ -38,7 +37,7 @@ def _get_template(name: str) -> str:
     if prompt_file.exists():
         try:
             return prompt_file.read_text(encoding="utf-8")
-        except Exception:  # noqa: BLE001
+        except Exception:  # noqa: BLE001, S110
             pass
     return ""
 
@@ -157,7 +156,7 @@ def _synthesize_fallback_prompt(
         return {
             "statement": f"In a study investigating whether two variables differ, suppose {uw_text}.",
             "targetConceptId": cid,
-            "modelSetUp": f"Define $H_0: \\mu_1 = \\mu_2$ versus $H_a: \\mu_1 \\neq \\mu_2$. Calculate sample difference statistics.",
+            "modelSetUp": "Define $H_0: \\mu_1 = \\mu_2$ versus $H_a: \\mu_1 \\neq \\mu_2$. Calculate sample difference statistics.",
             "keyPoints": ["State null and alternative hypotheses", "Specify test statistic", "State degrees of freedom"],
         }
 
@@ -223,7 +222,7 @@ def generate_prompts_for_concept(
             siblings = [m for m in matching_group.get("member_ids", []) if m != cid]
             prompt_input += f"Contrast Group: {matching_group.get('name', '')}\nSibling IDs: {', '.join(siblings)}\n"
         if style_examples:
-            prompt_input += f"Style Examples:\n" + "\n".join(f"- {ex}" for ex in style_examples) + "\n"
+            prompt_input += "Style Examples:\n" + "\n".join(f"- {ex}" for ex in style_examples) + "\n"
 
         req = ModelRequest(
             step=step_name,

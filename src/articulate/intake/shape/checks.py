@@ -156,12 +156,10 @@ def check_alias_leak(
     elif kind in ("shortAnswer", "multipleChoice"):
         question_text = content.get("question", "").lower()
 
-    if question_text:
-        # If question is asking to name or identify the term
-        if any(term in question_text for term in ("what is the term", "name the", "which concept", "what is another name")):
-            for alias in norm_aliases:
-                if re.search(r"\b" + re.escape(alias) + r"\b", question_text):
-                    return False, f"Prompt question leaks alias: '{alias}'"
+    if question_text and any(term in question_text for term in ("what is the term", "name the", "which concept", "what is another name")):
+        for alias in norm_aliases:
+            if re.search(r"\b" + re.escape(alias) + r"\b", question_text):
+                return False, f"Prompt question leaks alias: '{alias}'"
 
     return True, None
 
