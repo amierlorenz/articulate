@@ -1,0 +1,187 @@
+{
+  "_note": "Synthetic stats course. Invented text, no course material.",
+  "concepts": [
+    {
+      "concept_id": "stat101.mean",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.describing-data",
+      "kind": "definition",
+      "title": "Mean",
+      "aliases": ["average"],
+      "tier": "core",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "The sum of the values divided by how many values there are.", "provenance": "cited", "citations": []},
+        "explanationCitations": [
+          {"sourceFileId": "f.0000000000000001", "page": 2, "quote": "The mean adds every value and divides by the count.", "status": "verified", "verifiedBy": "text"}
+        ],
+        "aliases": ["average"],
+        "useWhen": [], "conditions": [], "workedExamples": []
+      }
+    },
+    {
+      "concept_id": "stat101.standard-error",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.sampling",
+      "kind": "fact",
+      "title": "Standard error of the mean",
+      "aliases": [],
+      "tier": "standard",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "The standard deviation divided by the square root of the sample size.", "provenance": "cited", "citations": []},
+        "explanationCitations": [
+          {"sourceFileId": "f.0000000000000001", "page": 5, "quote": "SE equals s over root n.", "status": "verified", "verifiedBy": "text"}
+        ],
+        "aliases": [], "useWhen": [], "conditions": [], "workedExamples": []
+      }
+    },
+    {
+      "concept_id": "stat101.sample",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.sampling",
+      "kind": "definition",
+      "title": "Sample",
+      "aliases": [],
+      "tier": "background",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "A subset of a population that is actually measured.", "provenance": "cited", "citations": []},
+        "explanationCitations": [
+          {"sourceFileId": "f.0000000000000001", "page": 4, "quote": "A sample is the part of the population we measure.", "status": "verified", "verifiedBy": "text"}
+        ],
+        "aliases": [], "useWhen": [], "conditions": [], "workedExamples": []
+      }
+    },
+    {
+      "concept_id": "stat101.course-logistics",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.describing-data",
+      "kind": "fact",
+      "title": "Course logistics",
+      "aliases": [],
+      "tier": "out",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "Office hours are on the syllabus.", "provenance": "cited", "citations": []},
+        "explanationCitations": [],
+        "aliases": [], "useWhen": [], "conditions": [], "workedExamples": []
+      }
+    },
+    {
+      "concept_id": "stat101.paired-t-test",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.testing-means",
+      "kind": "method",
+      "title": "Paired t-test",
+      "aliases": ["dependent samples t-test", "matched pairs"],
+      "tier": "core",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "Tests whether the mean of paired differences is zero.", "provenance": "cited", "citations": []},
+        "explanationCitations": [
+          {"sourceFileId": "f.0000000000000002", "page": 3, "quote": "Use the differences within each pair.", "status": "verified", "verifiedBy": "text"}
+        ],
+        "aliases": ["dependent samples t-test", "matched pairs"],
+        "useWhen": [{"text": "Each observation in one group is linked to one in the other.", "provenance": "cited", "citations": [{"sourceFileId": "f.0000000000000002", "page": 3, "quote": "Each subject is measured twice.", "status": "verified", "verifiedBy": "text"}]}],
+        "conditions": [{"text": "Differences are roughly normal.", "provenance": "cited", "citations": [{"sourceFileId": "f.0000000000000002", "page": 4, "quote": "Differences approximately normal.", "status": "verified", "verifiedBy": "text"}]}],
+        "workedExamples": [{"text": "Compute d for each pair, then t = dbar / (s_d / sqrt(n)).", "provenance": "cited", "citations": [{"sourceFileId": "f.0000000000000002", "page": 5, "quote": "t equals d bar over s d over root n.", "status": "verified", "verifiedBy": "text"}]}]
+      }
+    },
+    {
+      "concept_id": "stat101.independent-t-test",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.testing-means",
+      "kind": "method",
+      "title": "Independent two-sample t-test",
+      "aliases": ["two-sample t-test", "Welch test"],
+      "tier": "standard",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "Compares the means of two unrelated groups.", "provenance": "cited", "citations": []},
+        "explanationCitations": [
+          {"sourceFileId": "f.0000000000000002", "page": 6, "quote": "Two separate groups with no pairing.", "status": "verified", "verifiedBy": "text"}
+        ],
+        "aliases": ["two-sample t-test", "Welch test"],
+        "useWhen": [{"text": "Two groups of different subjects.", "provenance": "cited", "citations": [{"sourceFileId": "f.0000000000000002", "page": 6, "quote": "Different subjects in each group.", "status": "verified", "verifiedBy": "text"}]}],
+        "conditions": [], "workedExamples": []
+      }
+    },
+    {
+      "concept_id": "stat101.chi-square-test",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.categorical",
+      "kind": "method",
+      "title": "Chi-square test of independence",
+      "aliases": ["chi-square"],
+      "tier": "core",
+      "status": "held",
+      "hold_reason": "shape",
+      "details": {
+        "explanation": {"text": "Tests whether two categorical variables are associated.", "provenance": "cited", "citations": []},
+        "explanationCitations": [
+          {"sourceFileId": "f.0000000000000002", "page": 9, "quote": "Compare observed and expected counts.", "status": "verified", "verifiedBy": "text"}
+        ],
+        "aliases": ["chi-square"],
+        "useWhen": [{"text": "Two categorical variables in a contingency table.", "provenance": "cited", "citations": []}],
+        "conditions": [], "workedExamples": []
+      }
+    },
+    {
+      "concept_id": "stat101.gap-fill-median",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.describing-data",
+      "kind": "definition",
+      "title": "Median",
+      "aliases": [],
+      "tier": "core",
+      "status": "held",
+      "hold_reason": "gap_fill",
+      "details": {"explanationCitations": [], "aliases": [], "useWhen": [], "conditions": [], "workedExamples": []}
+    },
+    {
+      "concept_id": "stat101.merge-candidate-mode",
+      "course_key": "stat101",
+      "unit_id": "stat101.u.describing-data",
+      "kind": "definition",
+      "title": "Mode",
+      "aliases": [],
+      "tier": "standard",
+      "status": "held",
+      "hold_reason": "weekly_review",
+      "details": {"explanationCitations": [], "aliases": [], "useWhen": [], "conditions": [], "workedExamples": []}
+    }
+  ],
+  "contrast_groups": [
+    {
+      "group_id": "stat101.g.tests-for-means",
+      "course_key": "stat101",
+      "name": "Tests for means",
+      "question": "Which test compares two means?",
+      "member_ids": ["stat101.paired-t-test", "stat101.independent-t-test"],
+      "status": "active"
+    }
+  ],
+  "source_files": [
+    {"file_id": "f.00000000000000e1", "course_key": "stat101", "role": "guideOrExam", "display_name": "Test 1 practice", "created_at": "2026-09-20T12:00:00-04:00"},
+    {"file_id": "f.00000000000000e2", "course_key": "stat101", "role": "guideOrExam", "display_name": "Test 2 practice", "created_at": "2026-10-25T12:00:00-04:00"},
+    {"file_id": "f.00000000000000e9", "course_key": "other101", "role": "guideOrExam", "display_name": "Other course exam", "created_at": "2026-11-01T12:00:00-04:00"}
+  ],
+  "guide_items": [
+    {"file_id": "f.00000000000000e1", "position": 0, "number": "1", "kind": "shortAnswer", "page": 1, "quote": "Old example: define the spread of a data set in one sentence.", "verified": 1},
+    {"file_id": "f.00000000000000e1", "position": 1, "number": "2", "kind": "problem", "page": 1, "quote": "Old problem: twelve plants are weighed before and after a fertiliser trial.", "verified": 1},
+    {"file_id": "f.00000000000000e2", "position": 0, "number": "1", "kind": "shortAnswer", "page": 1, "quote": "Explain in your own words what a confidence interval tells a reader about the population value.", "verified": 1},
+    {"file_id": "f.00000000000000e2", "position": 1, "number": "2", "kind": "shortAnswer", "page": 1, "quote": "Unverified example that must never be used as a style example.", "verified": 0},
+    {"file_id": "f.00000000000000e2", "position": 2, "number": "3", "kind": "problem", "page": 2, "quote": "A coach records the sprint times of the same ten runners before and after a new training plan and wants to know whether the plan helped.", "verified": 1},
+    {"file_id": "f.00000000000000e2", "position": 3, "number": "4", "kind": "shortAnswer", "page": 2, "quote": "Describe what the median tells you that the mean does not.", "verified": 1},
+    {"file_id": "f.00000000000000e2", "position": 4, "number": "5", "kind": "shortAnswer", "page": 2, "quote": "Why does a larger sample shrink the standard error?", "verified": 1},
+    {"file_id": "f.00000000000000e2", "position": 5, "number": "6", "kind": "multipleChoice", "page": 3, "quote": "Which of these is a measure of centre? (a) range (b) mean (c) variance", "verified": 1},
+    {"file_id": "f.00000000000000e9", "position": 0, "number": "1", "kind": "shortAnswer", "page": 1, "quote": "Other course item that must not leak into stat101.", "verified": 1}
+  ]
+}
