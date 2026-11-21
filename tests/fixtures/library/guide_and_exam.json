@@ -1,0 +1,66 @@
+{
+  "study_guide": {
+    "file_id": "f_guide_01",
+    "role": "guideOrExam",
+    "kind": "guide",
+    "items": [
+      {
+        "position": 0,
+        "number": "1",
+        "kind": "shortAnswer",
+        "page": 1,
+        "quote": "Explain binary search and its logarithmic time complexity requirement.",
+        "answer_page": null,
+        "answer_quote": null,
+        "matched_concept_title": "Binary Search"
+      },
+      {
+        "position": 1,
+        "number": "2",
+        "kind": "problem",
+        "page": 2,
+        "quote": "Trace Heapsort algorithm on the array [4, 10, 3, 5, 1].",
+        "answer_page": 3,
+        "answer_quote": "Building the max heap results in [10, 5, 3, 4, 1], then repeated extraction yields sorted array.",
+        "matched_concept_title": null
+      },
+      {
+        "position": 2,
+        "number": "3",
+        "kind": "definition",
+        "page": 4,
+        "quote": "State the definition and stability of Radix sort.",
+        "answer_page": null,
+        "answer_quote": null,
+        "matched_concept_title": null
+      }
+    ]
+  },
+  "past_exam": {
+    "file_id": "f_exam_01",
+    "role": "guideOrExam",
+    "kind": "exam",
+    "items": [
+      {
+        "position": 0,
+        "number": "Q1",
+        "kind": "shortAnswer",
+        "page": 1,
+        "quote": "Trace partition step of quicksort on the subarray with pivot at index 0.",
+        "answer_page": null,
+        "answer_quote": null,
+        "matched_concept_title": "Quick Sort"
+      },
+      {
+        "position": 1,
+        "number": "Q2",
+        "kind": "shortAnswer",
+        "page": 2,
+        "quote": "Prove that the halting problem is undecidable over Turing machines.",
+        "answer_page": null,
+        "answer_quote": null,
+        "matched_concept_title": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+[
+  {
+    "concept_id": "lib.cs101.quicksort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Quick Sort",
+    "details": {
+      "explanationCitations": [
+        {
+          "sourceFileId": "f_existing_slides",
+          "page": 2,
+          "quote": "Existing quicksort explanation.",
+          "status": "verified"
+        }
+      ],
+      "aliases": ["Quicksort"],
+      "useWhen": []
+    },
+    "explanation": "Existing library concept for divide-and-conquer quicksort with pivot partitioning.",
+    "tier": "standard",
+    "status": "active"
+  },
+  {
+    "concept_id": "lib.cs101.bst",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.trees",
+    "kind": "definition",
+    "title": "Binary Search Tree",
+    "details": {
+      "explanationCitations": [],
+      "aliases": ["BST"],
+      "useWhen": []
+    },
+    "explanation": "A rooted binary tree data structure whose internal nodes each store a key greater than all keys in left subtree and less than right.",
+    "tier": "standard",
+    "status": "active"
+  }
+]
