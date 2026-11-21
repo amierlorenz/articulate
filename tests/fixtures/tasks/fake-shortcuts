@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""Fake `shortcuts` CLI standing in for master-todo's Add Task / Get Task State shortcuts.
+
+State lives in the JSON file named by $FAKE_SHORTCUTS_STATE:
+  {"installed": true,             # false: `list` shows no Add Task / Get Task State
+   "fail": false,                 # true: every `run` exits 1
+   "tasks": {"<source>|<externalID>": {"id": "...", "state": "open"|"done"}},
+   "tombstones": ["<source>|<externalID>"],
+   "calls": [{"shortcut": "...", "input": {...}}]}
+Output JSON matches master-todo's TaskIntents.AddTaskResult / TaskStateResult (sorted keys).
+"""
+import json
+import os
+import sys
+import uuid
+
+
+def load() -> dict:
+    with open(os.environ["FAKE_SHORTCUTS_STATE"], encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save(state: dict) -> None:
+    with open(os.environ["FAKE_SHORTCUTS_STATE"], "w", encoding="utf-8") as f:
+        json.dump(state, f)
+
+
+def main(argv: list[str]) -> int:
+    state = load()
+    if argv[:1] == ["list"]:
+        names = ["Timer Test"]
+        if state.get("installed", True):
+            names += ["Add Task", "Get Task State"]
+        print("\n".join(names))
+        return 0
+    if argv[:1] != ["run"] or len(argv) < 2:
+        print("usage: shortcuts run <name> -i <in> -o <out>", file=sys.stderr)
+        return 64
+
+    name = argv[1]
+    in_path = argv[argv.index("-i") + 1] if "-i" in argv else None
+    out_path = argv[argv.index("-o") + 1] if "-o" in argv else None
+    payload = json.loads(open(in_path, encoding="utf-8").read()) if in_path else {}
+    state.setdefault("calls", []).append({"shortcut": name, "input": payload})
+
+    if not state.get("installed", True) or name not in ("Add Task", "Get Task State"):
+        save(state)
+        print("Error: The operation couldn’t be completed. Shortcut not found", file=sys.stderr)
+        return 1
+    if state.get("fail"):
+        save(state)
+        print("Error: The operation couldn’t be completed.", file=sys.stderr)
+        return 1
+
+    key = f"{payload.get('source', 'user')}|{payload.get('externalID', '')}"
+    tasks = state.setdefault("tasks", {})
+    tombstones = state.setdefault("tombstones", [])
+    if name == "Add Task":
+        if key in tasks:
+            t = tasks[key]
+            result = {"created": False, "existing": True, "id": t["id"], "skipped": False,
+                      "state": t["state"], "status": "existing"}
+        elif key in tombstones:
+            result = {"created": False, "existing": False, "skipped": True, "status": "skipped"}
+        else:
+            t = {"id": str(uuid.uuid4()).upper(), "state": "open", "input": payload}
+            tasks[key] = t
+            result = {"created": True, "existing": False, "id": t["id"], "skipped": False,
+                      "state": "open", "status": "created"}
+    else:
+        if key in tasks:
+            result = {"externalID": payload["externalID"], "id": tasks[key]["id"],
+                      "source": payload["source"],
+                      "state": "done" if tasks[key]["state"] == "done" else "open"}
+        elif key in tombstones:
+            result = {"externalID": payload["externalID"], "source": payload["source"],
+                      "state": "removed"}
+        else:
+            result = {"externalID": payload["externalID"], "source": payload["source"],
+                      "state": "unknown"}
+
+    save(state)
+    text = json.dumps(result, sort_keys=True, separators=(",", ":"))
+    if out_path:
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(text)
+    else:
+        print(text)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

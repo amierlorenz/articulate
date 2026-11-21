@@ -16,5 +16,17 @@
         "page_url": "week-1-overview"
       }
     ]
+  },
+  {
+    "id": 102,
+    "name": "Syllabus and Policies",
+    "items": [
+      {
+        "id": 3,
+        "type": "File",
+        "title": "Syllabus_Fall2026.pdf",
+        "content_id": 901
+      }
+    ]
   }
 ]

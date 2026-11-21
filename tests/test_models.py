@@ -2,8 +2,9 @@
 
 Covers SPEC-requirements 0.6, 0.7, 0.8, 0.9, 0.10 and SPEC-implementation §3.6.
 """
+import json
 import logging
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -395,14 +396,39 @@ def test_pacific_date_boundary_eastern_dst():
 # ==============================================================================
 
 
+def _usage_ok_fixture() -> str:
+    """usage-ok.jsonl with its timestamps moved relative to now, so it never goes stale.
+
+    The checked-in file keeps realistic fixed dates; read_claude_usage fails closed once a
+    resets_at passes and warns when the credential expires within 7 days.
+    """
+    now = datetime.now(UTC)
+    shifted = {
+        "session": now + timedelta(hours=3),
+        "weekly_all": now + timedelta(days=5),
+    }
+    lines = []
+    raw = (Path(__file__).parent / "fixtures" / "claude" / "usage-ok.jsonl").read_text()
+    for line in raw.splitlines():
+        data = json.loads(line)
+        report = data.get("usage_report")
+        if report:
+            for row in report["rate_limits"]["limits"]:
+                row["resets_at"] = shifted[row["kind"]].isoformat()
+        if "credential_expires_at" in data:
+            data["credential_expires_at"] = (now + timedelta(days=28)).isoformat()
+        lines.append(json.dumps(data))
+    return "\n".join(lines) + "\n"
+
+
 def test_claude_usage_parsed_ok(test_db: Database, test_config: Config, monkeypatch):
     """Claude /usage output parsed by kind: session and weekly_all."""
-    fixture_ok = Path(__file__).parent / "fixtures" / "claude" / "usage-ok.jsonl"
+    fixture_ok = _usage_ok_fixture()
 
     from articulate.core.models import usage
 
     def mock_run_claude_usage(*args, **kwargs):
-        return (0, fixture_ok.read_text())
+        return (0, fixture_ok)
 
     monkeypatch.setattr(usage, "_run_usage_cmd", mock_run_claude_usage)
 
@@ -448,7 +474,7 @@ def test_claude_gate_rate_limit_warning_stops_run(test_db: Database, test_config
     from articulate.core.models import claude, usage
 
     # Valid usage
-    fixture_usage = (Path(__file__).parent / "fixtures" / "claude" / "usage-ok.jsonl").read_text()
+    fixture_usage = _usage_ok_fixture()
     monkeypatch.setattr(usage, "_run_usage_cmd", lambda *args, **kwargs: (0, fixture_usage))
 
     fixture_warning = (Path(__file__).parent / "fixtures" / "claude" / "rate-limit-warning.jsonl").read_text()
@@ -478,7 +504,7 @@ def test_claude_at_ramp_only_with_exam_in_ramp(test_db: Database, test_config: C
     """claude@ramp runs only when exam_in_ramp is True."""
     from articulate.core.models import usage
 
-    fixture_usage = (Path(__file__).parent / "fixtures" / "claude" / "usage-ok.jsonl").read_text()
+    fixture_usage = _usage_ok_fixture()
     monkeypatch.setattr(usage, "_run_usage_cmd", lambda *args, **kwargs: (0, fixture_usage))
 
     runner = DefaultModelRunner(db=test_db, config=test_config, job="nightly", pace=False)
