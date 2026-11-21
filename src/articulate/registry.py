@@ -23,6 +23,7 @@ STEPS: list[Step] = [
         order=220,
     ),
     Step("intake.library", "articulate.intake.library:step", jobs={"nightly", "pass2"}, order=300),
+    Step("plan.daily", "articulate.plan:step", jobs={"pass2"}, order=380),
     # Phase 3: 400–499
     # Phase 4: 500–599
     # Phase 5: 600–699
