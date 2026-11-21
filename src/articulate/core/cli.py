@@ -22,7 +22,7 @@ def main(argv: list[str] | None = None) -> int:
     # articulate run <job> [--only <step>]
     run_parser = subparsers.add_parser("run", help="Run a scheduled job (nightly, pass2, watch)")
     run_parser.add_argument("job", choices=["nightly", "pass2", "watch", "manual"], help="Job name")
-    run_parser.add_argument("--only", dest="only_step", help="Run only a single registered step")
+    run_parser.add_argument("--only", "--step", dest="only_step", help="Run only a single registered step")
 
     # articulate quota
     subparsers.add_parser("quota", help="Today's ledger per model (stub in Phase 0 slice 1)")
