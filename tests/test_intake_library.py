@@ -1,7 +1,9 @@
 """Tests for intake.library package: matching, tiers, gap-fill, resolvers, and public matcher."""
+
 import json
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 from unittest.mock import MagicMock
 
 import pytest
@@ -49,6 +51,26 @@ def guide_and_exam_data(fixtures_dir: Path) -> dict:
 
 
 @pytest.fixture
+def contrast_candidates_data(fixtures_dir: Path) -> list[dict]:
+    return json.loads((fixtures_dir / "contrast_candidates.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
+def contrast_library_data(fixtures_dir: Path) -> list[dict]:
+    return json.loads((fixtures_dir / "contrast_library.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
+def contrast_groups_data(fixtures_dir: Path) -> list[dict]:
+    return json.loads((fixtures_dir / "contrast_groups.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
+def contrast_judge_mock_output(fixtures_dir: Path) -> dict:
+    return json.loads((fixtures_dir / "contrast_judge_output.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
 def test_db(tmp_path: Path) -> Database:
     db = Database(tmp_path / "test.sqlite3")
     db.migrate()
@@ -58,6 +80,7 @@ def test_db(tmp_path: Path) -> Database:
 @pytest.fixture
 def test_config():
     from articulate.core.config import Config, ModelsConfig
+
     return Config(courses=None, models=ModelsConfig(), articulate=None)
 
 
@@ -380,7 +403,9 @@ def test_merge_candidate_holding_and_resolvers(run_ctx: RunContext):
 
     # Reset candidate for test 2: 'merge'
     with run_ctx.db.connect() as conn:
-        conn.execute("UPDATE concepts SET status = 'held', hold_reason = 'weekly_review' WHERE concept_id = 'cand_quick';")
+        conn.execute(
+            "UPDATE concepts SET status = 'held', hold_reason = 'weekly_review' WHERE concept_id = 'cand_quick';"
+        )
         conn.commit()
 
     resolve_merge(flag_id, "merge", run_ctx)
@@ -393,7 +418,9 @@ def test_merge_candidate_holding_and_resolvers(run_ctx: RunContext):
 
     # Reset candidate for test 3: 'drop'
     with run_ctx.db.connect() as conn:
-        conn.execute("UPDATE concepts SET status = 'held', hold_reason = 'weekly_review' WHERE concept_id = 'cand_quick';")
+        conn.execute(
+            "UPDATE concepts SET status = 'held', hold_reason = 'weekly_review' WHERE concept_id = 'cand_quick';"
+        )
         conn.commit()
 
     resolve_merge(flag_id, "drop", run_ctx)
@@ -441,13 +468,23 @@ def test_public_matcher_interface(
                     {
                         "candidate": 0,
                         "matches": [
-                            {"id": "lib.cs101.bst", "relation": "confusable", "reason": "...", "adds": []}
+                            {
+                                "id": "lib.cs101.bst",
+                                "relation": "confusable",
+                                "reason": "...",
+                                "adds": [],
+                            }
                         ],
                     },
                     {
                         "candidate": 1,
                         "matches": [
-                            {"id": "lib.cs101.quicksort", "relation": "same", "reason": "...", "adds": []}
+                            {
+                                "id": "lib.cs101.quicksort",
+                                "relation": "same",
+                                "reason": "...",
+                                "adds": [],
+                            }
                         ],
                     },
                     {"candidate": 2, "matches": []},
@@ -528,3 +565,296 @@ def test_pipeline_step_advances_to_shape(run_ctx: RunContext, monkeypatch):
         for r in rows:
             assert r["stage"] == "shape"
             assert r["status"] == "pending"
+
+
+def test_judge_contrast_groups_join_new_and_multiple(
+    run_ctx: RunContext,
+    contrast_candidates_data: list[dict],
+    contrast_library_data: list[dict],
+    contrast_groups_data: list[dict],
+    contrast_judge_mock_output: dict,
+):
+    """
+    Issue #72 / SPEC §7.1, 3.13:
+    - Join an existing group when candidate is confusable with its members and answers its question.
+    - Else a new pair group.
+    - A candidate may join several existing groups.
+    - Shortlisted concept's same-course groups (name, question, members) are received in the prompt.
+    """
+    # Populate existing contrast_groups in database
+    with run_ctx.db.connect() as conn:
+        for cg in contrast_groups_data:
+            conn.execute(
+                """
+                INSERT INTO contrast_groups (
+                    group_id, course_key, name, question, member_ids_json, contrasts_json, status
+                ) VALUES (?, ?, ?, ?, ?, ?, ?);
+                """,
+                (
+                    cg["group_id"],
+                    cg["course_key"],
+                    cg["name"],
+                    cg["question"],
+                    cg["member_ids_json"],
+                    cg["contrasts_json"],
+                    cg["status"],
+                ),
+            )
+        conn.commit()
+
+    captured_requests: list[Any] = []
+    mock_runner = MagicMock()
+
+    def mock_run(req):
+        captured_requests.append(req)
+        return MagicMock(
+            parsed=contrast_judge_mock_output,
+            text=json.dumps(contrast_judge_mock_output),
+        )
+
+    mock_runner.run.side_effect = mock_run
+    run_ctx.models = mock_runner
+
+    # Shortlist map:
+    # Cand 0 (selection_sort) -> lib.cs101.quicksort
+    # Cand 1 (radix_sort) -> lib.cs101.quicksort
+    # Cand 2 (avl_tree) -> lib.cs101.bst, lib.cs101.red_black
+    shortlist = {
+        0: [("lib.cs101.quicksort", 0.85)],
+        1: [("lib.cs101.quicksort", 0.78)],
+        2: [("lib.cs101.bst", 0.90), ("lib.cs101.red_black", 0.88)],
+    }
+
+    results = run_judge(
+        candidates=contrast_candidates_data[:3],
+        library=contrast_library_data,
+        shortlist=shortlist,
+        ctx=run_ctx,
+    )
+
+    assert len(results) == 3
+
+    # Check that shortlisted concept groups were sent in prompt
+    assert len(captured_requests) == 1
+    prompt_text = captured_requests[0].parts[0].text
+    assert "Contrast group: [cs101.g.sorting]" in prompt_text
+    assert "Comparison Sorting Algorithms" in prompt_text
+    assert "Contrast group: [cs101.g.balanced_trees]" in prompt_text
+    assert "Contrast group: [cs101.g.tree_rotations]" in prompt_text
+
+    # 1. Candidate 0 (selection_sort) joined existing group cs101.g.sorting
+    with run_ctx.db.connect() as conn:
+        sorting_row = conn.execute(
+            "SELECT member_ids_json FROM contrast_groups WHERE group_id = 'cs101.g.sorting';"
+        ).fetchone()
+        sorting_members = json.loads(sorting_row["member_ids_json"])
+        assert "cs101.selection_sort" in sorting_members
+        assert "lib.cs101.quicksort" in sorting_members
+        assert len(sorting_members) == 3
+
+    # 2. Candidate 1 (radix_sort) created a new pair group
+    with run_ctx.db.connect() as conn:
+        all_groups = conn.execute("SELECT * FROM contrast_groups;").fetchall()
+        # Find group with radix_sort
+        radix_group = next(
+            (g for g in all_groups if "cs101.radix_sort" in json.loads(g["member_ids_json"])),
+            None,
+        )
+        assert radix_group is not None
+        radix_members = json.loads(radix_group["member_ids_json"])
+        assert "cs101.radix_sort" in radix_members
+        assert "lib.cs101.quicksort" in radix_members
+        assert len(radix_members) == 2
+
+    # 3. Candidate 2 (avl_tree) joined several groups (balanced_trees and tree_rotations)
+    with run_ctx.db.connect() as conn:
+        bt_row = conn.execute(
+            "SELECT member_ids_json FROM contrast_groups WHERE group_id = 'cs101.g.balanced_trees';"
+        ).fetchone()
+        bt_members = json.loads(bt_row["member_ids_json"])
+        assert "cs101.avl_tree" in bt_members
+
+        tr_row = conn.execute(
+            "SELECT member_ids_json FROM contrast_groups WHERE group_id = 'cs101.g.tree_rotations';"
+        ).fetchone()
+        tr_members = json.loads(tr_row["member_ids_json"])
+        assert "cs101.avl_tree" in tr_members
+
+
+def test_judge_cross_course_confusable_is_note_only(
+    run_ctx: RunContext,
+    contrast_candidates_data: list[dict],
+    contrast_library_data: list[dict],
+):
+    """
+    Issue #72 / SPEC §7.1, 3.13:
+    Cross-course confusable match stays note only (no contrast group created or modified).
+    """
+    # Candidate 3 is cs101.hash_map (course cs101)
+    cand = contrast_candidates_data[3]
+    assert cand["concept_id"] == "cs101.hash_map"
+
+    # lib.cs382.hash_table is course cs382
+    shortlist = {0: [("lib.cs382.hash_table", 0.88)]}
+
+    mock_output = {
+        "candidates": [
+            {
+                "candidate": 0,
+                "matches": [
+                    {
+                        "id": "lib.cs382.hash_table",
+                        "relation": "confusable",
+                        "reason": "Both are hash table concepts from different courses.",
+                        "adds": [],
+                        "group": "new",
+                    }
+                ],
+            }
+        ]
+    }
+
+    mock_runner = MagicMock()
+    mock_runner.run.return_value = MagicMock(parsed=mock_output, text=json.dumps(mock_output))
+    run_ctx.models = mock_runner
+
+    results = run_judge(
+        candidates=[cand],
+        library=contrast_library_data,
+        shortlist=shortlist,
+        ctx=run_ctx,
+    )
+
+    # Outcome has the match with reason (note preserved)
+    assert len(results[0]["matches"]) == 1
+    assert results[0]["matches"][0]["relation"] == "confusable"
+    assert results[0]["matches"][0]["id"] == "lib.cs382.hash_table"
+
+    # No contrast group created in database
+    with run_ctx.db.connect() as conn:
+        count = conn.execute("SELECT COUNT(*) FROM contrast_groups;").fetchone()[0]
+        assert count == 0
+
+
+def test_judge_tombstoned_pair_is_never_readded(
+    run_ctx: RunContext,
+    contrast_candidates_data: list[dict],
+    contrast_library_data: list[dict],
+):
+    """
+    Issue #72 / SPEC §7.1, 3.17:
+    A tombstoned pair ('split the pair') is never re-added to contrast groups.
+    """
+    # Candidate 4 is cs101.bubble_sort
+    cand = contrast_candidates_data[4]
+    assert cand["concept_id"] == "cs101.bubble_sort"
+
+    # Add tombstone for pair (cs101.bubble_sort, lib.cs101.insertion_sort)
+    with run_ctx.db.connect() as conn:
+        conn.execute(
+            """
+            INSERT INTO tombstones (kind, key, reason, created_at)
+            VALUES ('pair', 'cs101.bubble_sort|lib.cs101.insertion_sort', 'Split the pair on weekly list', '2026-11-20T00:00:00Z');
+            """
+        )
+        conn.commit()
+
+    shortlist = {0: [("lib.cs101.insertion_sort", 0.90)]}
+
+    mock_output = {
+        "candidates": [
+            {
+                "candidate": 0,
+                "matches": [
+                    {
+                        "id": "lib.cs101.insertion_sort",
+                        "relation": "confusable",
+                        "reason": "Both are elementary sorting algorithms.",
+                        "adds": [],
+                        "group": "new",
+                    }
+                ],
+            }
+        ]
+    }
+
+    mock_runner = MagicMock()
+    mock_runner.run.return_value = MagicMock(parsed=mock_output, text=json.dumps(mock_output))
+    run_ctx.models = mock_runner
+
+    results = run_judge(
+        candidates=[cand],
+        library=contrast_library_data,
+        shortlist=shortlist,
+        ctx=run_ctx,
+    )
+
+    assert len(results[0]["matches"]) == 1
+
+    # Contrast group must NOT be created for tombstoned pair
+    with run_ctx.db.connect() as conn:
+        count = conn.execute("SELECT COUNT(*) FROM contrast_groups;").fetchone()[0]
+        assert count == 0
+
+
+def test_judge_caller_provided_groups_updated_in_memory():
+    """
+    When groups are provided explicitly as a list of dicts without ctx.db,
+    membership is updated and new groups are added to the list in-place.
+    """
+    cand = {
+        "concept_id": "cs101.quick_sort",
+        "course_key": "cs101",
+        "title": "Quick Sort",
+        "explanation": "Quicksort algorithm",
+    }
+    lib = [
+        {
+            "concept_id": "lib.cs101.merge_sort",
+            "course_key": "cs101",
+            "title": "Merge Sort",
+            "explanation": "Mergesort algorithm",
+        }
+    ]
+    groups = [
+        {
+            "group_id": "cs101.g.divide_conquer",
+            "course_key": "cs101",
+            "name": "Divide and Conquer",
+            "question": "Which divide-and-conquer strategy sorts in-place?",
+            "members": ["lib.cs101.merge_sort"],
+        }
+    ]
+
+    shortlist = {0: [("lib.cs101.merge_sort", 0.9)]}
+    mock_runner = MagicMock()
+    mock_runner.run.return_value = MagicMock(
+        parsed={
+            "candidates": [
+                {
+                    "candidate": 0,
+                    "matches": [
+                        {
+                            "id": "lib.cs101.merge_sort",
+                            "relation": "confusable",
+                            "reason": "Both are divide-and-conquer sorting methods.",
+                            "adds": [],
+                            "group": "group:cs101.g.divide_conquer",
+                        }
+                    ],
+                }
+            ]
+        }
+    )
+
+    ctx = MagicMock(models=mock_runner, db=None)
+
+    run_judge(
+        candidates=[cand],
+        library=lib,
+        shortlist=shortlist,
+        ctx=ctx,
+        groups=groups,
+    )
+
+    assert "cs101.quick_sort" in groups[0]["members"]

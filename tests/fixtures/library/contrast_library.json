@@ -1,0 +1,80 @@
+[
+  {
+    "concept_id": "lib.cs101.quicksort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Quick Sort",
+    "explanation": "Divide-and-conquer partition sorting algorithm.",
+    "details": {
+      "explanationCitations": []
+    },
+    "tier": "standard",
+    "status": "active"
+  },
+  {
+    "concept_id": "lib.cs101.mergesort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Merge Sort",
+    "explanation": "Stable divide-and-conquer sorting algorithm dividing arrays in halves.",
+    "details": {
+      "explanationCitations": []
+    },
+    "tier": "standard",
+    "status": "active"
+  },
+  {
+    "concept_id": "lib.cs101.bst",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.trees",
+    "kind": "definition",
+    "title": "Binary Search Tree",
+    "explanation": "Binary tree where each node key is greater than left subtree and less than right.",
+    "details": {
+      "explanationCitations": []
+    },
+    "tier": "standard",
+    "status": "active"
+  },
+  {
+    "concept_id": "lib.cs101.red_black",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.trees",
+    "kind": "definition",
+    "title": "Red-Black Tree",
+    "explanation": "Self-balancing binary search tree using node color bits to ensure logarithmic height.",
+    "details": {
+      "explanationCitations": []
+    },
+    "tier": "standard",
+    "status": "active"
+  },
+  {
+    "concept_id": "lib.cs382.hash_table",
+    "course_key": "cs382",
+    "unit_id": "cs382.u.structures",
+    "kind": "definition",
+    "title": "Hash Table",
+    "explanation": "Advanced hash table structure with quadratic probing.",
+    "details": {
+      "explanationCitations": []
+    },
+    "tier": "standard",
+    "status": "active"
+  },
+  {
+    "concept_id": "lib.cs101.insertion_sort",
+    "course_key": "cs101",
+    "unit_id": "cs101.u.sorting",
+    "kind": "method",
+    "title": "Insertion Sort",
+    "explanation": "Iteratively builds sorted array one element at a time.",
+    "details": {
+      "explanationCitations": []
+    },
+    "tier": "standard",
+    "status": "active"
+  }
+]

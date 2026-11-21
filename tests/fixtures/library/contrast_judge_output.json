@@ -1,0 +1,70 @@
+{
+  "candidates": [
+    {
+      "candidate": 0,
+      "matches": [
+        {
+          "id": "lib.cs101.quicksort",
+          "relation": "confusable",
+          "reason": "Both are comparison sorts; selection sort repeatedly finds minimums while quicksort partitions.",
+          "adds": [],
+          "group": "group:cs101.g.sorting"
+        }
+      ]
+    },
+    {
+      "candidate": 1,
+      "matches": [
+        {
+          "id": "lib.cs101.quicksort",
+          "relation": "confusable",
+          "reason": "Radix sort is non-comparative while quicksort is comparative.",
+          "adds": [],
+          "group": "new"
+        }
+      ]
+    },
+    {
+      "candidate": 2,
+      "matches": [
+        {
+          "id": "lib.cs101.bst",
+          "relation": "confusable",
+          "reason": "AVL trees add strict balance factor invariants to binary search trees.",
+          "adds": [],
+          "group": "group:cs101.g.balanced_trees"
+        },
+        {
+          "id": "lib.cs101.red_black",
+          "relation": "confusable",
+          "reason": "AVL trees and red-black trees represent different balance guarantees.",
+          "adds": [],
+          "group": "group:cs101.g.tree_rotations"
+        }
+      ]
+    },
+    {
+      "candidate": 3,
+      "matches": [
+        {
+          "id": "lib.cs382.hash_table",
+          "relation": "confusable",
+          "reason": "Both are hash-based associative mappings from different courses.",
+          "adds": []
+        }
+      ]
+    },
+    {
+      "candidate": 4,
+      "matches": [
+        {
+          "id": "lib.cs101.insertion_sort",
+          "relation": "confusable",
+          "reason": "Both are O(n^2) elementary sorting algorithms.",
+          "adds": [],
+          "group": "new"
+        }
+      ]
+    }
+  ]
+}
