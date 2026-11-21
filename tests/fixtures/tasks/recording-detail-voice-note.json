@@ -1,0 +1,83 @@
+{
+  "success": true,
+  "data": {
+    "id": "rec-voice-001",
+    "title": "Evening voice note",
+    "folder_id": null,
+    "duration": 3740,
+    "state": "completed",
+    "language": "en",
+    "recording_at": 1795129200,
+    "created_at": 1795129200,
+    "updated_at": 1795133000,
+    "tags": [],
+    "transcript": {
+      "text": "Okay, quick voice note before I forget a few things. I'll email Dana the lab budget by Thursday. Remind me to call the pharmacy tomorrow at 3pm. Jordan asked if I can review the poster draft, and yeah, I can do that. Can you send me the slides, Sam? I should really learn to cook someday. Riley wanted me to check the shared calendar but I never got back to them. Maybe I need to look at the gym schedule at some point. I need to renew my library card. Lorem ipsum dolor sit amet, wrapping up.",
+      "segments": [
+        {
+          "start": 0.4,
+          "end": 11.9,
+          "text": "Okay, quick voice note before I forget a few things.",
+          "originalText": "Okay, quick voice note before I forget a few things."
+        },
+        {
+          "start": 12.7,
+          "end": 30.1,
+          "text": "I'll email Dana the lab budget by Thursday.",
+          "originalText": "I'll email Dana the lab budget by Thursday."
+        },
+        {
+          "start": 31.2,
+          "end": 57.5,
+          "text": "Remind me to call the pharmacy tomorrow at 3pm.",
+          "originalText": "Remind me to call the pharmacy tomorrow at 3pm."
+        },
+        {
+          "start": 58.9,
+          "end": 74.2,
+          "text": "Jordan asked if I can review the poster draft, and yeah, I can do that.",
+          "originalText": "Jordan asked if I can review the poster draft, and yeah, I can do that."
+        },
+        {
+          "start": 75.0,
+          "end": 89.6,
+          "text": "Can you send me the slides, Sam?",
+          "originalText": "Can you send me the slides, Sam?"
+        },
+        {
+          "start": 90.3,
+          "end": 109.9,
+          "text": "I should really learn to cook someday.",
+          "originalText": "I should really learn to cook someday."
+        },
+        {
+          "start": 110.8,
+          "end": 129.7,
+          "text": "Riley wanted me to check the shared calendar but I never got back to them.",
+          "originalText": "Riley wanted me to check the shared calendar but I never got back to them."
+        },
+        {
+          "start": 130.5,
+          "end": 149.1,
+          "text": "Maybe I need to look at the gym schedule at some point.",
+          "originalText": "Maybe I need to look at the gym schedule at some point."
+        },
+        {
+          "start": 150.2,
+          "end": 168.0,
+          "text": "I need to renew my library card.",
+          "originalText": "I need to renew my library card."
+        },
+        {
+          "start": 3725.0,
+          "end": 3740.0,
+          "text": "Lorem ipsum dolor sit amet, wrapping up.",
+          "originalText": "Lorem ipsum dolor sit amet, wrapping up."
+        }
+      ]
+    },
+    "speakers": {},
+    "summarizations": {}
+  },
+  "fetched_at": "2026-11-20T00:15:02-05:00"
+}
