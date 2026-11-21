@@ -141,7 +141,7 @@ def archive_transcript(data_dir: Path, detail: dict) -> Path:
 
 def add_item(db: Database, *, item_id: str, native_id: str, kind: str = "recording",
              privacy: str = "personal", status: str = "done", payload: dict | None = None,
-             source: str = "pocket") -> None:
+             source: str = "pocket", inbox_status: str | None = "done") -> None:
     now = "2026-11-20T05:00:00+00:00"
     with db.connect() as conn:
         conn.execute(
@@ -150,6 +150,12 @@ def add_item(db: Database, *, item_id: str, native_id: str, kind: str = "recordi
                VALUES (?, ?, ?, ?, '', ?, 'note', ?, ?, ?, ?);""",
             (item_id, source, kind, native_id, privacy, status, json.dumps(payload or {}), now, now),
         )
+        if inbox_status is not None:
+            conn.execute(
+                """INSERT OR REPLACE INTO inbox_items (item_id, status, created_at, updated_at)
+                   VALUES (?, ?, ?, ?);""",
+                (item_id, inbox_status, now, now),
+            )
         conn.commit()
 
 
