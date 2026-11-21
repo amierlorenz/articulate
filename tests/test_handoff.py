@@ -338,17 +338,23 @@ def test_ingest_attempts_deduped_and_deleted(mock_ctx, monkeypatch):
 def test_ingest_flag_withdraws_prompt_and_handles_regeneration(mock_ctx):
     """
     Flag withdraws prompt (status='retired').
-    First flag: queued or regenerated.
+    First flag: calls Shape regeneration -> state='regenerated', new prompt active.
     Second flag: added to weekly list (§3.7, Proposal 2, 2.38).
     """
     from articulate.core.paths import from_encore_dir
 
-    # Insert prompt
+    # Insert concept and prompt
     with mock_ctx.db.connect() as conn:
         conn.execute(
             """
-            INSERT INTO prompts (prompt_id, concept_id, kind, status)
-            VALUES ('csc301.p1', 'csc301.concept', 'flashcard', 'active');
+            INSERT INTO concepts (concept_id, course_key, unit_id, kind, title, status)
+            VALUES ('csc301.concept', 'csc301', 'csc301.u.processes', 'definition', 'Concept', 'active');
+            """
+        )
+        conn.execute(
+            """
+            INSERT INTO prompts (prompt_id, concept_id, kind, content_json, status)
+            VALUES ('csc301.p1', 'csc301.concept', 'flashcard', '{"front":"Front question","back":"Old answer"}', 'active');
             """
         )
         conn.commit()
@@ -368,7 +374,7 @@ def test_ingest_flag_withdraws_prompt_and_handles_regeneration(mock_ctx):
         "conceptId": "csc301.concept",
         "reason": "wrong",
         "note": "Definition is inverted",
-        "suggestedFix": "Reverse front and back",
+        "suggestedFix": "Corrected answer",
         "flaggedAt": "2026-11-20T12:00:00Z",
     }
     flag1_file.write_text(json.dumps(flag1_data), encoding="utf-8")
@@ -383,11 +389,19 @@ def test_ingest_flag_withdraws_prompt_and_handles_regeneration(mock_ctx):
         p_row = conn.execute("SELECT status FROM prompts WHERE prompt_id = 'csc301.p1';").fetchone()
         assert p_row["status"] == "retired"
 
-        # Flag queued in handoff_card_flags
+        # Flag regenerated in handoff_card_flags
         f_row = conn.execute(
             "SELECT state FROM handoff_card_flags WHERE prompt_id = 'csc301.p1';"
         ).fetchone()
-        assert f_row["state"] == "queued"
+        assert f_row["state"] == "regenerated"
+
+        # New prompt created
+        new_p = conn.execute(
+            "SELECT * FROM prompts WHERE concept_id = 'csc301.concept' AND status = 'active';"
+        ).fetchone()
+        assert new_p is not None
+        assert new_p["prompt_id"] != "csc301.p1"
+        assert "Corrected answer" in new_p["content_json"]
 
     # Second flag on same prompt
     flag2_file = from_dir / "flag-2.json"
