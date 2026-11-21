@@ -134,5 +134,20 @@ def vault_path(cfg: "Config | None" = None) -> Path:
     """VAULT from articulate.toml vault.path"""
     if cfg is not None and cfg.articulate and cfg.articulate.vault:
         return Path(cfg.articulate.vault.path).expanduser().resolve()
+    # Check if articulate.toml exists on disk
+    cfg_file = articulate_toml_path()
+    if cfg_file.exists():
+        try:
+            import tomllib
+
+            with open(cfg_file, "rb") as f:
+                data = tomllib.load(f)
+            if "vault" in data and "path" in data["vault"]:
+                return Path(data["vault"]["path"]).expanduser().resolve()
+        except Exception:
+            pass
     # Default fallback if config not yet loaded
+    icloud_vault = Path("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/iCloud Vault").expanduser().resolve()
+    if icloud_vault.exists():
+        return icloud_vault
     return Path("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault").expanduser().resolve()

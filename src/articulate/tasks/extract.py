@@ -182,7 +182,16 @@ def load_recording(item: dict[str, Any], payload: dict[str, Any]) -> Recording |
     if payload.get("recorded_at"):
         recorded_at = datetime.fromisoformat(str(payload["recorded_at"]))
     else:
-        recorded_at = datetime.fromtimestamp(float(data.get("recording_at") or 0), tz=EASTERN)
+        rec_val = data.get("recording_at")
+        if isinstance(rec_val, (int, float)):
+            recorded_at = datetime.fromtimestamp(float(rec_val), tz=EASTERN)
+        elif isinstance(rec_val, str):
+            try:
+                recorded_at = datetime.fromtimestamp(float(rec_val), tz=EASTERN)
+            except ValueError:
+                recorded_at = datetime.fromisoformat(rec_val)
+        else:
+            recorded_at = datetime.now(tz=EASTERN)
     title = str(payload.get("title") or data.get("title") or "Recording")
     return Recording(recording_id, title, recorded_at, segs)
 
